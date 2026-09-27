@@ -487,23 +487,25 @@ function unlockNextLevel(completedLevel) {
                                 try {
 
                                     const result =
-                                        await fetch(
-                                            "http://localhost:3000/auth/google",
-                                            {
-                                                method: "POST",
+    await fetch(
+        "http://localhost:3000/auth/google",
+        {
+            method: "POST",
 
-                                                headers: {
-                                                    "Content-Type":
-                                                        "application/json"
-                                                },
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
 
-                                                body:
-                                                    JSON.stringify({
-                                                        code:
-                                                            response.code
-                                                    })
-                                            }
-                                        );
+            body:
+                JSON.stringify({
+                    code:
+                        response.code
+                })
+        }
+    );
+                                            
+                                    
 
 
                                     const data =
