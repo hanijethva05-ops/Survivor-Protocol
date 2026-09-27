@@ -488,7 +488,7 @@ function unlockNextLevel(completedLevel) {
 
                                     const result =
     await fetch(
-        "http://localhost:3000/auth/google",
+        "https://survivor-protocol.onrender.com/auth/google",
         {
             method: "POST",
 
