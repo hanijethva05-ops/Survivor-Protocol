@@ -16,7 +16,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 const oauth2Client = new OAuth2Client(
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
-    "postmessage"
+    "https://hanijethva05-ops.github.io"
 );
 
 console.log("GOOGLE CLIENT ID:", GOOGLE_CLIENT_ID);
