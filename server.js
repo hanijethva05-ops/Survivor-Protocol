@@ -41,7 +41,10 @@ app.post("/auth/google", async (req, res) => {
 
         console.log("Google authorization code received.");
 
-        const { tokens } = await oauth2Client.getToken(code);
+        const { tokens } = await oauth2Client.getToken({
+    code: code,
+    redirect_uri: "https://hanijethva05-ops.github.io"
+});
 
         console.log("Google tokens received.");
 
