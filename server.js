@@ -15,8 +15,7 @@ const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 const oauth2Client = new OAuth2Client(
     GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET,
-    ""https://hanijethva05-ops.github.io""
+    GOOGLE_CLIENT_SECRET
 );
 
 console.log("GOOGLE CLIENT ID:", GOOGLE_CLIENT_ID);
@@ -67,20 +66,20 @@ app.post("/auth/google", async (req, res) => {
 
     } catch (error) {
 
-    console.error("");
-    console.error("====================================");
-    console.error("       GOOGLE AUTH ERROR");
-    console.error("====================================");
-    console.error(error);
-    console.error("MESSAGE:", error.message);
-    console.error("====================================");
-    console.error("");
+        console.error("");
+        console.error("====================================");
+        console.error("       GOOGLE AUTH ERROR");
+        console.error("====================================");
+        console.error(error);
+        console.error("MESSAGE:", error.message);
+        console.error("====================================");
+        console.error("");
 
-    res.status(500).json({
-        success: false,
-        error: error.message
-    });
-}
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
 
 });
 
