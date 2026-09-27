@@ -462,8 +462,6 @@ function unlockNextLevel(completedLevel) {
                         ux_mode:
                             "popup",
 
-                        redirect_uri: "postmessage",
-
 
                         callback:
                             async function (response) {
