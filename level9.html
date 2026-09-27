@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LEVEL 9 // CORE REACTOR</title>
+
+    <link rel="stylesheet" href="level9.css">
+    <link rel="stylesheet" href="css/profile.css">
+    
+</head>
+
+<body>
+
+<div id="gameWorld">
+
+    <!-- =========================
+         REACTOR CHAMBER
+    ========================== -->
+
+    <div class="reactorRoom">
+
+        <div class="reactorCore">
+            <div class="reactorRing ring1"></div>
+            <div class="reactorRing ring2"></div>
+            <div class="reactorRing ring3"></div>
+
+            <div class="reactorSphere"></div>
+
+            <div class="reactorLabel">
+                CORE REACTOR
+            </div>
+        </div>
+
+        <div class="reactorPillar pillar1"></div>
+        <div class="reactorPillar pillar2"></div>
+        <div class="reactorPillar pillar3"></div>
+
+        <div class="energyPipe pipe1"></div>
+        <div class="energyPipe pipe2"></div>
+        <div class="energyPipe pipe3"></div>
+        <div class="energyPipe pipe4"></div>
+
+        <!-- =========================
+             STABILIZERS
+        ========================== -->
+
+        <div
+            class="stabilizer"
+            id="stabilizer1"
+            data-id="1"
+            style="left:18%;top:35%;"
+        >
+            <div class="stabilizerCore"></div>
+            <div class="stabilizerText">
+                STABILIZER 01
+            </div>
+            <div class="stabilizerStatus">
+                OFFLINE
+            </div>
+        </div>
+
+        <div
+            class="stabilizer"
+            id="stabilizer2"
+            data-id="2"
+            style="left:72%;top:32%;"
+        >
+            <div class="stabilizerCore"></div>
+            <div class="stabilizerText">
+                STABILIZER 02
+            </div>
+            <div class="stabilizerStatus">
+                OFFLINE
+            </div>
+        </div>
+
+        <div
+            class="stabilizer"
+            id="stabilizer3"
+            data-id="3"
+            style="left:45%;top:72%;"
+        >
+            <div class="stabilizerCore"></div>
+            <div class="stabilizerText">
+                STABILIZER 03
+            </div>
+            <div class="stabilizerStatus">
+                OFFLINE
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PLAYER
+    ========================== -->
+
+    <div id="player"></div>
+
+
+    <!-- =========================
+         HUD
+    ========================== -->
+
+    <div id="hud">
+
+        <div class="hudLeft">
+            <div class="hudTitle">
+                SERVER CORE // REACTOR
+            </div>
+
+            <div class="hudLevel">
+                LEVEL 09
+            </div>
+        </div>
+
+        <div id="reactorStatus">
+            REACTOR UNSTABLE
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         OBJECTIVE
+    ========================== -->
+
+    <div id="objectivePanel">
+
+        <div class="objectiveHeader">
+            CURRENT OBJECTIVE
+        </div>
+
+        <div id="objectiveText">
+            ACTIVATE ALL REACTOR STABILIZERS
+        </div>
+
+        <div class="objectiveProgress">
+            <span id="stabilizerCount">0 / 3</span>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         REACTOR INSTABILITY
+    ========================== -->
+
+    <div id="reactorPanel">
+
+        <div class="reactorPanelTitle">
+            REACTOR INSTABILITY
+        </div>
+
+        <div class="instabilityBar">
+            <div id="instabilityFill"></div>
+        </div>
+
+        <div id="instabilityText">
+            100%
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         AMMO
+    ========================== -->
+
+    <div id="ammoPanel">
+
+        <div class="ammoLabel">
+            AMMUNITION
+        </div>
+
+        <div>
+            <span id="magAmmo">30</span>
+            <span class="ammoSlash">/</span>
+            <span id="reserve">180</span>
+        </div>
+
+        <div id="reloadText">
+            R = RELOAD
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HEALTH
+    ========================== -->
+
+    <div id="healthPanel">
+
+        <div class="healthLabel">
+            VITAL STATUS
+        </div>
+
+        <div id="hpText">
+            HP 100
+        </div>
+
+        <div class="healthBar">
+            <div id="healthFill"></div>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INTERACTION PROMPT
+    ========================== -->
+
+    <div id="interactionPrompt">
+        MOVE TO A STABILIZER
+    </div>
+
+
+    <!-- =========================
+         REACTOR ALERT
+    ========================== -->
+
+    <div id="reactorAlert">
+        ⚠ REACTOR INSTABILITY CRITICAL ⚠
+    </div>
+
+
+    <!-- =========================
+         DAMAGE EFFECT
+    ========================== -->
+
+    <div id="damageEffect"></div>
+
+
+    <!-- =========================
+         FINAL EXIT
+    ========================== -->
+
+    <div id="exitDoor">
+
+        <div class="exitLight"></div>
+
+        <div class="exitText">
+            CORE ACCESS
+        </div>
+
+    </div>
+
+    <div id="exitPrompt">
+        [ E ] EXIT REACTOR CHAMBER
+    </div>
+
+
+    <!-- =========================
+         MISSION COMPLETE
+    ========================== -->
+
+    <div id="missionComplete">
+
+        <div class="completeBox">
+
+            <div class="completeSmall">
+                REACTOR SYSTEM
+            </div>
+
+            <h1>
+                CORE STABILIZED
+            </h1>
+
+            <p>
+                LEVEL 09 COMPLETE
+            </p>
+
+            <button id="continueBtn">
+                CONTINUE TO LEVEL 10
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         GAME OVER
+    ========================== -->
+
+    <div id="gameOver">
+
+        <div class="gameOverBox">
+
+            <div class="gameOverSmall">
+                CRITICAL FAILURE
+            </div>
+
+            <h1>
+                AGENT DOWN
+            </h1>
+
+            <p>
+                REACTOR CHAMBER LOST
+            </p>
+
+            <button id="restartBtn">
+                RESTART LEVEL 9
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================
+     SURVIVOR PROFILE - LEVEL 9
+========================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="survivorProfileBox">
+
+        <div class="profileHeader">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileLine"></div>
+
+        <div class="profileRow">
+            <span>NAME</span>
+            <strong id="playerName">GUEST SURVIVOR</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>EMAIL</span>
+            <strong id="playerEmail">GUEST ACCESS</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>SURVIVOR ID</span>
+            <strong id="playerID">ZS-000000</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LEVEL</span>
+            <strong id="playerLevel">09</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LOCATION</span>
+            <strong id="profileLocation">
+                SECTOR_09 // EVACUATION ZONE
+            </strong>
+        </div>
+
+        <div class="profileRow">
+            <span>XP</span>
+            <strong id="playerXP">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ZOMBIES KILLED</span>
+            <strong id="profileKills">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ITEMS FOUND</span>
+            <strong id="profileItems">0</strong>
+        </div>
+
+        <div class="xpSection">
+
+            <div class="xpHeader">
+                LEVEL <span id="xpLevel">09</span>
+            </div>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+
+        </div>
+
+        <div class="profileButtons">
+
+            <button id="resumeGameBtn">
+                RESUME GAME
+            </button>
+
+            <button id="profileReturnHQBtn">
+                RETURN TO HQ
+            </button>
+
+        </div>
+
+        <div class="profileHint">
+            PRESS ESC TO CLOSE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MINI PROFILE -->
+
+<div id="survivorMiniProfile">
+
+    <div id="miniPlayerName">
+        GUEST SURVIVOR
+    </div>
+
+    <div>
+        LVL <span id="miniPlayerLevel">09</span>
+    </div>
+
+</div>
+
+</div>
+
+<script src="level9.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

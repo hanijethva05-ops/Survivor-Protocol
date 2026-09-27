@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LEVEL 7 // MAINTENANCE VENTILATION</title>
+
+    <link rel="stylesheet" href="level7.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+
+<body>
+
+
+<div id="gameWorld">
+
+
+    <!-- =========================================
+         ATMOSPHERE
+    ========================================== -->
+
+    <div class="darkness"></div>
+
+    <div class="scanlines"></div>
+
+
+
+    <!-- =========================================
+         TOP HUD
+    ========================================== -->
+
+    <div id="topHud" class="hud">
+
+        <div class="hudLeft">
+
+            <div class="facility">
+                ORBITAL FACILITY
+            </div>
+
+            <div>
+                LEVEL 07 // MAINTENANCE VENTILATION
+            </div>
+
+            <div>
+                THREAT:
+                <span class="danger">
+                    ECHO
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="hudCenter">
+
+            <div class="objectiveLabel">
+                CURRENT OBJECTIVE
+            </div>
+
+            <div id="objectiveText">
+                REACH THE ELEVATOR HATCH
+            </div>
+
+        </div>
+
+
+        <div class="hudRight">
+
+            <div>
+                SIGNAL:
+                <span id="signalStatus">
+                    UNSTABLE
+                </span>
+            </div>
+
+            <div>
+                <span class="recDot">●</span>
+                REC
+            </div>
+
+            <div>
+                CAM-07 // LIVE
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         VENTILATION MAP
+    ========================================== -->
+
+    <div id="ventilation">
+
+
+        <!-- PIPES -->
+
+        <div class="pipe pipeHorizontal pipeA"></div>
+
+        <div class="pipe pipeHorizontal pipeB"></div>
+
+        <div class="pipe pipeHorizontal pipeC"></div>
+
+        <div class="pipe pipeVertical pipeD"></div>
+
+        <div class="pipe pipeVertical pipeE"></div>
+
+
+
+        <!-- BROKEN PIPES -->
+
+        <div class="brokenPipe brokenPipe1">
+
+            <span></span>
+
+        </div>
+
+
+        <div class="brokenPipe brokenPipe2">
+
+            <span></span>
+
+        </div>
+
+
+
+        <!-- =====================================
+             EXHAUST FAN 1
+        ====================================== -->
+
+        <div
+            class="exhaustFan fan1"
+            data-fan="1"
+        >
+
+            <div class="fanCircle">
+
+                <div class="fanBlade blade1"></div>
+
+                <div class="fanBlade blade2"></div>
+
+                <div class="fanBlade blade3"></div>
+
+                <div class="fanBlade blade4"></div>
+
+            </div>
+
+            <div class="fanWarning">
+                DANGER
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             EXHAUST FAN 2
+        ====================================== -->
+
+        <div
+            class="exhaustFan fan2"
+            data-fan="2"
+        >
+
+            <div class="fanCircle">
+
+                <div class="fanBlade blade1"></div>
+
+                <div class="fanBlade blade2"></div>
+
+                <div class="fanBlade blade3"></div>
+
+                <div class="fanBlade blade4"></div>
+
+            </div>
+
+            <div class="fanWarning">
+                DANGER
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             EXHAUST FAN 3
+        ====================================== -->
+
+        <div
+            class="exhaustFan fan3"
+            data-fan="3"
+        >
+
+            <div class="fanCircle">
+
+                <div class="fanBlade blade1"></div>
+
+                <div class="fanBlade blade2"></div>
+
+                <div class="fanBlade blade3"></div>
+
+                <div class="fanBlade blade4"></div>
+
+            </div>
+
+            <div class="fanWarning">
+                DANGER
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             STEAM / SMOKE
+        ====================================== -->
+
+        <div class="steam steam1"></div>
+
+        <div class="steam steam2"></div>
+
+        <div class="steam steam3"></div>
+
+        <div class="steam steam4"></div>
+
+
+
+        <!-- =====================================
+             ELEVATOR HATCH
+        ====================================== -->
+
+        <div
+            id="elevatorHatch"
+            class="elevatorHatch"
+        >
+
+            <div class="hatchTop">
+                ELEVATOR
+            </div>
+
+            <div class="hatchMain">
+                ↑
+            </div>
+
+            <div class="hatchBottom">
+                ACCESS
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         PLAYER
+    ========================================== -->
+
+    <div
+        id="player"
+        class="player"
+    >
+        ◈
+    </div>
+
+
+
+    <!-- =========================================
+         CROSSHAIR
+    ========================================== -->
+
+    <div id="crosshair">
+        +
+    </div>
+
+
+
+    <!-- =========================================
+         ZOMBIE ALERT
+    ========================================== -->
+
+    <div
+        id="zombieAlert"
+        class="zombieAlert"
+    >
+        ⚠ HOSTILES APPROACHING ⚠
+    </div>
+
+
+
+    <!-- =========================================
+         DAMAGE EFFECT
+    ========================================== -->
+
+    <div
+        id="damageEffect"
+        class="damageEffect"
+    ></div>
+
+
+
+    <!-- =========================================
+         PLAYER VITALS
+    ========================================== -->
+
+    <div class="vitalsHud hud">
+
+        <div class="vitalsTitle">
+            VITAL SIGN MONITOR
+        </div>
+
+        <div class="heartLine">
+            —\/—\/—\/—\/—
+        </div>
+
+        <div>
+            STATUS:
+            <span id="vitalStatus">
+                STABLE
+            </span>
+        </div>
+
+        <div>
+            BPM:
+            <span id="bpm">
+                72
+            </span>
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         WEAPON HUD
+    ========================================== -->
+
+    <div class="weaponHud hud">
+
+        <div class="weaponName">
+            M4 RIFLE
+        </div>
+
+
+        <div class="ammo">
+
+            MAG:
+
+            <span id="magAmmo">
+                30
+            </span>
+
+            / 30
+
+        </div>
+
+
+        <div class="reserveAmmo">
+
+            RESERVE:
+
+            <span id="reserveAmmo">
+                120
+            </span>
+
+        </div>
+
+
+        <div class="controls">
+
+            LMB FIRE
+
+            &nbsp;&nbsp;
+
+            R RELOAD
+
+            &nbsp;&nbsp;
+
+            SHIFT SPRINT
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         INTERACTION PROMPT
+    ========================================== -->
+
+    <div
+        id="interactionPrompt"
+        class="interactionPrompt"
+    >
+        REACH THE ELEVATOR HATCH
+    </div>
+
+
+
+    <!-- =========================================
+         DISTANCE / RUN STATUS
+    ========================================== -->
+
+    <div class="runStatus">
+
+        <div>
+
+            ROUTE:
+
+            <span id="routeStatus">
+                ACTIVE
+            </span>
+
+        </div>
+
+
+        <div>
+
+            FANS:
+
+            <span id="fanStatus">
+                3 ACTIVE
+            </span>
+
+        </div>
+
+
+        <div>
+
+            HOSTILES:
+
+            <span id="zombiesKilled">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         LOW AMMO WARNING
+    ========================================== -->
+
+    <div
+        id="lowAmmoWarning"
+        class="lowAmmoWarning"
+    >
+        LOW AMMUNITION
+    </div>
+
+
+
+    <!-- =========================================
+         GAME OVER
+    ========================================== -->
+
+    <div
+        id="gameOver"
+        class="overlay hidden"
+    >
+
+        <div class="gameOverBox">
+
+            <div class="gameOverHeader">
+                AGENT DOWN
+            </div>
+
+            <div class="gameOverText">
+                MAINTENANCE VENTILATION RUN FAILED
+            </div>
+
+            <button
+                id="restartBtn"
+                class="continueButton"
+            >
+                RESTART LEVEL 7
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         LEVEL COMPLETE
+    ========================================== -->
+
+    <div
+        id="missionComplete"
+        class="overlay hidden"
+    >
+
+        <div class="completeBox">
+
+            <div class="completeHeader">
+                LEVEL 7 COMPLETE
+            </div>
+
+            <div class="completeText">
+                ELEVATOR HATCH REACHED
+            </div>
+
+            <div class="completeText">
+                MAINTENANCE ROUTE CLEARED
+            </div>
+
+            <div class="completeSuccess">
+                PROCEED TO LEVEL 8
+            </div>
+
+            <button
+                id="continueBtn"
+                class="continueButton"
+            >
+                CONTINUE TO LEVEL 8
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         LEVEL LABEL
+    ========================================== -->
+
+    <div class="levelInfo">
+
+        LEVEL 07
+
+        <span>
+            // THE CLAUSTROPHOBIC RUN
+        </span>
+
+    </div>
+
+
+
+    <!-- =========================================
+         SURVIVOR MINI PROFILE
+         ONLY ONE
+    ========================================== -->
+
+    <div
+        id="survivorMiniProfile"
+        class="survivorMiniProfile"
+    >
+
+        <div class="miniProfileTitle">
+            SURVIVOR
+        </div>
+
+
+        <div id="miniPlayerName">
+            GUEST SURVIVOR
+        </div>
+
+
+        <div>
+
+            LEVEL
+
+            <span id="miniPlayerLevel">
+                07
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         SURVIVOR PROFILE PANEL
+         ONLY ONE
+    ========================================== -->
+
+    <div
+        id="survivorProfilePanel"
+        class="survivorProfilePanel"
+    >
+
+        <div class="survivorProfileBox">
+
+
+            <!-- HEADER -->
+
+            <div class="profileHeader">
+                SURVIVOR PROFILE
+            </div>
+
+
+            <div class="profileSubtitle">
+                // ORBITAL FACILITY DATABASE //
+            </div>
+
+
+            <div class="profileLine"></div>
+
+
+
+            <!-- NAME -->
+
+            <div class="profileRow">
+
+                <span>
+                    NAME
+                </span>
+
+                <strong id="playerName">
+                    GUEST SURVIVOR
+                </strong>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="profileRow">
+
+                <span>
+                    EMAIL
+                </span>
+
+                <strong id="playerEmail">
+                    GUEST ACCESS
+                </strong>
+
+            </div>
+
+
+
+            <!-- SURVIVOR ID -->
+
+            <div class="profileRow">
+
+                <span>
+                    SURVIVOR ID
+                </span>
+
+                <strong id="playerID">
+                    ZS-000000
+                </strong>
+
+            </div>
+
+
+
+            <!-- LEVEL -->
+
+            <div class="profileRow">
+
+                <span>
+                    LEVEL
+                </span>
+
+                <strong id="playerLevel">
+                    07
+                </strong>
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div class="profileRow">
+
+                <span>
+                    LOCATION
+                </span>
+
+                <strong id="profileLocation">
+                    SECTOR_07 // MAINTENANCE VENTILATION
+                </strong>
+
+            </div>
+
+
+
+            <!-- XP -->
+
+            <div class="profileRow">
+
+                <span>
+                    XP
+                </span>
+
+                <strong id="playerXP">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- ZOMBIES KILLED -->
+
+            <div class="profileRow">
+
+                <span>
+                    ZOMBIES KILLED
+                </span>
+
+                <strong id="profileKills">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- ITEMS FOUND -->
+
+            <div class="profileRow">
+
+                <span>
+                    ITEMS FOUND
+                </span>
+
+                <strong id="profileItems">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- XP SECTION -->
+
+            <div class="xpSection">
+
+
+                <div class="xpHeader">
+
+                    LEVEL
+
+                    <span id="xpLevel">
+                        07
+                    </span>
+
+                </div>
+
+
+                <div class="profileXPBar">
+
+                    <div id="profileXPFill"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="profileButtons">
+
+
+                <button id="resumeGameBtn">
+                    RESUME GAME
+                </button>
+
+
+                <button id="profileReturnHQBtn">
+                    RETURN TO HQ
+                </button>
+
+
+            </div>
+
+
+
+            <!-- HINT -->
+
+            <div class="profileHint">
+                PRESS ESC TO CLOSE
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script src="level7.js"></script>
+
+<script src="profile.js"></script>
+
+
+</body>
+
+</html>

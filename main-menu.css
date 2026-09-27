@@ -1,0 +1,1320 @@
+/* =========================
+   MAIN MENU - SECURITY SYSTEM
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #050806;
+    color: #9cffb0;
+    font-family: "Courier New", monospace;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+
+/* =========================
+   SECURITY MONITOR
+========================= */
+
+#securityMonitor {
+    width: min(1100px, 96vw);
+    min-height: 100vh;
+
+    padding: 24px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #102017 0%,
+            #07100b 55%,
+            #030604 100%
+        );
+
+    border: 4px solid #26382d;
+    border-radius: 32px;
+
+    box-shadow:
+        0 0 0 8px #101712,
+        0 0 35px rgba(100, 255, 140, 0.15);
+
+    position: relative;
+
+    overflow: visible;
+}
+
+
+/* =========================
+   CAMERA HEADER
+========================= */
+
+#cameraHeader {
+    width: 100%;
+
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    border: 1px solid #5c8f68;
+
+    background: #07100b;
+
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+#recording {
+    color: #ff4b4b;
+    font-weight: bold;
+}
+
+.recordFlash {
+    animation: recordFlash 0.5s ease;
+}
+
+@keyframes recordFlash {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================
+   CAMERA SCREEN
+========================= */
+
+#cameraScreen {
+    position: relative;
+
+    width: 100%;
+
+    height: 600px;
+
+    margin-top: 14px;
+
+    overflow: hidden;
+
+    border: 2px solid #507c5b;
+
+    border-radius: 18px;
+
+    background: #07100b;
+}
+
+
+/* =========================
+   CAMERA SCENE
+========================= */
+
+#cameraScene {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    background-color: #07100b;
+
+    transition:
+        opacity 0.3s ease,
+        filter 0.3s ease;
+}
+
+
+/* =========================
+   SCANLINES
+========================= */
+
+#scanlines {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 20;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(150, 255, 170, 0.04) 0px,
+            rgba(150, 255, 170, 0.04) 1px,
+            transparent 2px,
+            transparent 5px
+        );
+}
+
+
+/* =========================
+   CRT DOT EFFECT
+========================= */
+
+#cameraScreen::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 21;
+
+    background:
+        radial-gradient(
+            rgba(130, 255, 150, 0.15) 1px,
+            transparent 1px
+        );
+
+    background-size: 4px 4px;
+
+    opacity: 0.3;
+}
+
+
+/* =========================
+   STATIC
+========================= */
+
+#static {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 22;
+
+    opacity: 0.08;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #ffffff 0,
+            #ffffff 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    animation: staticMove 0.15s steps(2) infinite;
+}
+
+@keyframes staticMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(-2px, 2px);
+    }
+
+}
+
+
+/* =========================
+   SIGNAL LOST
+========================= */
+
+#signalLost {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 30;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #ff3333;
+
+    font-size: 55px;
+
+    font-weight: bold;
+
+    letter-spacing: 8px;
+
+    background: rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================
+   HOSPITAL SCENE
+========================= */
+
+.sceneHospital,
+.hospitalScene {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #102017 0%,
+            #08100b 55%,
+            #101b14 100%
+        );
+}
+
+
+/* Hospital wall */
+
+.hospitalWall {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #16251b,
+            #09100c 70%
+        );
+}
+
+
+/* Hospital doors */
+
+.hospitalDoor {
+    position: absolute;
+
+    width: 150px;
+    height: 240px;
+
+    bottom: 80px;
+
+    background: #020403;
+
+    border: 5px solid #587d60;
+
+    box-shadow:
+        0 0 25px rgba(120, 255, 150, 0.25);
+}
+
+.doorLeft {
+    left: 24%;
+}
+
+.doorRight {
+    right: 24%;
+}
+
+
+/* Hospital lights */
+
+.hospitalLight {
+    position: absolute;
+
+    width: 190px;
+    height: 15px;
+
+    top: 55px;
+
+    background: #9affaa;
+
+    box-shadow:
+        0 0 30px #79ff91,
+        0 0 60px rgba(80, 255, 100, 0.5);
+}
+
+.lightOne {
+    left: 18%;
+}
+
+.lightTwo {
+    right: 18%;
+}
+
+
+/* =========================
+   STRETCHER
+========================= */
+
+.stretcher {
+    position: absolute;
+
+    left: 50%;
+    bottom: 75px;
+
+    width: 280px;
+    height: 70px;
+
+    transform: translateX(-50%);
+
+    border: 4px solid #52745b;
+
+    background: #18251c;
+}
+
+.stretcherMattress {
+    position: absolute;
+
+    inset: 8px;
+
+    background: #53665a;
+}
+
+.stretcherWheel {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    bottom: -25px;
+
+    border-radius: 50%;
+
+    background: #050705;
+
+    border: 2px solid #78917d;
+}
+
+.wheel1 {
+    left: 30px;
+}
+
+.wheel2 {
+    right: 30px;
+}
+
+
+/* =========================
+   ZOMBIE
+========================= */
+
+.cameraZombie,
+.shadowZombie {
+    position: absolute;
+
+    font-size: 65px;
+
+    filter:
+        grayscale(1)
+        brightness(0.7)
+        sepia(1)
+        hue-rotate(70deg);
+
+    animation: zombieMove 5s linear infinite;
+}
+
+.zombieOne {
+    left: 72%;
+    bottom: 80px;
+}
+
+@keyframes zombieMove {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-180px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================
+   CORRIDOR
+========================= */
+
+.sceneCorridor,
+.corridorScene {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #16241b,
+            #07100b
+        );
+}
+
+.corridorLight {
+    position: absolute;
+
+    top: 55px;
+    left: 50%;
+
+    width: 500px;
+    height: 15px;
+
+    transform: translateX(-50%);
+
+    background: #9affaa;
+
+    box-shadow:
+        0 0 35px #78ff90;
+}
+
+.corridorDoor {
+    position: absolute;
+
+    width: 270px;
+    height: 260px;
+
+    left: 50%;
+    bottom: 100px;
+
+    transform: translateX(-50%);
+
+    background: #020302;
+
+    border: 5px solid #56755d;
+}
+
+.corridorZombie {
+    position: absolute;
+
+    left: 50%;
+    top: 45%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 110px;
+
+    opacity: 0;
+
+    animation: corridorZombie 8s infinite;
+}
+
+@keyframes corridorZombie {
+
+    0%,
+    65% {
+        opacity: 0;
+    }
+
+    70%,
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   BASEMENT
+========================= */
+
+.sceneBasement,
+.basementScene {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #16251a,
+            #020503 70%
+        );
+}
+
+.basementLight {
+    position: absolute;
+
+    top: 70px;
+    left: 50%;
+
+    width: 420px;
+    height: 20px;
+
+    transform: translateX(-50%);
+
+    background: #8cff9e;
+
+    box-shadow:
+        0 0 40px #69ff82;
+}
+
+.basementDoor {
+    position: absolute;
+
+    left: 50%;
+    top: 35%;
+
+    width: 260px;
+    height: 250px;
+
+    transform: translateX(-50%);
+
+    background: #010201;
+
+    border: 5px solid #4c6b53;
+}
+
+.horde {
+    position: absolute;
+
+    left: 50%;
+    bottom: 70px;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    font-size: 55px;
+
+    animation: hordeMove 4s infinite alternate;
+}
+
+@keyframes hordeMove {
+
+    from {
+        transform: translateX(-50%) translateY(15px);
+    }
+
+    to {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+}
+
+
+/* =========================
+   CAMERA SELECTOR
+========================= */
+
+#cameraSelector {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 14px;
+}
+
+.cameraBtn {
+    min-width: 105px;
+
+    padding: 12px 20px;
+
+    background: #07100b;
+
+    color: #7fa889;
+
+    border: 1px solid #405e47;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.cameraBtn:hover {
+    color: #b8ffc4;
+
+    border-color: #8cff9e;
+
+    box-shadow:
+        0 0 12px rgba(100, 255, 130, 0.25);
+}
+
+.cameraBtn.active {
+    color: #d0ffd8;
+
+    border-color: #8cff9e;
+
+    box-shadow:
+        0 0 15px rgba(100, 255, 130, 0.3);
+}
+
+
+/* =========================
+   CONTROL PANEL
+========================= */
+
+#controlPanel {
+    width: 100%;
+
+    margin-top: 16px;
+
+    padding: 24px;
+
+    border: 1px solid #52735b;
+
+    background:
+        linear-gradient(
+            180deg,
+            #09130d,
+            #050b07
+        );
+}
+
+
+/* =========================
+   SYSTEM TITLE
+========================= */
+
+#systemTitle {
+    font-size: 27px;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 15px;
+
+    color: #aaffb5;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+#systemStatus {
+    padding: 12px;
+
+    border-top: 1px solid #29422f;
+    border-bottom: 1px solid #29422f;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+}
+
+#systemStatus span {
+    color: #8cff9e;
+
+    text-shadow:
+        0 0 10px #5aff75;
+}
+
+
+/* =========================
+   MENU BUTTONS
+========================= */
+
+#menuButtons {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+
+    margin-top: 20px;
+}
+
+#menuButtons button {
+    min-height: 85px;
+
+    padding: 15px;
+
+    background: #07100b;
+
+    color: #9cffad;
+
+    border: 1px solid #46664e;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+}
+
+#menuButtons button small {
+    color: #60836a;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+#menuButtons button:hover {
+    transform: translateY(-2px);
+
+    border-color: #a4ffb0;
+
+    color: #d3ffda;
+
+    box-shadow:
+        0 0 20px rgba(100, 255, 130, 0.2);
+}
+
+
+/* =========================
+   TERMINAL
+========================= */
+
+#terminalText {
+    margin-top: 20px;
+
+    padding: 16px;
+
+    border: 1px solid #29422f;
+
+    background: #030705;
+
+    color: #669b70;
+
+    line-height: 1.8;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    body {
+        padding: 8px;
+    }
+
+    #securityMonitor {
+        width: 100%;
+
+        padding: 12px;
+
+        border-radius: 20px;
+    }
+
+    #cameraHeader {
+        font-size: 14px;
+
+        letter-spacing: 2px;
+    }
+
+    #cameraScreen {
+        height: 450px;
+    }
+
+    #menuButtons {
+        grid-template-columns: 1fr;
+    }
+
+    #systemTitle {
+        font-size: 18px;
+
+        letter-spacing: 3px;
+    }
+
+}
+
+/* ==========================================
+   GAME SCREEN SYSTEM
+========================================== */
+
+.gameScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 35, 15, 0.96),
+            rgba(0, 5, 2, 0.99) 70%
+        );
+
+    overflow-y: auto;
+}
+
+.gameScreen.hidden {
+    display: none !important;
+}
+
+.screenPanel {
+    width: min(700px, 92vw);
+    padding: 35px;
+    border: 1px solid #00ff66;
+    background: rgba(0, 8, 4, 0.97);
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 102, 0.15),
+        inset 0 0 30px rgba(0, 255, 102, 0.04);
+
+    color: #00ff66;
+}
+
+.widePanel {
+    width: min(950px, 94vw);
+}
+
+.screenHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 255, 102, 0.4);
+    letter-spacing: 3px;
+}
+
+.screenTitle {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 6px;
+}
+
+.screenSubtitle {
+    text-align: center;
+    opacity: .65;
+    letter-spacing: 3px;
+}
+
+.authOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 35px 0;
+}
+
+.selectionBtn,
+.primaryBtn,
+.backBtn,
+.mapCard,
+.weaponCard,
+.deployBtn {
+    font-family: "Courier New", monospace;
+    cursor: pointer;
+}
+
+.selectionBtn {
+    padding: 22px;
+    background: transparent;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+}
+
+.selectionBtn:hover,
+.primaryBtn:hover,
+.deployBtn:hover {
+    background: #00ff66;
+    color: #001a08;
+    box-shadow: 0 0 20px #00ff66;
+}
+
+.selectionBtn strong,
+.selectionBtn small {
+    display: block;
+}
+
+.selectionBtn small {
+    margin-top: 8px;
+    opacity: .65;
+}
+
+.backBtn {
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid rgba(0,255,102,.5);
+    color: #00ff66;
+}
+
+.mapGrid,
+.weaponGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.mapCard,
+.weaponCard {
+    padding: 20px;
+    background: rgba(0,20,8,.7);
+    border: 1px solid rgba(0,255,102,.4);
+    color: #00ff66;
+}
+
+.mapCard.selected,
+.weaponCard.selected {
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 18px rgba(0,255,102,.3);
+}
+
+.mapCard strong,
+.mapCard small,
+.mapStatus,
+.weaponCard strong,
+.weaponCard small,
+.weaponCard span {
+    display: block;
+    margin-top: 8px;
+}
+
+.mapStatus {
+    color: #00ff66;
+}
+
+.mapStatus.locked,
+.weaponCard span {
+    color: #ff3030;
+}
+
+.selectionFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.primaryBtn,
+.deployBtn {
+    padding: 14px 24px;
+    background: transparent;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+}
+
+.loadoutSummary {
+    border: 1px solid rgba(0,255,102,.35);
+    padding: 18px;
+    margin: 20px 0;
+    line-height: 2;
+}
+
+@media (max-width: 700px) {
+
+    .mapGrid,
+    .weaponGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .selectionFooter {
+        flex-direction: column;
+    }
+
+    .screenTitle {
+        font-size: 20px;
+    }
+}
+
+/* =========================
+   FIX GAME SCREEN SCROLL
+========================= */
+
+.gameScreen {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+
+    display: block;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding: 30px 15px;
+}
+
+.gameScreen .screenPanel {
+    margin: 0 auto 30px auto;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   FIX: GAME SCREEN SCROLL
+========================================== */
+
+.gameScreen {
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: flex-start !important;
+    justify-content: center;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    padding: 40px 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gameScreen.hidden {
+    display: none !important;
+}
+
+
+/* ==========================================
+   SCREEN PANEL
+========================================== */
+
+.gameScreen .screenPanel {
+    flex: 0 0 auto;
+
+    width: min(700px, 92vw);
+
+    margin: auto 0;
+
+    max-height: none;
+
+    overflow: visible;
+}
+
+
+/* Wide panels */
+.gameScreen .widePanel {
+    width: min(950px, 94vw);
+}
+
+
+/* ==========================================
+   SMALL SCREEN
+========================================== */
+
+@media (max-height: 700px) {
+
+    .gameScreen {
+        align-items: flex-start !important;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .gameScreen .screenPanel {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 700px) {
+
+    .gameScreen {
+        padding: 20px 10px;
+        align-items: flex-start !important;
+    }
+
+    .gameScreen .screenPanel {
+        width: 96vw;
+        padding: 25px;
+    }
+
+    .gameScreen .widePanel {
+        width: 96vw;
+    }
+}
+
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
+
+#scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(0, 255, 100, 0.10) 0px,
+            rgba(0, 255, 100, 0.10) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   CRT STATIC
+========================================================= */
+
+#static {
+    position: absolute;
+    inset: 0;
+    z-index: 60;
+
+    pointer-events: none;
+
+    background:
+        repeating-radial-gradient(
+            circle at 20% 30%,
+            rgba(255,255,255,0.10) 0px,
+            rgba(255,255,255,0.10) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    opacity: 0.20;
+
+    animation: staticNoise 0.12s steps(2) infinite;
+}
+
+
+/* STATIC MOVEMENT */
+
+@keyframes staticNoise {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2%, 1%);
+    }
+
+    50% {
+        transform: translate(1%, -2%);
+    }
+
+    75% {
+        transform: translate(2%, 1%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+
+}
+
+/* =========================================================
+   VISIBLE CRT SCANLINES
+========================================================= */
+
+#cameraScreen #scanlines {
+    position: absolute;
+    inset: 0;
+
+    z-index: 50;
+
+    pointer-events: none;
+
+    display: block;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(120, 255, 150, 0.18) 0px,
+            rgba(120, 255, 150, 0.18) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   VISIBLE CRT STATIC
+========================================================= */
+
+#cameraScreen #static {
+    position: absolute;
+    inset: 0;
+
+    z-index: 60;
+
+    pointer-events: none;
+
+    display: block;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.25) 1px,
+            transparent 1px
+        );
+
+    background-size: 4px 4px;
+
+    opacity: 0.35;
+
+    animation: crtStaticMove 0.12s steps(2) infinite;
+}
+
+
+@keyframes crtStaticMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(2px, -1px);
+    }
+
+    50% {
+        transform: translate(-2px, 2px);
+    }
+
+    75% {
+        transform: translate(1px, -2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* ==========================================
+   CRT STATIC SETTINGS OFF
+========================================== */
+
+#cameraScreen #static.settings-off {
+    display: none !important;
+    visibility: hidden !important;
+}

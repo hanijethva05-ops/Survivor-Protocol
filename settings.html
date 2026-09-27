@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>System Configuration</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            min-height: 100vh;
+
+            background: #000b06;
+
+            color: #19ff72;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =================================
+           MAIN PANEL
+        ================================= */
+
+        .screenPanel {
+
+            width: 85%;
+
+            max-width: 900px;
+
+            min-height: 430px;
+
+            border: 1px solid #19ff72;
+
+            padding: 42px;
+
+            box-shadow:
+                0 0 30px rgba(25,255,114,0.12);
+        }
+
+
+        /* =================================
+           HEADER
+        ================================= */
+
+        .screenHeader {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid
+                rgba(25,255,114,0.5);
+
+            font-size: 18px;
+
+            letter-spacing: 5px;
+        }
+
+
+        /* =================================
+           TITLE
+        ================================= */
+
+        .screenTitle {
+
+            text-align: center;
+
+            margin-top: 38px;
+
+            font-size: 32px;
+
+            letter-spacing: 8px;
+        }
+
+
+        .screenSubtitle {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            margin-bottom: 45px;
+
+            font-size: 17px;
+
+            letter-spacing: 4px;
+
+            opacity: 0.8;
+        }
+
+
+        /* =================================
+           SETTINGS
+        ================================= */
+
+        .settingsList {
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 25px;
+        }
+
+
+        .settingRow {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            font-size: 19px;
+
+            letter-spacing: 3px;
+        }
+
+
+        /* =================================
+           TOGGLE
+        ================================= */
+
+        .switch {
+
+            position: relative;
+
+            width: 105px;
+
+            height: 44px;
+
+            display: inline-block;
+        }
+
+
+        .switch input {
+
+            display: none;
+        }
+
+
+        .slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            cursor: pointer;
+
+            border-radius: 30px;
+
+            background: #20b900;
+
+            border: 2px solid #19ff72;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 0 10px
+                rgba(25,255,114,0.35);
+        }
+
+
+        /* ON text */
+
+        .slider::before {
+
+            content: "ON";
+
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: white;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size: 17px;
+
+            font-weight: bold;
+        }
+
+
+        /* Circle */
+
+        .slider::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 36px;
+
+            height: 36px;
+
+            top: 2px;
+
+            right: 2px;
+
+            border-radius: 50%;
+
+            background: #eeeeee;
+
+            border: 2px solid #999;
+
+            box-shadow:
+                inset 0 0 5px
+                rgba(0,0,0,0.5),
+
+                0 2px 4px
+                rgba(0,0,0,0.5);
+
+            transition: 0.25s;
+        }
+
+
+        /* =================================
+           OFF STATE
+        ================================= */
+
+        .switch input:not(:checked)
+        + .slider {
+
+            background: #e60000;
+
+            border-color: #ff4444;
+
+            box-shadow:
+                0 0 12px
+                rgba(255,0,0,0.4);
+        }
+
+
+        .switch input:not(:checked)
+        + .slider::before {
+
+            content: "OFF";
+
+            left: auto;
+
+            right: 11px;
+        }
+
+
+        .switch input:not(:checked)
+        + .slider::after {
+
+            right: auto;
+
+            left: 2px;
+        }
+
+
+        /* =================================
+           RETURN BUTTON
+        ================================= */
+
+        #returnSecurityBtn {
+
+            margin-top: 40px;
+
+            padding: 15px 25px;
+
+            background: transparent;
+
+            border: 1px solid #19ff72;
+
+            color: #19ff72;
+
+            font-family:
+                "Courier New",
+                monospace;
+
+            font-size: 15px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        #returnSecurityBtn:hover {
+
+            background: #19ff72;
+
+            color: #001b0a;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="screenPanel">
+
+
+        <div class="screenHeader">
+
+            <span>
+                SYSTEM CONFIGURATION
+            </span>
+
+            <span>
+                SETTINGS
+            </span>
+
+        </div>
+
+
+        <div class="screenTitle">
+
+            SURVIVOR SYSTEM CONFIG
+
+        </div>
+
+
+        <div class="screenSubtitle">
+
+            MODIFY SYSTEM PARAMETERS //
+            LOCAL SETTINGS
+
+        </div>
+
+
+        <div class="settingsList">
+
+
+            <!-- CAMERA -->
+
+            <div class="settingRow">
+
+                <span>
+                    CAMERA FEED
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="cameraFeedBtn"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- SCANLINE -->
+
+            <div class="settingRow">
+
+                <span>
+                    SCANLINE EFFECT
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="scanlineBtn"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- CRT -->
+
+            <div class="settingRow">
+
+                <span>
+                    CRT STATIC
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="crtStaticBtn"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+
+        <button id="returnSecurityBtn">
+
+            ← RETURN TO SECURITY SYSTEM
+
+        </button>
+
+
+    </div>
+
+
+    <script>
+
+        /* =====================================
+           SETTINGS
+        ===================================== */
+
+        const toggles = [
+
+            [
+                "cameraFeedBtn",
+                "cameraFeed"
+            ],
+
+            [
+                "scanlineBtn",
+                "scanlineEffect"
+            ],
+
+            [
+                "crtStaticBtn",
+                "crtStatic"
+            ],
+
+            
+
+        ];
+
+
+        toggles.forEach(function (item) {
+
+            const button =
+                document.getElementById(item[0]);
+
+            const storageKey =
+                item[1];
+
+
+            /* LOAD SAVED VALUE */
+
+            const saved =
+                localStorage.getItem(
+                    storageKey
+                );
+
+
+            if (saved === "OFF") {
+
+                button.checked = false;
+
+            } else {
+
+                button.checked = true;
+
+            }
+
+
+            /* CLICK */
+
+            button.addEventListener(
+                "change",
+                function () {
+
+                    if (button.checked) {
+
+                        localStorage.setItem(
+                            storageKey,
+                            "ON"
+                        );
+
+                        console.log(
+                            storageKey + " = ON"
+                        );
+
+                    } else {
+
+                        localStorage.setItem(
+                            storageKey,
+                            "OFF"
+                        );
+
+                        console.log(
+                            storageKey + " = OFF"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+        /* =====================================
+           RETURN
+        ===================================== */
+
+        document
+            .getElementById("returnSecurityBtn")
+            .addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "main-menu.html";
+
+                }
+            );
+
+    </script>
+
+
+</body>
+
+</html>

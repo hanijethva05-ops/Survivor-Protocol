@@ -1,0 +1,1086 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #020605;
+
+    color: #00ff88;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+}
+
+
+/* ==========================================
+   GAME SCREEN
+========================================== */
+
+#gameScreen {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+}
+
+
+/* ==========================================
+   GAME WORLD
+========================================== */
+
+#gameWorld {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.05)
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            #dce7e3 0px,
+            #dce7e3 80px,
+            #cbd8d4 81px,
+            #cbd8d4 160px
+        );
+
+}
+
+
+/* ==========================================
+   MATRIX GREEN EFFECT
+========================================== */
+
+#gameWorld::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(
+            rgba(0,255,100,.08),
+            rgba(0,255,100,.08)
+        );
+
+    box-shadow:
+        inset 0 0 150px rgba(0,255,100,.4);
+
+    z-index: 5;
+
+}
+
+
+/* ==========================================
+   LAB FLOOR
+========================================== */
+
+.labFloor {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 79px,
+            rgba(0,0,0,.15) 80px
+        ),
+
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 79px,
+            rgba(0,0,0,.15) 80px
+        );
+
+}
+
+
+/* ==========================================
+   GLASS CHAMBERS
+========================================== */
+
+.glass {
+
+    position: absolute;
+
+    width: 180px;
+    height: 130px;
+
+    border:
+
+        3px solid
+        rgba(0,255,180,.8);
+
+    background:
+
+        linear-gradient(
+            rgba(0,255,180,.15),
+            rgba(0,100,150,.08)
+        );
+
+    box-shadow:
+
+        0 0 25px
+        rgba(0,255,180,.4);
+
+    z-index: 3;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 12px;
+
+}
+
+
+.chamber1 {
+
+    left: 5%;
+    top: 50%;
+
+}
+
+
+.chamber2 {
+
+    right: 5%;
+    top: 50%;
+
+}
+
+
+.chamber3 {
+
+    left: 40%;
+    top: 5%;
+
+}
+
+
+/* ==========================================
+   SERVER ROOM
+========================================== */
+
+.serverRoom {
+
+    position: absolute;
+
+    right: 5%;
+    bottom: 5%;
+
+    width: 230px;
+    height: 150px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.server {
+
+    border: 2px solid #006644;
+
+    background: #061612;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    box-shadow:
+        0 0 10px
+        rgba(0,255,100,.3);
+
+}
+
+
+/* ==========================================
+   TERMINALS
+========================================== */
+
+.terminal {
+
+    position: absolute;
+
+    width: 150px;
+    height: 80px;
+
+    transform: translate(-50%, -50%);
+
+    border: 2px solid #00ff88;
+
+    background: rgba(0,20,15,.9);
+
+    box-shadow:
+        0 0 25px
+        rgba(0,255,120,.5);
+
+    z-index: 20;
+
+    text-align: center;
+
+    padding-top: 15px;
+
+    font-size: 13px;
+
+}
+
+
+.terminal span {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 10px;
+
+}
+
+
+.terminal.hacked {
+
+    border-color: #ffffff;
+
+    background: #064d35;
+
+}
+
+
+/* ==========================================
+   MAIN CORE
+========================================== */
+
+.core {
+
+    position: absolute;
+
+    width: 190px;
+    height: 130px;
+
+    transform: translate(-50%, -50%);
+
+    border: 4px solid #00ccff;
+
+    background:
+        rgba(0,20,30,.95);
+
+    box-shadow:
+        0 0 40px
+        rgba(0,180,255,.6);
+
+    z-index: 20;
+
+    text-align: center;
+
+    padding-top: 35px;
+
+}
+
+
+.core span {
+
+    display: block;
+
+    margin-top: 15px;
+
+    color: #ff4444;
+
+}
+
+
+/* ==========================================
+   ESCAPE POD
+========================================== */
+
+#escapePod {
+
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+
+    display: none;
+
+    width: 130px;
+    height: 100px;
+
+    text-align: center;
+
+    padding-top: 10px;
+
+    border: 3px solid #00ff88;
+
+    background:
+        rgba(0,40,20,.9);
+
+    box-shadow:
+        0 0 35px
+        rgba(0,255,100,.8);
+
+    z-index: 30;
+
+    font-size: 35px;
+
+}
+
+
+#escapePod div {
+
+    font-size: 12px;
+
+}
+
+
+#escapePod span {
+
+    font-size: 10px;
+
+}
+
+
+/* ==========================================
+   TURRETS
+========================================== */
+
+.turret {
+
+    position: absolute;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    border: 3px solid #ff3333;
+
+    background: #180707;
+
+    color: #ff3333;
+
+    font-size: 30px;
+
+    text-align: center;
+
+    line-height: 44px;
+
+    z-index: 15;
+
+    box-shadow:
+        0 0 20px
+        rgba(255,0,0,.7);
+
+}
+
+
+.turret1 {
+
+    left: 30%;
+    top: 20%;
+
+}
+
+
+.turret2 {
+
+    left: 70%;
+    top: 45%;
+
+}
+
+
+.turret3 {
+
+    left: 30%;
+    top: 70%;
+
+}
+
+
+.turretsOff {
+
+    border-color: #333;
+
+    color: #333;
+
+    box-shadow: none;
+
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+#player {
+
+    position: absolute;
+
+    left: 50%;
+    top: 85%;
+
+    width: 30px;
+    height: 30px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border: 3px solid #00ff88;
+
+    background: #061b12;
+
+    box-shadow:
+        0 0 20px
+        #00ff88;
+
+    z-index: 80;
+
+}
+
+
+/* ==========================================
+   ZOMBIES
+========================================== */
+
+.enemy {
+
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 50;
+
+    font-size: 30px;
+
+}
+
+
+.armored {
+
+    filter:
+        grayscale(.2)
+        brightness(.7);
+
+    text-shadow:
+        0 0 10px red;
+
+}
+
+
+/* ==========================================
+   CROSSHAIR
+========================================== */
+
+#crosshair {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    font-size: 30px;
+
+    color: #00ff88;
+
+    z-index: 100;
+
+}
+
+
+/* ==========================================
+   HUD
+========================================== */
+
+#topLeftHUD {
+
+    position: absolute;
+
+    left: 25px;
+    top: 25px;
+
+    line-height: 1.8;
+
+    z-index: 120;
+
+}
+
+
+#topRightHUD {
+
+    position: absolute;
+
+    right: 25px;
+    top: 25px;
+
+    z-index: 120;
+
+}
+
+
+#recDot {
+
+    color: red;
+
+}
+
+
+#objectiveHUD {
+
+    position: absolute;
+
+    left: 50%;
+    top: 25px;
+
+    transform:
+        translateX(-50%);
+
+    padding: 12px 25px;
+
+    background:
+        rgba(0,0,0,.8);
+
+    border:
+        1px solid #00ff88;
+
+    z-index: 120;
+
+}
+
+
+#hackHUD {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 70px;
+
+    transform:
+        translateX(-50%);
+
+    width: 300px;
+
+    text-align: center;
+
+    z-index: 120;
+
+}
+
+
+#hackBar {
+
+    width: 100%;
+    height: 15px;
+
+    margin-top: 8px;
+
+    border: 1px solid #00ff88;
+
+    background: #02100a;
+
+}
+
+
+#hackProgress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: #00ff88;
+
+}
+
+
+#timerHUD {
+
+    position: absolute;
+
+    right: 25px;
+    top: 90px;
+
+    z-index: 120;
+
+}
+
+
+#selfDestruct {
+
+    margin-top: 10px;
+
+    color: #ff3333;
+
+    font-size: 20px;
+
+}
+
+
+#weaponHUD {
+
+    position: absolute;
+
+    right: 25px;
+    bottom: 25px;
+
+    text-align: right;
+
+    line-height: 1.7;
+
+    z-index: 120;
+
+}
+
+
+/* ==========================================
+   DAMAGE
+========================================== */
+
+#damageEffect {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        rgba(255,0,0,.4);
+
+    opacity: 0;
+
+    z-index: 150;
+
+}
+
+
+.damage {
+
+    animation:
+        damageFlash .3s;
+
+}
+
+
+@keyframes damageFlash {
+
+    from {
+        opacity: .9;
+    }
+
+    to {
+        opacity: 0;
+    }
+
+}
+
+
+/* ==========================================
+   MATRIX OVERLAY
+========================================== */
+
+#matrixOverlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    opacity: .15;
+
+    color: #00ff66;
+
+    z-index: 110;
+
+}
+
+
+#matrixOverlay span {
+
+    position: absolute;
+
+    font-size: 30px;
+
+    animation:
+        matrixFall 4s linear infinite;
+
+}
+
+
+#matrixOverlay span:nth-child(1) {
+    left: 10%;
+}
+
+
+#matrixOverlay span:nth-child(2) {
+    left: 40%;
+    animation-delay: 1s;
+}
+
+
+#matrixOverlay span:nth-child(3) {
+    left: 65%;
+    animation-delay: 2s;
+}
+
+
+#matrixOverlay span:nth-child(4) {
+    left: 85%;
+    animation-delay: 3s;
+}
+
+
+@keyframes matrixFall {
+
+    from {
+        top: -50px;
+    }
+
+    to {
+        top: 100%;
+    }
+
+}
+
+
+/* ==========================================
+   ALERT MODE
+========================================== */
+
+body.alertMode {
+
+    animation:
+        alertFlash .5s infinite alternate;
+
+}
+
+
+@keyframes alertFlash {
+
+    from {
+        background: #020605;
+    }
+
+    to {
+        background: #260000;
+    }
+
+}
+
+
+/* ==========================================
+   FINAL SCREEN
+========================================== */
+
+#finalScreen {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #000;
+
+    color: #00ff88;
+
+    z-index: 500;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+}
+
+
+#finalScreen h1 {
+
+    font-size: 38px;
+
+    letter-spacing: 6px;
+
+}
+
+
+#finalScreen p {
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.finalGlitch {
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+}
+
+/* ==========================================
+   LEVEL 4 FINAL SCREEN
+   ========================================== */
+
+#finalScreen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 120, 0.08),
+            rgba(0, 0, 0, 0.96) 65%
+        );
+
+    z-index: 9999;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    text-align: center;
+
+    color: #39ff88;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 5px #39ff88,
+        0 0 15px rgba(57, 255, 136, 0.6);
+}
+
+
+/* ==========================================
+   COMPLETE TITLE
+   ========================================== */
+
+#finalTitle {
+
+    font-size: 48px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+
+    color: #39ff88;
+
+    text-shadow:
+        0 0 8px #39ff88,
+        0 0 20px #39ff88,
+        0 0 40px rgba(57, 255, 136, 0.6);
+
+}
+
+
+/* ==========================================
+   FINAL MESSAGE
+   ========================================== */
+
+#finalMessage {
+
+    display: block;
+
+    font-size: 18px;
+
+    margin-bottom: 45px;
+
+    color: #39ff88;
+
+    letter-spacing: 4px;
+
+}
+
+
+/* ==========================================
+   FINAL BUTTONS
+   ========================================== */
+
+#finalScreen button {
+
+    width: 270px;
+
+    min-height: 58px;
+
+    margin: 8px;
+
+    padding: 14px 25px;
+
+    background:
+        rgba(0, 20, 12, 0.85);
+
+    border:
+        1px solid #39ff88;
+
+    color: #39ff88;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 16px;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    box-shadow:
+        0 0 8px rgba(57, 255, 136, 0.25);
+
+    transition:
+        0.2s ease;
+
+}
+
+
+/* ==========================================
+   BUTTON HOVER
+   ========================================== */
+
+#finalScreen button:hover {
+
+    background:
+        rgba(57, 255, 136, 0.12);
+
+    color: #ffffff;
+
+    border-color: #ffffff;
+
+    box-shadow:
+        0 0 10px #39ff88,
+        0 0 25px rgba(57, 255, 136, 0.5);
+
+    transform:
+        scale(1.03);
+
+}
+
+
+/* ==========================================
+   FAILED SCREEN
+   ========================================== */
+
+#finalScreen.failed {
+
+    color: #ff3030;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 0, 0, 0.08),
+            rgba(0, 0, 0, 0.97) 65%
+        );
+
+}
+
+
+#finalScreen.failed #finalTitle {
+
+    color: #ff3030;
+
+    text-shadow:
+        0 0 8px #ff3030,
+        0 0 20px #ff3030,
+        0 0 40px rgba(255, 0, 0, 0.6);
+
+}
+
+
+#finalScreen.failed #finalMessage {
+
+    color: #ff3030;
+
+}
+
+
+#finalScreen.failed button {
+
+    border-color: #ff3030;
+
+    color: #ff3030;
+
+    box-shadow:
+        0 0 8px rgba(255, 48, 48, 0.25);
+
+}
+
+
+#finalScreen.failed button:hover {
+
+    background:
+        rgba(255, 0, 0, 0.12);
+
+    color: #ffffff;
+
+    border-color: #ffffff;
+
+    box-shadow:
+        0 0 10px #ff3030,
+        0 0 25px rgba(255, 0, 0, 0.5);
+
+}

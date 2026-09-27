@@ -1,0 +1,955 @@
+/* =========================
+   SURVIVOR DATABASE
+   ========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #102018 0%,
+            #050806 55%,
+            #020302 100%
+        );
+
+    color: #9cffb5;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   CRT SCANLINES
+   ========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(150, 255, 170, 0.035) 0px,
+            rgba(150, 255, 170, 0.035) 1px,
+            transparent 2px,
+            transparent 5px
+        );
+}
+
+
+/* =========================
+   MAIN SYSTEM
+   ========================= */
+
+#survivorSystem {
+
+    width: min(1200px, 96vw);
+
+    min-height: 94vh;
+
+    margin: 3vh auto;
+
+    padding: 22px;
+
+    border: 2px solid #344b3c;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b110d,
+            #050806
+        );
+
+    box-shadow:
+        0 0 35px rgba(80, 255, 120, 0.12),
+        inset 0 0 35px rgba(80, 255, 120, 0.05);
+
+    position: relative;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+#databaseHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px 18px;
+
+    border: 1px solid #466050;
+
+    background: #080e0a;
+
+    letter-spacing: 3px;
+
+    font-size: 15px;
+}
+
+
+.systemBlink {
+
+    color: #65ff83;
+
+    text-shadow:
+        0 0 8px #65ff83;
+
+    animation: blink 1s infinite;
+}
+
+
+#classification {
+
+    color: #ff5555;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   TITLE
+   ========================= */
+
+#databaseTitle {
+
+    text-align: center;
+
+    padding: 25px 10px 20px;
+
+    border-bottom: 1px solid #304638;
+}
+
+
+#databaseTitle h1 {
+
+    margin-top: 8px;
+
+    font-size: clamp(25px, 4vw, 42px);
+
+    letter-spacing: 8px;
+
+    color: #b7ffc5;
+
+    text-shadow:
+        0 0 12px rgba(100, 255, 130, 0.45);
+}
+
+
+#databaseTitle p {
+
+    margin-top: 8px;
+
+    color: #62816b;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+
+.redWarning {
+
+    display: inline-block;
+
+    padding: 5px 12px;
+
+    border: 1px solid #7b2929;
+
+    color: #ff5b5b;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    background: rgba(100, 0, 0, 0.15);
+}
+
+
+/* =========================
+   DATABASE LAYOUT
+   ========================= */
+
+#database {
+
+    display: grid;
+
+    grid-template-columns:
+        330px
+        1fr;
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================
+   SURVIVOR LIST
+   ========================= */
+
+#survivorList {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.survivorCard {
+
+    width: 100%;
+
+    min-height: 125px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 12px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    color: #91b99c;
+
+    background: #080e0a;
+
+    border: 1px solid #304638;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    transition:
+        0.2s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.survivorCard:hover {
+
+    border-color: #73ff91;
+
+    box-shadow:
+        0 0 18px rgba(90, 255, 120, 0.15);
+
+    transform: translateX(4px);
+}
+
+
+.survivorCard.active {
+
+    border-color: #73ff91;
+
+    background:
+        linear-gradient(
+            90deg,
+            #122018,
+            #080e0a
+        );
+
+    box-shadow:
+        inset 4px 0 0 #73ff91;
+}
+
+
+/* =========================
+   MUGSHOT
+   ========================= */
+
+.mugshot {
+
+    width: 82px;
+
+    height: 95px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid #466050;
+
+    background:
+        radial-gradient(
+            circle,
+            #1c3022,
+            #050806
+        );
+
+    filter:
+        grayscale(0.8);
+}
+
+
+.mugshot::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    height: 3px;
+
+    background: #8aff9d;
+
+    box-shadow:
+        0 0 10px #8aff9d;
+
+    animation:
+        mugScan 2s linear infinite;
+}
+
+
+.scanFace {
+
+    font-size: 48px;
+
+    opacity: 0.75;
+
+    filter:
+        grayscale(1)
+        contrast(1.4);
+
+    text-shadow:
+        0 0 8px #76ff91;
+}
+
+
+.cardInfo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.cardInfo strong {
+
+    color: #b8ffc6;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+}
+
+
+.cardInfo span {
+
+    color: #607c68;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+.cardInfo small {
+
+    color: #62ff82;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+.cardInfo small.missing {
+
+    color: #ff5b5b;
+}
+
+
+/* =========================
+   PROFILE PANEL
+   ========================= */
+
+#profilePanel {
+
+    min-height: 470px;
+
+    padding: 18px;
+
+    border: 1px solid #466050;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            #14271b,
+            #070c08 70%
+        );
+
+    position: relative;
+}
+
+
+#profileTop {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    border-bottom: 1px solid #304638;
+
+    padding-bottom: 15px;
+}
+
+
+/* =========================
+   FINGERPRINT
+   ========================= */
+
+#fingerprint {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #6d9076;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+.fingerprintCircle {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 2px solid #67ff86;
+
+    border-radius: 50%;
+
+    color: #67ff86;
+
+    font-size: 25px;
+
+    box-shadow:
+        0 0 15px rgba(100, 255, 130, 0.3);
+
+    animation:
+        fingerprintPulse 1.5s infinite;
+}
+
+
+#profileStatus {
+
+    text-align: right;
+
+    color: #65806c;
+
+    font-size: 10px;
+
+    line-height: 2;
+
+    letter-spacing: 1px;
+}
+
+
+#statusText {
+
+    color: #62ff82;
+}
+
+
+#locationText {
+
+    color: #b5d6bc;
+}
+
+
+/* =========================
+   LARGE MUGSHOT
+   ========================= */
+
+#largeMugshot {
+
+    width: 180px;
+
+    height: 205px;
+
+    margin: 22px auto 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    border: 2px solid #466050;
+
+    background:
+        radial-gradient(
+            circle,
+            #1c3223,
+            #030504
+        );
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 25px rgba(90, 255, 120, 0.08);
+}
+
+
+#mugshotCharacter {
+
+    font-size: 105px;
+
+    opacity: 0.7;
+
+    filter:
+        grayscale(1)
+        contrast(1.5);
+
+    text-shadow:
+        0 0 15px #69ff87;
+}
+
+
+.photoLines {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 8px,
+            rgba(120, 255, 150, 0.08) 9px
+        );
+}
+
+
+#largeMugshot > span {
+
+    position: absolute;
+
+    bottom: 7px;
+
+    left: 0;
+
+    right: 0;
+
+    text-align: center;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #63806a;
+}
+
+
+/* =========================
+   PROFILE INFORMATION
+   ========================= */
+
+#profileInfo {
+
+    width: min(650px, 90%);
+
+    margin: auto;
+}
+
+
+.infoRow {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 8px 0;
+
+    border-bottom: 1px dashed #25392b;
+
+    font-size: 11px;
+}
+
+
+.infoRow span {
+
+    color: #587060;
+
+    letter-spacing: 2px;
+}
+
+
+.infoRow strong {
+
+    color: #a9ffb8;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   BIO
+   ========================= */
+
+#bioBox {
+
+    margin-top: 15px;
+
+    padding: 13px;
+
+    border: 1px solid #304638;
+
+    background: rgba(0, 0, 0, 0.2);
+
+    min-height: 75px;
+}
+
+
+.bioTitle {
+
+    color: #6f9b79;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+
+#bioText {
+
+    color: #a0c5a8;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    min-height: 35px;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+#databaseFooter {
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #304638;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+#terminalStatus {
+
+    flex: 1;
+
+    color: #587560;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+#databaseFooter button {
+
+    padding: 12px 17px;
+
+    background: #08100b;
+
+    border: 1px solid #466050;
+
+    color: #86b594;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    cursor: pointer;
+
+    letter-spacing: 1px;
+
+    transition:
+        0.2s ease;
+}
+
+
+#databaseFooter button:hover {
+
+    color: #baffc6;
+
+    border-color: #7cff96;
+
+    box-shadow:
+        0 0 15px rgba(100, 255, 130, 0.2);
+}
+
+
+#selectBtn {
+
+    color: #8dffa0 !important;
+
+    border-color: #5fcf76 !important;
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes blink {
+
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.25;
+    }
+
+}
+
+
+@keyframes mugScan {
+
+    0% {
+        top: -5px;
+    }
+
+    100% {
+        top: 100%;
+    }
+
+}
+
+
+@keyframes fingerprintPulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+        box-shadow:
+            0 0 25px rgba(100, 255, 130, 0.5);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    #database {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #survivorList {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .survivorCard {
+
+        flex-direction: column;
+
+        min-height: 175px;
+
+        text-align: center;
+
+    }
+
+
+    .cardInfo {
+
+        align-items: center;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    #survivorSystem {
+
+        width: 100%;
+
+        margin: 0;
+
+        border-radius: 0;
+
+        padding: 12px;
+
+    }
+
+
+    #survivorList {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #profileTop {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+
+    #profileStatus {
+
+        text-align: left;
+
+    }
+
+
+    #databaseTitle h1 {
+
+        letter-spacing: 4px;
+
+    }
+
+}
+
+/* =========================
+   FINGERPRINT SCAN
+   ========================= */
+
+.fingerprintActive .fingerprintCircle {
+
+    animation:
+        fingerprintScan 0.8s ease;
+
+}
+
+
+@keyframes fingerprintScan {
+
+    0% {
+
+        transform: scale(0.7);
+
+        opacity: 0.3;
+
+        box-shadow:
+            0 0 0 rgba(100, 255, 130, 0);
+
+    }
+
+    50% {
+
+        transform: scale(1.25);
+
+        opacity: 1;
+
+        box-shadow:
+            0 0 30px
+            rgba(100, 255, 130, 0.8);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+        box-shadow:
+            0 0 15px
+            rgba(100, 255, 130, 0.3);
+
+    }
+
+}

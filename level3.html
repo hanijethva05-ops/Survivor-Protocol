@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Survival // Sector 03</title>
+
+    <link rel="stylesheet" href="level3.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+
+<body>
+
+    
+
+<div id="gameScreen">
+
+    <div id="gameWorld">
+
+        <!-- DOWNTOWN STREET -->
+        <div class="street"></div>
+
+        <!-- ENVIRONMENT -->
+        <div class="burningCar car1">🚗</div>
+        <div class="burningCar car2">🚙</div>
+
+        <div class="barricade wire1"></div>
+        <div class="barricade wire2"></div>
+
+        <!-- MILITARY CHECKPOINT -->
+        <div class="checkpoint">
+            <div style="font-size:22px;">⚠</div>
+            MILITARY CHECKPOINT
+            <br>
+            <span style="font-size:13px;">SECTOR 03</span>
+        </div>
+
+        <!-- SUPPLY CRATES -->
+        <div class="supplyCrate" id="crate1" data-collected="false">
+            📦
+            <span>[E] SEARCH SUPPLY</span>
+        </div>
+
+        <div class="supplyCrate" id="crate2" data-collected="false">
+            📦
+            <span>[E] SEARCH SUPPLY</span>
+        </div>
+
+        <div class="supplyCrate" id="crate3" data-collected="false">
+            📦
+            <span>[E] SEARCH SUPPLY</span>
+        </div>
+
+        <!-- EXTRACTION CHOPPER -->
+        <div id="chopper">
+            🚁
+            <span>EVAC</span>
+        </div>
+
+        <!-- ZOMBIES -->
+        <div id="enemies"></div>
+
+        <!-- PLAYER -->
+        <div id="player"></div>
+
+    </div>
+
+    <!-- CROSSHAIR -->
+    <div id="crosshair">+</div>
+
+    <!-- TOP LEFT -->
+    <div id="topLeft">
+        LOC: SECTOR_03 // DOWNTOWN
+        <br>
+        HEALTH: <span id="health">100</span>
+    </div>
+
+    <!-- TOP RIGHT -->
+    <div id="topRight">
+        <span id="recDot">●</span>
+        REC &nbsp; CAM-03 &nbsp; STATIC
+    </div>
+
+    <!-- OBJECTIVE -->
+    <div id="objectiveHUD">
+        OBJECTIVE:
+        <span id="objectiveText">
+            REACH THE MILITARY CHECKPOINT
+        </span>
+    </div>
+
+    <!-- SUPPLIES -->
+    <div id="supplyHUD">
+        SUPPLIES:
+        <span id="supplies">0</span>/3
+    </div>
+
+    <!-- ZOMBIE COUNT -->
+    <div id="zombieHUD">
+        THREATS:
+        <span id="zombiesKilled">0</span>/8
+    </div>
+
+    <!-- WEAPON -->
+    <div id="weaponHUD">
+        M4 RIFLE
+        <br>
+        MAG: <span id="magAmmo">30</span>
+        <br>
+        RSV: <span id="reserve">090</span>
+    </div>
+
+    <!-- DAMAGE FLASH -->
+    <div id="damageEffect"></div>
+
+    <!-- FINAL SCREEN -->
+    <div id="finalScreen">
+
+        <div id="finalTitle">
+            SECTOR 03 COMPLETE
+        </div>
+
+        <small id="finalMessage">
+            EXTRACTION SUCCESSFUL
+        </small>
+
+        <button id="restartLevelBtn">
+            RESTART LEVEL
+        </button>
+
+    </div>
+
+    <!-- =====================================================
+     SURVIVOR PROFILE
+     SAME STRUCTURE FOR ALL LEVELS
+     ===================================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="profilePanel">
+
+        <div class="profilePanelTitle">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ACTIVE SURVIVOR // PLAYER DATABASE
+        </div>
+
+
+        <!-- NAME -->
+
+        <div class="profileRow">
+            <span>NAME:</span>
+            <span id="playerName">
+                PLAYER
+            </span>
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="profileRow">
+            <span>EMAIL:</span>
+            <span id="playerEmail">
+                UNKNOWN
+            </span>
+        </div>
+
+
+        <!-- SURVIVOR ID -->
+
+        <div class="profileRow">
+            <span>SURVIVOR ID:</span>
+            <span id="playerID">
+                LOCAL-001
+            </span>
+        </div>
+
+
+        <!-- LEVEL -->
+
+        <div class="profileRow">
+            <span>LEVEL:</span>
+            <span id="playerLevel">
+                03
+            </span>
+        </div>
+
+
+        <!-- LOCATION -->
+
+        <div class="profileRow">
+            <span>LOCATION:</span>
+            <span id="playerLocation">
+                DOWNTOWN
+            </span>
+        </div>
+
+
+        <!-- XP -->
+
+        <div class="profileRow">
+            <span>XP:</span>
+            <span id="playerXP">
+                0
+            </span>
+        </div>
+
+
+        <!-- ZOMBIES -->
+
+        <div class="profileRow">
+            <span>ZOMBIES KILLED:</span>
+            <span id="profileKills">
+                0
+            </span>
+        </div>
+
+
+        <!-- ITEMS -->
+
+        <div class="profileRow">
+            <span>ITEMS FOUND:</span>
+            <span id="profileItems">
+                0
+            </span>
+        </div>
+
+
+        <!-- XP BAR -->
+
+        <div class="profileXP">
+
+            <span>
+                LEVEL
+            </span>
+
+            <span id="xpLevel">
+                03
+            </span>
+
+            <div class="profileXPBar">
+
+                <div id="profileXPFill"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <button id="resumeGameBtn">
+            RESUME
+        </button>
+
+        <button id="profileReturnHQBtn">
+            ← RETURN TO HQ
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="level3.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

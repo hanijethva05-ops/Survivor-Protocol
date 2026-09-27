@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Survivor Profiles - Classified</title>
+
+    <link
+        rel="stylesheet"
+        href="survivor.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div id="survivorSystem">
+
+        <!-- =========================
+             TOP HEADER
+        ========================== -->
+
+        <header id="databaseHeader">
+
+            <div>
+                <span class="systemBlink">●</span>
+                SECURITY DATABASE
+            </div>
+
+            <div id="classification">
+                CLASSIFIED // LEVEL 01
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             DATABASE TITLE
+        ========================== -->
+
+        <section id="databaseTitle">
+
+            <div class="redWarning">
+                ⚠ RESTRICTED ACCESS
+            </div>
+
+            <h1>
+                SURVIVOR PROFILES
+            </h1>
+
+            <p>
+                MISSING PERSONS // EMERGENCY RESPONSE DATABASE
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN DATABASE
+        ========================== -->
+
+        <main id="database">
+
+            <!-- =========================
+                 SURVIVOR LIST
+            ========================== -->
+
+            <section id="survivorList">
+
+                <button
+                    class="survivorCard active"
+                    data-survivor="0"
+                >
+
+                    <div class="mugshot">
+                        <div class="scanFace">
+                            👤
+                        </div>
+                    </div>
+
+                    <div class="cardInfo">
+
+                        <strong>
+                            SURVIVOR 01
+                        </strong>
+
+                        <span>
+                            SUBJECT: UNKNOWN
+                        </span>
+
+                        <small>
+                            STATUS: SURVIVED
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="survivorCard"
+                    data-survivor="1"
+                >
+
+                    <div class="mugshot">
+                        <div class="scanFace">
+                            👨
+                        </div>
+                    </div>
+
+                    <div class="cardInfo">
+
+                        <strong>
+                            SURVIVOR 02
+                        </strong>
+
+                        <span>
+                            SUBJECT: UNKNOWN
+                        </span>
+
+                        <small>
+                            STATUS: SURVIVED
+                        </small>
+
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="survivorCard"
+                    data-survivor="2"
+                >
+
+                    <div class="mugshot">
+                        <div class="scanFace">
+                            👩
+                        </div>
+                    </div>
+
+                    <div class="cardInfo">
+
+                        <strong>
+                            SURVIVOR 03
+                        </strong>
+
+                        <span>
+                            SUBJECT: UNKNOWN
+                        </span>
+
+                        <small class="missing">
+                            STATUS: MISSING
+                        </small>
+
+                    </div>
+
+                </button>
+
+            </section>
+
+
+            <!-- =========================
+                 PROFILE DETAILS
+            ========================== -->
+
+            <section id="profilePanel">
+
+                <div id="profileTop">
+
+                    <div id="fingerprint">
+
+                        <div class="fingerprintCircle">
+                            ◉
+                        </div>
+
+                        <span>
+                            FINGERPRINT SCAN
+                        </span>
+
+                    </div>
+
+
+                    <div id="profileStatus">
+
+                        STATUS:
+                        <strong id="statusText">
+                            SURVIVED
+                        </strong>
+
+                        <br>
+
+                        LAST KNOWN LOCATION:
+
+                        <strong id="locationText">
+                            SECTOR 4
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE PHOTO -->
+
+                <div id="largeMugshot">
+
+                    <div id="mugshotCharacter">
+                        👤
+                    </div>
+
+                    <div class="photoLines"></div>
+
+                    <span>
+                        DATABASE IMAGE
+                    </span>
+
+                </div>
+
+
+                <!-- PROFILE INFORMATION -->
+
+                <div id="profileInfo">
+
+                    <div class="infoRow">
+
+                        <span>
+                            DESIGNATION
+                        </span>
+
+                        <strong id="nameText">
+                            SURVIVOR 01
+                        </strong>
+
+                    </div>
+
+
+                    <div class="infoRow">
+
+                        <span>
+                            SPECIALTY
+                        </span>
+
+                        <strong id="specialtyText">
+                            COMBAT EXPERT
+                        </strong>
+
+                    </div>
+
+
+                    <div class="infoRow">
+
+                        <span>
+                            CLEARANCE
+                        </span>
+
+                        <strong id="clearanceText">
+                            LEVEL 01
+                        </strong>
+
+                    </div>
+
+
+                    <div id="bioBox">
+
+                        <div class="bioTitle">
+                            PERSONNEL NOTES
+                        </div>
+
+                        <p id="bioText"></p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- =========================
+             FOOTER CONTROLS
+        ========================== -->
+
+        <footer id="databaseFooter">
+
+            <div id="terminalStatus">
+                &gt; DATABASE CONNECTION: STABLE
+            </div>
+
+
+            <button id="selectBtn">
+                ▶ SELECT SURVIVOR
+            </button>
+
+
+            <button id="backBtn">
+                ← RETURN TO SECURITY SYSTEM
+            </button>
+
+        </footer>
+
+
+    </div>
+
+
+    <script src="survivor.js"></script>
+
+</body>
+
+</html>

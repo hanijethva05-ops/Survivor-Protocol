@@ -1,0 +1,1538 @@
+/* ==========================================
+   LEVEL 7 - THE MAINTENANCE VENTILATION
+   CLAUSTROPHOBIC RUN
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #010203;
+    color: #d8ffff;
+    font-family: "Courier New", monospace;
+}
+
+body {
+    cursor: crosshair;
+}
+
+
+/* ==========================================
+   GAME WORLD
+========================================== */
+
+#gameWorld {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(0, 255, 255, .07),
+            transparent 45%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        #010304;
+
+    background-size:
+        auto,
+        45px 45px,
+        45px 45px,
+        auto;
+}
+
+
+/* ==========================================
+   VENTILATION
+========================================== */
+
+#ventilation {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            #020506 0%,
+            #101719 12%,
+            #05090a 50%,
+            #101719 88%,
+            #020506 100%
+        );
+
+    border-top: 8px solid #17272a;
+    border-bottom: 8px solid #17272a;
+
+    box-shadow:
+        inset 0 0 120px #000;
+
+    z-index: 1;
+}
+
+
+/* ==========================================
+   VENT WALLS
+========================================== */
+
+.ventWall {
+    position: absolute;
+
+    background:
+        linear-gradient(
+            180deg,
+            #19272a,
+            #071012,
+            #172528
+        );
+
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,.9);
+}
+
+.wallTop {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 17%;
+}
+
+.wallBottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 17%;
+}
+
+
+/* ==========================================
+   FLOOR
+========================================== */
+
+#ventFloor {
+    position: absolute;
+
+    left: 8%;
+    right: 8%;
+    top: 17%;
+    bottom: 17%;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(0,255,255,.025) 0,
+            rgba(0,255,255,.025) 2px,
+            transparent 2px,
+            transparent 55px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,255,255,.02) 0,
+            rgba(0,255,255,.02) 2px,
+            transparent 2px,
+            transparent 55px
+        );
+
+    border: 1px solid rgba(0,255,255,.12);
+
+    box-shadow:
+        inset 0 0 100px #000;
+}
+
+
+/* ==========================================
+   PIPE NETWORK
+========================================== */
+
+.pipe {
+    position: absolute;
+
+    background:
+        linear-gradient(
+            90deg,
+            #304346,
+            #081012,
+            #263a3d
+        );
+
+    border: 1px solid #456568;
+
+    box-shadow:
+        0 0 12px rgba(0,255,255,.08),
+        inset 0 0 10px rgba(0,0,0,.9);
+
+    z-index: 20;
+}
+
+
+/* HTML uses pipeHorizontal / pipeVertical */
+
+.pipeHorizontal {
+    height: 13px;
+}
+
+.pipeVertical {
+    width: 13px;
+}
+
+
+/* Existing HTML pipe classes */
+
+.pipeA {
+    width: 45%;
+    top: 22%;
+    left: 5%;
+}
+
+.pipeB {
+    width: 32%;
+    top: 67%;
+    right: 4%;
+}
+
+.pipeC {
+    width: 38%;
+    top: 42%;
+    left: 32%;
+}
+
+.pipeD {
+    height: 45%;
+    top: 20%;
+    left: 23%;
+}
+
+.pipeE {
+    height: 42%;
+    top: 38%;
+    right: 20%;
+}
+
+
+/* ==========================================
+   BROKEN PIPES
+========================================== */
+
+.brokenPipe {
+    position: absolute;
+
+    width: 100px;
+    height: 14px;
+
+    background: #263a3d;
+
+    border: 1px solid #4c6669;
+
+    box-shadow:
+        0 0 10px rgba(0,255,255,.08);
+}
+
+.brokenPipe span {
+    position: absolute;
+
+    right: -15px;
+    top: 50%;
+
+    width: 18px;
+    height: 4px;
+
+    transform: translateY(-50%);
+
+    background: #ff5533;
+
+    box-shadow:
+        0 0 12px #ff5533;
+
+    animation: leakPulse .6s infinite alternate;
+}
+
+.brokenPipe1 {
+    top: 35%;
+    left: 42%;
+    transform: rotate(12deg);
+}
+
+.brokenPipe2 {
+    top: 63%;
+    right: 30%;
+    transform: rotate(-8deg);
+}
+
+@keyframes leakPulse {
+    from {
+        opacity: .3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   EXHAUST FANS
+========================================== */
+
+.exhaustFan {
+    position: absolute;
+
+    width: 125px;
+    height: 125px;
+
+    border: 4px solid #35484b;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #020506 0 20%,
+            #172528 21% 24%,
+            #020405 25% 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(0,0,0,.9);
+
+    z-index: 30;
+}
+
+.fan1 {
+    left: 18%;
+    top: 27%;
+}
+
+.fan2 {
+    left: 48%;
+    top: 58%;
+}
+
+.fan3 {
+    right: 14%;
+    top: 27%;
+}
+
+.exhaustFan::before,
+.exhaustFan::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 8px;
+    height: 92px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #53676a,
+            #10191b
+        );
+
+    transform-origin: center bottom;
+
+    border-radius: 8px;
+
+    margin-left: -4px;
+    margin-top: -92px;
+
+    opacity: .8;
+}
+
+.exhaustFan::after {
+    transform: rotate(90deg);
+}
+
+.fanBlade {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 8px;
+    height: 92px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #53676a,
+            #10191b
+        );
+
+    transform-origin: center bottom;
+
+    border-radius: 8px;
+
+    margin-left: -4px;
+    margin-top: -92px;
+}
+
+.exhaustFan.running .fanBlade {
+    animation:
+        fanSpin .25s linear infinite;
+}
+
+@keyframes fanSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.fanWarning {
+    position: absolute;
+
+    bottom: -22px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #ff3333;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 8px red;
+}
+
+
+/* ==========================================
+   STEAM
+========================================== */
+
+.steam {
+    position: absolute;
+
+    width: 80px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180,220,220,.08),
+            transparent 70%
+        );
+
+    filter: blur(8px);
+
+    animation:
+        steamMove 3s infinite alternate ease-in-out;
+
+    z-index: 15;
+}
+
+.steam1 {
+    left: 30%;
+    top: 30%;
+}
+
+.steam2 {
+    left: 55%;
+    top: 25%;
+}
+
+.steam3 {
+    right: 28%;
+    top: 55%;
+}
+
+.steam4 {
+    right: 12%;
+    bottom: 25%;
+}
+
+@keyframes steamMove {
+    from {
+        transform: translateY(15px);
+        opacity: .25;
+    }
+
+    to {
+        transform: translateY(-20px);
+        opacity: .65;
+    }
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+#player {
+    position: absolute;
+
+    width: 40px;
+    height: 40px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border: 2px solid #00ffff;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #dfffff 0 10%,
+            #008f99 12% 28%,
+            #031517 30% 100%
+        );
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 35px rgba(0,255,255,.35);
+
+    z-index: 100;
+}
+
+#player::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 65px;
+    height: 2px;
+
+    background: #00ffff;
+
+    transform:
+        translateY(-50%);
+
+    opacity: .5;
+}
+
+
+/* ==========================================
+   ZOMBIES
+========================================== */
+
+.enemy {
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 32px;
+
+    z-index: 90;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(255,0,0,.65)
+        );
+}
+
+.enemy.chaser {
+    animation:
+        zombiePulse .35s infinite alternate;
+}
+
+@keyframes zombiePulse {
+    from {
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(255,0,0,.5)
+            );
+    }
+
+    to {
+        filter:
+            drop-shadow(
+                0 0 18px
+                rgba(255,0,0,1)
+            );
+    }
+}
+
+.enemyHit {
+    filter:
+        brightness(3)
+        drop-shadow(
+            0 0 20px red
+        );
+}
+
+
+/* ==========================================
+   CROSSHAIR
+========================================== */
+
+#crosshair {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #00ffff;
+
+    font-size: 24px;
+
+    text-shadow:
+        0 0 10px #00ffff;
+
+    z-index: 500;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   TOP HUD
+========================================== */
+
+#topHud {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    min-height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,8,10,.96),
+            rgba(0,8,10,.55),
+            transparent
+        );
+
+    border-bottom:
+        1px solid rgba(0,255,255,.15);
+
+    z-index: 400;
+}
+
+.hud {
+    font-family: "Courier New", monospace;
+}
+
+.hudLeft,
+.hudRight {
+    font-size: 10px;
+    line-height: 1.7;
+    letter-spacing: 1px;
+}
+
+.hudCenter {
+    text-align: center;
+}
+
+.facility {
+    color: #00ffff;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.danger {
+    color: #ff3333;
+}
+
+.objectiveLabel {
+    color: #64777a;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 5px;
+}
+
+#objectiveText {
+    color: #ffcc00;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    text-shadow:
+        0 0 8px rgba(255,204,0,.4);
+}
+
+#signalStatus {
+    color: #ffcc00;
+}
+
+.recDot {
+    color: #ff003c;
+
+    animation:
+        recBlink 1s infinite;
+}
+
+@keyframes recBlink {
+    50% {
+        opacity: .25;
+    }
+}
+
+
+/* ==========================================
+   VITALS HUD
+========================================== */
+
+.vitalsHud {
+    position: fixed;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: 190px;
+
+    padding: 13px;
+
+    background:
+        rgba(0,7,9,.92);
+
+    border:
+        1px solid rgba(0,255,255,.25);
+
+    z-index: 400;
+}
+
+.heartLine {
+    color: #00ff66;
+
+    margin: 5px 0;
+
+    font-size: 12px;
+}
+
+#vitalStatus {
+    color: #00ff66;
+}
+
+#bpm {
+    color: #00ffff;
+}
+
+
+/* ==========================================
+   WEAPON HUD
+========================================== */
+
+.weaponHud {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    min-width: 210px;
+
+    padding: 15px 20px;
+
+    background:
+        rgba(0,7,9,.92);
+
+    border:
+        1px solid rgba(0,255,255,.3);
+
+    z-index: 400;
+}
+
+.weaponName {
+    color: #00ffff;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+.ammo {
+    margin-top: 8px;
+    color: #567174;
+}
+
+#magAmmo {
+    color: #fff;
+
+    font-size: 32px;
+
+    font-weight: bold;
+}
+
+.reserveAmmo {
+    color: #00ffff;
+
+    font-size: 14px;
+
+    margin-top: 3px;
+}
+
+.controls {
+    margin-top: 8px;
+
+    color: #607477;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   INTERACTION PROMPT
+========================================== */
+
+#interactionPrompt {
+    position: fixed;
+
+    left: 50%;
+    bottom: 12%;
+
+    transform:
+        translateX(-50%);
+
+    padding: 11px 22px;
+
+    color: #00ffff;
+
+    background:
+        rgba(0,8,10,.92);
+
+    border:
+        1px solid #00ffff;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 600;
+
+    text-shadow:
+        0 0 8px #00ffff;
+}
+
+#interactionPrompt.active {
+    opacity: 1;
+
+    animation:
+        promptPulse 1s infinite alternate;
+}
+
+@keyframes promptPulse {
+    from {
+        box-shadow:
+            0 0 8px rgba(0,255,255,.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 28px rgba(0,255,255,.5);
+    }
+}
+
+
+/* ==========================================
+   RUN STATUS
+========================================== */
+
+.runStatus {
+    position: fixed;
+
+    right: 25px;
+    top: 95px;
+
+    padding: 12px 15px;
+
+    background:
+        rgba(0,8,10,.85);
+
+    border:
+        1px solid rgba(0,255,255,.2);
+
+    color: #607477;
+
+    font-size: 9px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+
+    z-index: 400;
+}
+
+.runStatus span {
+    color: #00ffff;
+}
+
+
+/* ==========================================
+   ZOMBIE ALERT
+========================================== */
+
+#zombieAlert {
+    position: fixed;
+
+    left: 50%;
+    top: 45%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff003c;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px red;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 800;
+}
+
+#zombieAlert.active {
+    animation:
+        warningFlash .8s ease;
+}
+
+@keyframes warningFlash {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================
+   DAMAGE EFFECT
+========================================== */
+
+#damageEffect {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 900;
+
+    border:
+        0 solid rgba(255,0,0,.8);
+
+    transition:
+        .12s ease;
+}
+
+#damageEffect.active {
+    border-width: 18px;
+
+    box-shadow:
+        inset 0 0 100px rgba(255,0,0,.6);
+}
+
+
+/* ==========================================
+   LOW AMMO
+========================================== */
+
+#lowAmmoWarning {
+    position: fixed;
+
+    left: 50%;
+    bottom: 23%;
+
+    transform:
+        translateX(-50%);
+
+    color: #ff3333;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    opacity: 0;
+
+    z-index: 700;
+}
+
+#lowAmmoWarning.warningActive {
+    animation:
+        lowAmmoFlash 1s ease;
+}
+
+@keyframes lowAmmoFlash {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================
+   ELEVATOR HATCH
+   IMPORTANT:
+   HTML ID = elevatorHatch
+========================================== */
+
+#elevatorHatch {
+    position: absolute;
+
+    right: 4%;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 100px;
+    height: 150px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #263638,
+            #080e10,
+            #263638
+        );
+
+    border:
+        3px solid #657b7d;
+
+    box-shadow:
+        0 0 30px rgba(0,255,255,.1);
+
+    z-index: 35;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        .25s ease;
+}
+
+#elevatorHatch::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 7px;
+
+    border:
+        1px solid rgba(0,255,255,.25);
+
+    pointer-events: none;
+}
+
+#elevatorHatch.open {
+    border-color: #00ff66;
+
+    box-shadow:
+        0 0 35px rgba(0,255,100,.45),
+        inset 0 0 25px rgba(0,255,100,.15);
+
+    background:
+        linear-gradient(
+            90deg,
+            #102418,
+            #06140b,
+            #102418
+        );
+}
+
+.hatchTop {
+    color: #738789;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.hatchMain {
+    color: #00ffff;
+
+    font-size: 45px;
+
+    line-height: 1;
+
+    text-shadow:
+        0 0 15px #00ffff;
+}
+
+.hatchBottom {
+    color: #738789;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+#elevatorHatch.open .hatchMain {
+    color: #00ff66;
+
+    text-shadow:
+        0 0 18px #00ff66;
+}
+
+
+/* ==========================================
+   LEVEL COMPLETE
+========================================== */
+
+#missionComplete {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,.9);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1500;
+}
+
+#missionComplete.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.completeBox {
+    width: 500px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background:
+        rgba(0,15,8,.96);
+
+    border:
+        1px solid #00ff66;
+
+    box-shadow:
+        0 0 60px rgba(0,255,100,.25);
+}
+
+.completeHeader {
+    color: #00ff66;
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px #00ff66;
+
+    margin-bottom: 20px;
+}
+
+.completeText {
+    color: #9affb0;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.7;
+}
+
+.completeSuccess {
+    color: #00ffff;
+
+    font-size: 13px;
+
+    margin-top: 15px;
+
+    letter-spacing: 3px;
+}
+
+#continueBtn {
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    background:
+        #06130a;
+
+    border:
+        1px solid #00ff66;
+
+    color: #00ff66;
+
+    font-family:
+        "Courier New", monospace;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+}
+
+#continueBtn:hover {
+    background: #00ff66;
+
+    color: #001006;
+
+    box-shadow:
+        0 0 25px rgba(0,255,100,.5);
+}
+
+
+/* ==========================================
+   GAME OVER
+========================================== */
+
+#gameOver {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,.94);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1600;
+}
+
+#gameOver.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.gameOverBox {
+    padding: 40px;
+
+    text-align: center;
+
+    border:
+        1px solid #ff003c;
+
+    box-shadow:
+        0 0 50px rgba(255,0,60,.35);
+}
+
+.gameOverHeader {
+    color: #ff003c;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 15px red;
+}
+
+.gameOverText {
+    color: #ff8899;
+
+    font-size: 11px;
+
+    margin-top: 10px;
+}
+
+#restartBtn {
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    background:
+        #160307;
+
+    border:
+        1px solid #ff003c;
+
+    color: #ff003c;
+
+    font-family:
+        "Courier New", monospace;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   LEVEL INFO
+========================================== */
+
+.levelInfo {
+    position: fixed;
+
+    left: 25px;
+    top: 95px;
+
+    color: #00ffff;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    z-index: 400;
+}
+
+.levelInfo span {
+    color: #526568;
+}
+
+
+/* ==========================================
+   PROFILE MINI
+========================================== */
+
+.survivorMiniProfile {
+    position: fixed;
+
+    left: 25px;
+    bottom: 170px;
+
+    padding: 10px 13px;
+
+    background:
+        rgba(0,7,9,.88);
+
+    border:
+        1px solid rgba(0,255,255,.2);
+
+    color: #6b8184;
+
+    font-size: 9px;
+
+    z-index: 400;
+}
+
+.miniProfileTitle {
+    color: #00ffff;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 5px;
+}
+
+
+/* ==========================================
+   SCANLINES
+========================================== */
+
+#gameWorld::after {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1900;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: .35;
+}
+
+
+/* ==========================================
+   VIGNETTE
+========================================== */
+
+#gameWorld::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 1800;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 40%,
+            rgba(0,0,0,.8) 100%
+        );
+}
+
+
+/* ==========================================
+   GLITCH
+========================================== */
+
+.glitch {
+    animation:
+        screenGlitch .2s infinite;
+}
+
+@keyframes screenGlitch {
+
+    0% {
+        filter: none;
+    }
+
+    25% {
+        filter:
+            hue-rotate(35deg)
+            contrast(1.3);
+    }
+
+    50% {
+        filter:
+            saturate(1.8);
+    }
+
+    75% {
+        filter:
+            hue-rotate(-35deg)
+            contrast(1.3);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+
+/* ==========================================
+   HIDDEN
+========================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .hudCenter {
+        display: none;
+    }
+
+    .runStatus {
+        right: 10px;
+    }
+
+    .weaponHud {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .vitalsHud {
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .exhaustFan {
+        transform: scale(.8);
+    }
+
+}
+
+@media (max-height: 700px) {
+
+    .wallTop,
+    .wallBottom {
+        height: 14%;
+    }
+
+}

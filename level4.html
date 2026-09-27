@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zombie Survival // Sector 04</title>
+
+    <link rel="stylesheet" href="level4.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+
+<div id="gameScreen">
+
+    <!-- ================= GAME WORLD ================= -->
+
+    <div id="gameWorld">
+
+        <!-- LAB FLOOR -->
+
+        <div class="labFloor"></div>
+
+        <!-- GLASS CHAMBERS -->
+
+        <div class="glass chamber1">
+            CHEMICAL CONTAINMENT
+        </div>
+
+        <div class="glass chamber2">
+            BIO STORAGE
+        </div>
+
+        <div class="glass chamber3">
+            SPECIMEN LAB
+        </div>
+
+        <!-- SERVERS -->
+
+        <div class="serverRoom">
+
+            <div class="server">SERVER</div>
+            <div class="server">SERVER</div>
+            <div class="server">SERVER</div>
+            <div class="server">SERVER</div>
+
+        </div>
+
+        <!-- TERMINAL 1 -->
+
+        <div
+            id="terminal1"
+            class="terminal"
+            style="left:15%; top:25%;"
+        >
+            <div>SUB TERMINAL 01</div>
+            <span>PRESS E TO HACK</span>
+        </div>
+
+        <!-- TERMINAL 2 -->
+
+        <div
+            id="terminal2"
+            class="terminal"
+            style="left:80%; top:25%;"
+        >
+            <div>SUB TERMINAL 02</div>
+            <span>PRESS E TO HACK</span>
+        </div>
+
+        <!-- MAIN CORE -->
+
+        <div
+            id="mainCore"
+            class="core"
+            style="left:50%; top:45%;"
+        >
+            <div>MAIN CONTROL CORE</div>
+            <span>LOCKED</span>
+        </div>
+
+        <!-- ESCAPE POD -->
+
+        <div
+            id="escapePod"
+            style="left:90%; top:85%;"
+        >
+            🚀
+            <div>ESCAPE POD</div>
+            <span>LOCKED</span>
+        </div>
+
+        <!-- TURRETS -->
+
+        <div class="turret turret1">⌾</div>
+        <div class="turret turret2">⌾</div>
+        <div class="turret turret3">⌾</div>
+
+        <!-- ZOMBIES -->
+
+        <div id="enemies"></div>
+
+        <!-- PLAYER -->
+
+        <div id="player"></div>
+
+    </div>
+
+
+    <!-- ================= CROSSHAIR ================= -->
+
+    <div id="crosshair">+</div>
+
+
+    <!-- ================= TOP LEFT ================= -->
+
+    <div id="topLeftHUD">
+
+        <div>
+            LOC: SECTOR_04
+        </div>
+
+        <div>
+            HEALTH:
+            <span id="health">100</span>
+        </div>
+
+        <div>
+            BATT:
+            <span id="batteryPercent">80%</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOP RIGHT ================= -->
+
+    <div id="topRightHUD">
+
+        <span id="recDot">●</span>
+
+        REC&nbsp;&nbsp;
+        CAM-04&nbsp;&nbsp;
+        MATRIX LINK
+
+    </div>
+
+
+    <!-- ================= OBJECTIVE ================= -->
+
+    <div id="objectiveHUD">
+
+        OBJECTIVE:
+
+        <span id="objectiveText">
+            HACK SUB TERMINAL 01
+        </span>
+
+    </div>
+
+
+    <!-- ================= HACK BAR ================= -->
+
+    <div id="hackHUD">
+
+        HACK PROGRESS
+
+        <div id="hackBar">
+
+            <div id="hackProgress"></div>
+
+        </div>
+
+        <span id="hackPercent">0%</span>
+
+    </div>
+
+
+    <!-- ================= TIMER ================= -->
+
+    <div id="timerHUD">
+
+        SYSTEM STATUS
+
+        <div id="selfDestruct">
+
+            SELF-DESTRUCT:
+            <span id="timer">45</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= WEAPON ================= -->
+
+    <div id="weaponHUD">
+
+        M4 RIFLE
+
+        <br>
+
+        MAG:
+        <span id="magAmmo">30</span>
+
+        /
+
+        30
+
+        <br>
+
+        RSV:
+        <span id="reserveAmmo">090</span>
+
+        <br>
+
+        [R] RELOAD
+
+    </div>
+
+
+    <!-- ================= DAMAGE ================= -->
+
+    <div id="damageEffect"></div>
+
+
+    <!-- ================= MATRIX ================= -->
+
+    <div id="matrixOverlay">
+
+        <span>010101</span>
+        <span>110010</span>
+        <span>001101</span>
+        <span>101010</span>
+
+    </div>
+
+
+    <!-- ================= FINAL SCREEN ================= -->
+
+    <div id="finalScreen">
+
+    <div id="finalTitle">
+        SECTOR 04 COMPLETE
+    </div>
+
+    <small id="finalMessage">
+        OPERATION COMPLETE
+    </small>
+
+    <button id="nextLevelBtn">
+        LEVEL 5 →
+    </button>
+
+    <button id="restartLevelBtn">
+        RESTART LEVEL 04
+    </button>
+
+    <button id="returnHQBtn">
+        RETURN TO HQ
+    </button>
+
+</div>
+
+<!-- ==============================
+     SURVIVOR PROFILE
+=============================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="profilePanel">
+
+        <div class="profilePanelTitle">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ACTIVE SURVIVOR // PLAYER DATABASE
+        </div>
+
+        <div class="profileRow">
+            NAME:
+            <span id="playerName">PLAYER</span>
+        </div>
+
+        <div class="profileRow">
+            EMAIL:
+            <span id="playerEmail">UNKNOWN</span>
+        </div>
+
+        <div class="profileRow">
+            SURVIVOR ID:
+            <span id="playerID">LOCAL-001</span>
+        </div>
+
+        <div class="profileRow">
+            LEVEL:
+            <span id="playerLevel">04</span>
+        </div>
+
+        <div class="profileRow">
+            LOCATION:
+            <span>DOWNTOWN</span>
+        </div>
+
+        <div class="profileRow">
+            XP:
+            <span id="playerXP">0%</span>
+        </div>
+
+        <div class="profileRow">
+            ZOMBIES KILLED:
+            <span id="profileZombiesKilled">0</span>
+        </div>
+
+        <div class="profileXP">
+
+            LEVEL
+            <span id="xpLevel">04</span>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+
+        </div>
+
+        <button id="resumeGameBtn">
+            RESUME GAME
+        </button>
+
+        <button id="profileReturnHQBtn">
+            RETURN TO HQ
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script src="level4.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

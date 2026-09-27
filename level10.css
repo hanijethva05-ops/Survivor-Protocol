@@ -1,0 +1,1373 @@
+/* ==========================================
+   LEVEL 10 - THE FINAL CORE
+========================================== */
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #010203;
+    color: #d8ffff;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+
+/* ==========================================
+   WORLD
+========================================== */
+
+#gameWorld {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,255,255,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at center,
+            rgba(255,0,40,.06),
+            transparent 60%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        #020405;
+
+    background-size:
+        auto,
+        auto,
+        50px 50px,
+        50px 50px,
+        auto;
+}
+
+
+/* ==========================================
+   FLOOR
+========================================== */
+
+#gameWorld::before {
+    content: "";
+
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+
+    height: 35%;
+
+    border:
+        1px solid rgba(0,255,255,.15);
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(0,255,255,.04) 0,
+            rgba(0,255,255,.04) 2px,
+            transparent 2px,
+            transparent 80px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,255,255,.035) 0,
+            rgba(0,255,255,.035) 2px,
+            transparent 2px,
+            transparent 80px
+        );
+
+    box-shadow:
+        inset 0 0 100px #000;
+}
+
+
+/* ==========================================
+   REACTOR
+========================================== */
+
+.reactor {
+    position: absolute;
+
+    left: 50%;
+    top: 52%;
+
+    width: 380px;
+    height: 380px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+}
+
+
+.reactorRing {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border:
+        2px solid rgba(0,255,255,.25);
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+
+.ring1 {
+    width: 300px;
+    height: 300px;
+
+    animation:
+        rotateRing 12s linear infinite;
+}
+
+
+.ring2 {
+    width: 250px;
+    height: 250px;
+
+    border-color:
+        rgba(255,0,60,.25);
+
+    animation:
+        rotateRingReverse 8s linear infinite;
+}
+
+
+.ring3 {
+    width: 190px;
+    height: 190px;
+
+    border-color:
+        rgba(0,255,100,.3);
+
+    animation:
+        rotateRing 5s linear infinite;
+}
+
+
+@keyframes rotateRing {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+
+@keyframes rotateRingReverse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+}
+
+
+.reactorCore {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 120px;
+    height: 120px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        3px solid #00ffff;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #00ffff 10%,
+            #006c73 30%,
+            #001517 70%,
+            #000 100%
+        );
+
+    box-shadow:
+        0 0 25px #00ffff,
+        0 0 80px rgba(0,255,255,.5);
+
+    animation:
+        corePulse .8s infinite alternate;
+}
+
+
+@keyframes corePulse {
+
+    from {
+        box-shadow:
+            0 0 20px #00ffff,
+            0 0 50px rgba(0,255,255,.3);
+    }
+
+    to {
+        box-shadow:
+            0 0 40px #00ffff,
+            0 0 110px rgba(0,255,255,.8);
+    }
+}
+
+
+.coreEnergy {
+    position: absolute;
+
+    inset: 25px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            white,
+            #00ffff 30%,
+            transparent 70%
+        );
+
+    animation:
+        energyPulse .3s infinite alternate;
+}
+
+
+@keyframes energyPulse {
+
+    from {
+        opacity: .5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   BOSS
+========================================== */
+
+#boss {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 180px;
+    height: 180px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        4px solid #ff003c;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #31000b,
+            #090305 65%,
+            #010101
+        );
+
+    box-shadow:
+        0 0 25px red,
+        0 0 80px rgba(255,0,60,.35);
+
+    z-index: 40;
+
+    animation:
+        bossFloat 2s infinite ease-in-out;
+}
+
+
+@keyframes bossFloat {
+
+    0%,
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.04);
+    }
+}
+
+
+.bossCore {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 70px;
+    height: 70px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff,
+            #ff003c 20%,
+            #5c0015 55%,
+            #080002
+        );
+
+    box-shadow:
+        0 0 25px red;
+
+    animation:
+        bossCorePulse .35s infinite alternate;
+}
+
+
+@keyframes bossCorePulse {
+
+    from {
+        opacity: .65;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.bossEye {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 25px;
+    height: 25px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 15px red;
+}
+
+
+.bossArmor {
+    position: absolute;
+
+    width: 35px;
+    height: 70px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #120408,
+            #58101e,
+            #160408
+        );
+
+    border:
+        2px solid #7a1a2c;
+
+    box-shadow:
+        0 0 10px rgba(255,0,60,.3);
+}
+
+
+.armor1 {
+    left: -22px;
+    top: 55px;
+}
+
+
+.armor2 {
+    right: -22px;
+    top: 55px;
+}
+
+
+.armor3 {
+    left: 72px;
+    top: -25px;
+
+    transform:
+        rotate(90deg);
+}
+
+
+.armor4 {
+    left: 72px;
+    bottom: -25px;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+#player {
+    position: absolute;
+
+    width: 44px;
+    height: 44px;
+
+    border:
+        2px solid #00ffff;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            white 0 8%,
+            #00ffff 10% 25%,
+            #00383d 35%,
+            #020707 100%
+        );
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 35px rgba(0,255,255,.4);
+
+    z-index: 100;
+}
+
+
+/* ==========================================
+   HUD
+========================================== */
+
+#hud {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,8,10,.95),
+            transparent
+        );
+
+    border-bottom:
+        1px solid rgba(0,255,255,.2);
+
+    z-index: 300;
+}
+
+
+.hudTitle {
+    color: #00ffff;
+
+    font-size: 19px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 0 12px cyan;
+}
+
+
+.hudLevel {
+    color: #ffcc00;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+#bossStatus {
+    color: #ff003c;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   OBJECTIVE
+========================================== */
+
+#objectivePanel {
+    position: fixed;
+
+    top: 90px;
+    left: 25px;
+
+    width: 340px;
+
+    padding: 15px;
+
+    background:
+        rgba(0,8,10,.88);
+
+    border-left:
+        3px solid #ff003c;
+
+    z-index: 300;
+}
+
+
+.objectiveTitle {
+    color: #647174;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+
+#objectiveText {
+    color: #00ffff;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   BOSS HEALTH
+========================================== */
+
+#bossHealthPanel {
+    position: fixed;
+
+    left: 50%;
+    top: 88px;
+
+    width: 420px;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+    z-index: 300;
+}
+
+
+.bossName {
+    color: #ff003c;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 7px;
+}
+
+
+.bossHealthBar {
+    width: 100%;
+    height: 14px;
+
+    border:
+        1px solid #7d1830;
+
+    background: #100307;
+}
+
+
+#bossHealthFill {
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff003c,
+            #ff315d
+        );
+
+    box-shadow:
+        0 0 15px red;
+
+    transition:
+        width .15s linear;
+}
+
+
+#bossHealthText {
+    margin-top: 5px;
+
+    color: #ff6a85;
+
+    font-size: 10px;
+}
+
+
+/* ==========================================
+   PLAYER STATUS
+========================================== */
+
+#playerStatus {
+    position: fixed;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: 210px;
+
+    padding: 12px;
+
+    background:
+        rgba(0,7,9,.9);
+
+    border:
+        1px solid rgba(0,255,255,.25);
+
+    z-index: 300;
+}
+
+
+.statusLabel,
+.ammoLabel {
+    color: #557174;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+#hpText {
+    margin: 5px 0;
+
+    color: #00ff66;
+
+    font-size: 15px;
+}
+
+
+.healthBar {
+    height: 7px;
+
+    background: #071719;
+
+    border:
+        1px solid #17484c;
+}
+
+
+#healthFill {
+    width: 100%;
+    height: 100%;
+
+    background: #00ff66;
+
+    box-shadow:
+        0 0 10px #00ff66;
+}
+
+
+/* ==========================================
+   AMMO
+========================================== */
+
+#ammoPanel {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    min-width: 180px;
+
+    padding: 14px 18px;
+
+    background:
+        rgba(0,7,9,.92);
+
+    border:
+        1px solid rgba(0,255,255,.3);
+
+    z-index: 300;
+}
+
+
+#magAmmo {
+    color: white;
+
+    font-size: 31px;
+    font-weight: bold;
+}
+
+
+.ammoDivider {
+    color: #53686a;
+}
+
+
+#reserve {
+    color: #00ffff;
+
+    font-size: 16px;
+}
+
+
+.reloadHint {
+    margin-top: 4px;
+
+    color: #496265;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   PHASE ALERT
+========================================== */
+
+#phaseAlert {
+    position: fixed;
+
+    left: 50%;
+    top: 43%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff003c;
+
+    font-size: 28px;
+    font-weight: bold;
+
+    letter-spacing: 7px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 500;
+
+    text-shadow:
+        0 0 20px red;
+}
+
+
+#phaseAlert.active {
+    animation:
+        phaseFlash 1.4s ease;
+}
+
+
+@keyframes phaseFlash {
+
+    0% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(.6);
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(1.3);
+    }
+}
+
+
+/* ==========================================
+   WARNING
+========================================== */
+
+#warningText {
+    position: fixed;
+
+    left: 50%;
+    bottom: 18%;
+
+    transform:
+        translateX(-50%);
+
+    color: #ff003c;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    opacity: 0;
+
+    z-index: 400;
+}
+
+
+#warningText.active {
+    opacity: 1;
+
+    animation:
+        warningBlink .45s infinite alternate;
+}
+
+
+@keyframes warningBlink {
+
+    from {
+        opacity: .25;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   DAMAGE
+========================================== */
+
+#damageEffect {
+    position: fixed;
+
+    inset: 0;
+
+    border:
+        0 solid rgba(255,0,0,.8);
+
+    pointer-events: none;
+
+    z-index: 800;
+}
+
+
+#damageEffect.active {
+    border-width: 18px;
+
+    box-shadow:
+        inset 0 0 100px rgba(255,0,0,.65);
+}
+
+
+/* ==========================================
+   SHUTDOWN
+========================================== */
+
+#shutdownPanel {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    width: 440px;
+
+    padding: 25px;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        rgba(0,8,10,.97);
+
+    border:
+        1px solid #00ff66;
+
+    box-shadow:
+        0 0 50px rgba(0,255,100,.3);
+
+    text-align: center;
+
+    display: none;
+
+    z-index: 700;
+}
+
+
+#shutdownPanel.active {
+    display: block;
+}
+
+
+.shutdownTitle {
+    color: #00ff66;
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+
+.shutdownText {
+    color: #8affaa;
+
+    font-size: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.shutdownBar {
+    width: 100%;
+    height: 9px;
+
+    background: #07140b;
+
+    border:
+        1px solid #1d6534;
+}
+
+
+#shutdownFill {
+    width: 0%;
+    height: 100%;
+
+    background: #00ff66;
+
+    box-shadow:
+        0 0 15px #00ff66;
+}
+
+
+#shutdownPercent {
+    margin-top: 8px;
+
+    color: #00ff66;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   VICTORY
+========================================== */
+
+#victoryScreen,
+#gameOver {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1000;
+}
+
+
+#victoryScreen {
+    background:
+        rgba(0,5,3,.94);
+}
+
+
+#gameOver {
+    background:
+        rgba(8,0,2,.96);
+}
+
+
+#victoryScreen.active,
+#gameOver.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.victoryBox,
+.gameOverBox {
+    width: 550px;
+
+    padding: 45px;
+
+    text-align: center;
+
+    border:
+        1px solid #00ff66;
+
+    background:
+        rgba(0,15,8,.96);
+
+    box-shadow:
+        0 0 70px rgba(0,255,100,.3);
+}
+
+
+.victorySmall {
+    color: #567c61;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+}
+
+
+.victoryBox h1 {
+    margin: 15px 0;
+
+    color: #00ff66;
+
+    font-size: 42px;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 20px #00ff66;
+}
+
+
+.victoryBox p {
+    color: #8affaa;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+}
+
+
+.finalMessage {
+    margin: 25px 0;
+
+    color: #00ffff;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+
+.gameOverBox {
+    border-color: #ff003c;
+
+    background:
+        rgba(15,0,4,.96);
+
+    box-shadow:
+        0 0 70px rgba(255,0,60,.3);
+}
+
+
+.gameOverBox h1 {
+    color: #ff003c;
+
+    font-size: 42px;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 20px red;
+}
+
+
+.gameOverBox p {
+    color: #ff718b;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+button {
+    margin-top: 20px;
+
+    padding: 12px 25px;
+
+    background:
+        #03100b;
+
+    border:
+        1px solid #00ff66;
+
+    color: #00ff66;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+}
+
+
+button:hover {
+    background: #00ff66;
+    color: #001006;
+
+    box-shadow:
+        0 0 25px rgba(0,255,100,.5);
+}
+
+
+/* ==========================================
+   SCANLINES
+========================================== */
+
+#gameWorld::after {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 900;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: .35;
+}
+
+
+/* ==========================================
+   BOSS ENRAGED
+========================================== */
+
+#boss.enraged {
+    border-color: #ff004c;
+
+    box-shadow:
+        0 0 40px red,
+        0 0 130px rgba(255,0,60,.65);
+
+    animation:
+        bossEnrage .25s infinite alternate;
+}
+
+
+@keyframes bossEnrage {
+
+    from {
+        filter:
+            brightness(1);
+    }
+
+    to {
+        filter:
+            brightness(1.7)
+            hue-rotate(-10deg);
+    }
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+    #bossHealthPanel {
+        width: 300px;
+    }
+
+    #objectivePanel {
+        width: 270px;
+    }
+
+    .reactor {
+        transform:
+            translate(-50%, -50%)
+            scale(.75);
+    }
+
+}
+
+/* ==========================================
+   DYNAMIC BOSS OBJECTS
+========================================== */
+
+.bossProjectile {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #fff,
+            #ff003c 35%,
+            #650018 70%,
+            transparent
+        );
+
+    box-shadow:
+        0 0 12px red,
+        0 0 30px rgba(255,0,60,.7);
+
+    z-index: 90;
+}
+
+
+.bossMinion {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff315d;
+
+    font-size: 30px;
+
+    filter:
+        drop-shadow(
+            0 0 10px red
+        );
+
+    z-index: 70;
+}
+
+
+.hitEffect {
+    position: absolute;
+
+    width: 35px;
+    height: 35px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        3px solid #00ffff;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 20px #00ffff;
+
+    animation:
+        hitExpand .2s ease-out;
+
+    pointer-events: none;
+
+    z-index: 150;
+}
+
+
+@keyframes hitExpand {
+
+    from {
+        opacity: 1;
+        transform:
+            translate(-50%, -50%)
+            scale(.4);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(2);
+    }
+}

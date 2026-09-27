@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Level 10 - The Final Core</title>
+
+    <link rel="stylesheet" href="level10.css">
+    <link rel="stylesheet" href="css/profile.css">
+    
+</head>
+
+<body>
+
+<div id="gameWorld">
+
+    <!-- ==========================================
+         BACKGROUND CORE
+    =========================================== -->
+
+    <div class="reactor">
+        <div class="reactorRing ring1"></div>
+        <div class="reactorRing ring2"></div>
+        <div class="reactorRing ring3"></div>
+
+        <div class="reactorCore">
+            <div class="coreEnergy"></div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         BOSS
+    =========================================== -->
+
+    <div id="boss">
+
+        <div class="bossCore"></div>
+
+        <div class="bossEye"></div>
+
+        <div class="bossArmor armor1"></div>
+        <div class="bossArmor armor2"></div>
+        <div class="bossArmor armor3"></div>
+        <div class="bossArmor armor4"></div>
+
+    </div>
+
+
+    <!-- ==========================================
+         PLAYER
+    =========================================== -->
+
+    <div id="player"></div>
+
+
+    <!-- ==========================================
+         HUD
+    =========================================== -->
+
+    <div id="hud">
+
+        <div class="hudTitle">
+            FINAL CORE
+        </div>
+
+        <div class="hudLevel">
+            LEVEL 10 // FINAL BREACH
+        </div>
+
+        <div id="bossStatus">
+            BOSS: ACTIVE
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         OBJECTIVE
+    =========================================== -->
+
+    <div id="objectivePanel">
+
+        <div class="objectiveTitle">
+            FINAL OBJECTIVE
+        </div>
+
+        <div id="objectiveText">
+            DESTROY THE CORE GUARDIAN
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         BOSS HEALTH
+    =========================================== -->
+
+    <div id="bossHealthPanel">
+
+        <div class="bossName">
+            CORE GUARDIAN // OMEGA
+        </div>
+
+        <div class="bossHealthBar">
+            <div id="bossHealthFill"></div>
+        </div>
+
+        <div id="bossHealthText">
+            100%
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         PLAYER STATUS
+    =========================================== -->
+
+    <div id="playerStatus">
+
+        <div class="statusLabel">
+            VITALS
+        </div>
+
+        <div id="hpText">
+            HP 100
+        </div>
+
+        <div class="healthBar">
+            <div id="healthFill"></div>
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         AMMO
+    =========================================== -->
+
+    <div id="ammoPanel">
+
+        <div class="ammoLabel">
+            AMMUNITION
+        </div>
+
+        <span id="magAmmo">30</span>
+        <span class="ammoDivider">/</span>
+        <span id="reserve">240</span>
+
+        <div class="reloadHint">
+            R // RELOAD
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         BOSS PHASE
+    =========================================== -->
+
+    <div id="phaseAlert">
+        PHASE 1
+    </div>
+
+
+    <!-- ==========================================
+         DAMAGE
+    =========================================== -->
+
+    <div id="damageEffect"></div>
+
+
+    <!-- ==========================================
+         WARNING
+    =========================================== -->
+
+    <div id="warningText">
+        CORE ENERGY CRITICAL
+    </div>
+
+
+    <!-- ==========================================
+         FINAL CORE SHUTDOWN
+    =========================================== -->
+
+    <div id="shutdownPanel">
+
+        <div class="shutdownTitle">
+            CORE GUARDIAN DESTROYED
+        </div>
+
+        <div class="shutdownText">
+            INITIATING REACTOR SHUTDOWN...
+        </div>
+
+        <div class="shutdownBar">
+            <div id="shutdownFill"></div>
+        </div>
+
+        <div id="shutdownPercent">
+            0%
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         VICTORY
+    =========================================== -->
+
+    <div id="victoryScreen">
+
+        <div class="victoryBox">
+
+            <div class="victorySmall">
+                SYSTEM STATUS
+            </div>
+
+            <h1>
+                MISSION COMPLETE
+            </h1>
+
+            <p>
+                CORE GUARDIAN ELIMINATED
+            </p>
+
+            <p>
+                SERVER NETWORK SECURED
+            </p>
+
+            <div class="finalMessage">
+                ALL LEVELS CLEARED
+            </div>
+
+            <button id="restartBtn">
+                RESTART CAMPAIGN
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         GAME OVER
+    =========================================== -->
+
+    <div id="gameOver">
+
+        <div class="gameOverBox">
+
+            <div>
+                FINAL CORE
+            </div>
+
+            <h1>
+                AGENT DOWN
+            </h1>
+
+            <p>
+                THE CORE GUARDIAN REMAINS ACTIVE
+            </p>
+
+            <button id="retryBtn">
+                RETRY LEVEL 10
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================
+     SURVIVOR PROFILE - LEVEL 10
+========================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="survivorProfileBox">
+
+        <div class="profileHeader">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileLine"></div>
+
+        <div class="profileRow">
+            <span>NAME</span>
+            <strong id="playerName">GUEST SURVIVOR</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>EMAIL</span>
+            <strong id="playerEmail">GUEST ACCESS</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>SURVIVOR ID</span>
+            <strong id="playerID">ZS-000000</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LEVEL</span>
+            <strong id="playerLevel">10</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LOCATION</span>
+            <strong id="profileLocation">
+                SECTOR_10 // FINAL OUTBREAK
+            </strong>
+        </div>
+
+        <div class="profileRow">
+            <span>XP</span>
+            <strong id="playerXP">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ZOMBIES KILLED</span>
+            <strong id="profileKills">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ITEMS FOUND</span>
+            <strong id="profileItems">0</strong>
+        </div>
+
+        <div class="xpSection">
+
+            <div class="xpHeader">
+                LEVEL <span id="xpLevel">10</span>
+            </div>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+
+        </div>
+
+        <div class="profileButtons">
+
+            <button id="resumeGameBtn">
+                RESUME GAME
+            </button>
+
+            <button id="profileReturnHQBtn">
+                RETURN TO HQ
+            </button>
+
+        </div>
+
+        <div class="profileHint">
+            PRESS ESC TO CLOSE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MINI PROFILE -->
+
+<div id="survivorMiniProfile">
+
+    <div id="miniPlayerName">
+        GUEST SURVIVOR
+    </div>
+
+    <div>
+        LVL <span id="miniPlayerLevel">10</span>
+    </div>
+
+</div>
+
+</div>
+
+<script src="level10.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

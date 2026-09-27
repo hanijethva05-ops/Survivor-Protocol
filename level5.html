@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zombie Survival // Level 5</title>
+
+    <link rel="stylesheet" href="level5.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+
+<div id="gameScreen">
+
+    <!-- ==============================
+         LEVEL 5 WORLD
+    =============================== -->
+
+    <div id="gameWorld">
+
+        <div id="orbitalFacility">
+
+            <!-- Background -->
+            <div class="facilityGrid"></div>
+            <div class="facilityGlow glowOne"></div>
+            <div class="facilityGlow glowTwo"></div>
+
+            <!-- Command Bridge -->
+            <div id="commandBridge">
+
+                <div class="bridgeWindow"></div>
+
+                <div class="bridgeLabel">
+                    ORBITAL COMMAND BRIDGE
+                </div>
+
+            </div>
+
+
+            <!-- Server Units -->
+            <div class="server serverOne">
+                SERVER
+            </div>
+
+            <div class="server serverTwo">
+                SERVER
+            </div>
+
+            <div class="server serverThree">
+                SERVER
+            </div>
+
+
+            <!-- Main AI Terminal -->
+            <div id="aiTerminal">
+
+                <div class="terminalScreen">
+
+                    <div class="terminalHeader">
+                        MAIN CONTROL CORE
+                    </div>
+
+                    <div id="terminalStatus">
+                        SYSTEM ONLINE
+                    </div>
+
+                    <div id="hackText">
+                        WAITING FOR AUTHORIZATION...
+                    </div>
+
+                </div>
+
+                <div class="terminalBase"></div>
+
+                <div id="hackPrompt">
+                    [E] INITIALIZE AI GENERATOR
+                </div>
+
+            </div>
+
+
+            <!-- Fixed Zombies -->
+
+            <div class="enemy enemyOne">
+                🧟
+            </div>
+
+            <div class="enemy enemyTwo">
+                🧟
+            </div>
+
+            <div class="enemy enemyThree">
+                🧟
+            </div>
+
+
+            <!-- Player -->
+
+            <div id="player"></div>
+
+        </div>
+
+
+        <!-- Crosshair -->
+
+        <div id="crosshair">
+            +
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         TOP LEFT HUD
+    =============================== -->
+
+    <div id="topLeftHUD">
+
+        <div id="battery">
+
+            BATT
+
+            <span id="batteryBars">
+                [████░]
+            </span>
+
+            <span id="batteryPercent">
+                80%
+            </span>
+
+        </div>
+
+
+        <div id="location">
+
+            LOC:
+            <span>
+                ORBITAL_COMMAND
+            </span>
+
+        </div>
+
+
+        <div id="radar">
+
+            <div class="radarCircle"></div>
+
+            <div class="radarSweep"></div>
+
+            <div class="radarDot dotOne"></div>
+
+            <div class="radarDot dotTwo"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         TOP RIGHT HUD
+    =============================== -->
+
+    <div id="topRightHUD">
+
+        <div id="recording">
+
+            <span id="recDot">●</span>
+
+            REC&nbsp;&nbsp;
+            CAM-05&nbsp;&nbsp;
+            LIVE
+
+        </div>
+
+
+        <div id="systemClock">
+
+            ISO-8601
+
+            <span id="clock">
+                2026-09-18 00:00:00
+            </span>
+
+        </div>
+
+
+        <div id="signalStatus">
+
+            SIGNAL:
+            <span>
+                STABLE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         VITAL MONITOR
+    =============================== -->
+
+    <div id="bottomLeftHUD">
+
+        <div id="vitalTitle">
+            VITAL SIGN MONITOR
+        </div>
+
+        <div id="ecg">
+            ──╲╱╲──╲╱╲──╲╱╲──
+        </div>
+
+        <div id="heartRate">
+
+            VITAL_SIGNS:
+
+            <span id="vitalStatus">
+                STABLE
+            </span>
+
+            //
+
+            <span id="bpm">
+                72
+            </span>
+
+            BPM
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         WEAPON HUD
+    =============================== -->
+
+    <div id="bottomRightHUD">
+
+        <div id="weaponName">
+            M4 RIFLE
+        </div>
+
+        <div id="ammoCounter">
+
+            <div>
+                MAG:
+                <strong id="magAmmo">30</strong>
+            </div>
+
+            <div id="reserveAmmo">
+
+                RSV:
+                <span id="reserve">090</span>
+
+            </div>
+
+        </div>
+
+        <div id="attachments">
+
+            <div class="attachment equipped">
+                ⚡ SCOPE
+            </div>
+
+            <div class="attachment equipped">
+                🎒 MAG_EXT
+            </div>
+
+            <div class="attachment equipped">
+                🔇 SUPR
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         LOW AMMO
+    =============================== -->
+
+    <div id="lowAmmoWarning">
+
+        ⚠️ LOW ASSETS -
+        RELOAD IMMEDIATELY
+
+    </div>
+
+
+    <!-- ==============================
+         OBJECTIVE
+    =============================== -->
+
+    <div id="objectiveHUD">
+
+        OBJECTIVE:
+
+        <span id="objectiveText">
+            INITIALIZE AI GENERATOR TERMINAL
+        </span>
+
+    </div>
+
+
+    <!-- ==============================
+         DAMAGE EFFECT
+    =============================== -->
+
+    <div id="damageEffect"></div>
+
+
+    <!-- CRT -->
+    <div id="scanlines"></div>
+    <div id="crtVignette"></div>
+
+
+    <!-- ==============================
+         LEVEL 5 COMPLETE
+    =============================== -->
+
+    <div id="level5Complete">
+
+        <div class="completeTitle">
+            LEVEL 5 COMPLETE
+        </div>
+
+        <div class="completeText">
+            AI GENERATOR TERMINAL INITIALIZED
+        </div>
+
+        <div id="aiBootMessage">
+            [CRITICAL ALERT]
+        </div>
+
+        <div class="completeSub">
+            DEEP LEARNING MATRIX ARCHITECTURE ACTIVE
+        </div>
+
+        <button id="continueBtn">
+            CONTINUE →
+        </button>
+
+    </div>
+
+
+    <!-- ==============================
+         GAME OVER
+    =============================== -->
+
+    <div id="gameOver">
+
+        <div id="connectionLost">
+            CONNECTION LOST
+        </div>
+
+        <div id="signalTerminated">
+            // SIGNAL TERMINATED
+        </div>
+
+        <div id="deathStats">
+
+            TIME ALIVE:
+            <span id="timeAlive">
+                00:00
+            </span>
+
+            <br>
+
+            ZOMBIES KILLED:
+            <span id="zombiesKilled">
+                0
+            </span>
+
+        </div>
+
+
+        <button id="restartBtn">
+            RE-ESTABLISH LINK
+        </button>
+
+
+        <button id="returnHQBtn">
+            RETURN TO HQ
+        </button>
+
+    </div>
+
+    <!-- ==============================
+     SURVIVOR PROFILE
+=============================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="profilePanel">
+
+        <div class="profilePanelTitle">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ACTIVE SURVIVOR // PLAYER DATABASE
+        </div>
+
+        <div class="profileRow">
+            NAME:
+            <span id="playerName">PLAYER</span>
+        </div>
+
+        <div class="profileRow">
+            EMAIL:
+            <span id="playerEmail">UNKNOWN</span>
+        </div>
+
+        <div class="profileRow">
+            SURVIVOR ID:
+            <span id="playerID">LOCAL-001</span>
+        </div>
+
+        <div class="profileRow">
+            LEVEL:
+            <span id="playerLevel">05</span>
+        </div>
+
+        <div class="profileRow">
+            LOCATION:
+            <span>ORBITAL COMMAND</span>
+        </div>
+
+        <div class="profileRow">
+            XP:
+            <span id="playerXP">0%</span>
+        </div>
+
+        <div class="profileRow">
+            ZOMBIES KILLED:
+            <span id="zombiesKilled">0</span>
+        </div>
+
+        <div class="profileXP">
+
+            LEVEL
+            <span id="xpLevel">05</span>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+
+        </div>
+
+        <button id="resumeGameBtn">
+            RESUME GAME
+        </button>
+
+        <button id="profileReturnHQBtn">
+            RETURN TO HQ
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==============================
+     JAVASCRIPT
+=============================== -->
+
+<script src="level5.js"></script>
+<script src="profile.js"></script>
+
+
+
+</body>
+</html>

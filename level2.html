@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Zombie Survival // Sector 02</title>
+
+    <link rel="stylesheet" href="level2.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+
+<div id="gameScreen">
+
+    <!-- ==============================
+         LEVEL 2 WORLD
+    =============================== -->
+
+    <div id="gameWorld">
+
+        <div id="subwayWorld">
+
+            <!-- TRAIN TRACKS -->
+
+            <div class="track trackA"></div>
+            <div class="track trackB"></div>
+
+            <!-- BROKEN TRAINS -->
+
+            <div class="train trainA">
+                <div class="trainWindow"></div>
+                <div class="trainWindow"></div>
+                <div class="trainDoor"></div>
+            </div>
+
+            <div class="train trainB">
+                <div class="trainWindow"></div>
+                <div class="trainWindow"></div>
+                <div class="trainDoor"></div>
+            </div>
+
+            <!-- WATER -->
+
+            <div id="floodWater"></div>
+
+            <!-- GENERATOR -->
+
+            <div id="generatorRoom">
+
+                <div class="generatorBox">
+                    ⚡
+                </div>
+
+                <div class="generatorLabel">
+                    MAIN GENERATOR
+                </div>
+
+                <div id="generatorPrompt">
+                    [E] RESTORE POWER
+                </div>
+
+            </div>
+
+            <!-- CONTROL ROOM -->
+
+            <div id="controlRoom">
+
+                <div class="computer">
+
+                    <div class="screenText">
+                        OFFLINE
+                    </div>
+
+                </div>
+
+                <div class="computerLabel">
+                    ROUTE CONTROL TERMINAL
+                </div>
+
+                <div id="computerPrompt">
+                    [E] OVERRIDE TRAIN ROUTE
+                </div>
+
+            </div>
+
+            <!-- ESCAPE GATE -->
+
+            <div id="escapeGate">
+
+                <div class="gateText">
+                    TUNNEL EXIT
+                </div>
+
+                <div id="escapePrompt">
+                    [E] ESCAPE
+                </div>
+
+            </div>
+
+            <!-- SPRINTER ZOMBIES -->
+
+            <div id="sprinterContainer"></div>
+
+            <!-- PLAYER -->
+
+            <div id="player"></div>
+
+        </div>
+
+        <!-- CROSSHAIR -->
+
+        <div id="crosshair">
+            +
+        </div>
+
+    </div>
+
+
+    <!-- ==============================
+         HUD
+    =============================== -->
+
+    <div id="topHUD">
+
+        <div>
+            LOC:
+            <span>SECTOR_02 // SUBWAY</span>
+        </div>
+
+        <div id="signalStatus">
+            SIGNAL:
+            <span>STABLE</span>
+        </div>
+
+    </div>
+
+    <div id="killHUD">
+
+    <div>
+        ZOMBIES KILLED:
+        <span id="zombiesKilled">0</span>
+    </div>
+
+    <div>
+        XP AWARDED:
+        <span id="xpAwarded">200</span>
+    </div>
+
+</div>
+
+
+    <!-- OBJECTIVE -->
+
+    <div id="objectiveHUD">
+
+        OBJECTIVE:
+
+        <span id="objectiveText">
+            RESTORE MAIN POWER GRID
+        </span>
+
+    </div>
+
+
+    <!-- FLASHLIGHT -->
+
+    <div id="flashlightStatus">
+        FLASHLIGHT: <span id="flashlightText">OFF</span>
+    </div>
+
+
+    <!-- WATER STATUS -->
+
+    <div id="waterStatus">
+        FLOOD:
+        <span id="waterText">ACTIVE</span>
+    </div>
+
+
+    <!-- AMMO -->
+
+    <div id="ammoHUD">
+
+        M4 RIFLE
+
+        <div>
+            MAG:
+            <strong id="magAmmo">30</strong>
+        </div>
+
+        <div>
+            RSV:
+            <span id="reserve">090</span>
+        </div>
+
+    </div>
+
+
+    <!-- VITALS -->
+
+    <div id="vitals">
+
+        VITAL:
+
+        <span id="vitalStatus">
+            STABLE
+        </span>
+
+        //
+
+        <span id="bpm">
+            72
+        </span>
+
+        BPM
+
+    </div>
+
+
+    
+
+<!-- =====================================
+     LEVEL 2 COMPLETE
+===================================== -->
+
+<div id="missionComplete">
+
+    <div id="completeTitle">
+        LEVEL 2 // SECTOR 02 COMPLETE
+    </div>
+
+    <div id="completeSubtitle">
+        UNDERGROUND TRANSIT // EXTRACTION SUCCESSFUL
+    </div>
+
+    <div id="completeStats">
+
+        ZOMBIES KILLED:
+        <span id="completeKills">0</span>
+
+        <br>
+
+        XP AWARDED:
+        <span id="completeXP">200</span>
+
+    </div>
+
+    <button id="nextLevelBtn">
+        LEVEL 3 →
+    </button>
+
+</div>
+
+
+<!-- ==============================
+     LEVEL 2 FAILED
+============================== -->
+
+<div id="levelFailed">
+
+    <div id="failedTitle">
+        SECTOR 02 FAILED
+    </div>
+
+    <div id="failedSubtitle">
+        CONNECTION LOST // PLAYER TERMINATED
+    </div>
+
+    <div id="failedStats">
+
+        LEVEL:
+        <span>02</span>
+
+        <br>
+
+        LOCATION:
+        <span>FLOODED SUBWAY</span>
+
+        <br>
+
+        STATUS:
+        <span>MISSION FAILED</span>
+
+    </div>
+
+    <button id="restartLevelBtn">
+        RESTART LEVEL 02
+    </button>
+
+    <button id="returnHQBtn">
+        RETURN TO HQ
+    </button>
+
+</div>
+
+
+
+</div>
+
+<!-- =====================================
+     SURVIVOR PROFILE
+===================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="survivorProfileWindow">
+
+        <div class="profileHeader">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ACTIVE SURVIVOR // PLAYER DATABASE
+        </div>
+
+        <div class="profileRow">
+            NAME:
+            <span id="playerName">SURVIVOR</span>
+        </div>
+
+        <div class="profileRow">
+            EMAIL:
+            <span id="playerEmail">UNKNOWN</span>
+        </div>
+
+        <div class="profileRow">
+            SURVIVOR ID:
+            <span id="playerID">ZS-000000</span>
+        </div>
+
+        <div class="profileRow">
+            LEVEL:
+            <span id="playerLevel">01</span>
+        </div>
+
+        <div class="profileRow">
+            LOCATION:
+            <span id="profileLocation">QUARANTINE HOSPITAL</span>
+        </div>
+
+        <div class="profileRow">
+            XP:
+            <span id="playerXP">0</span>
+        </div>
+
+        <div class="profileRow">
+            ZOMBIES KILLED:
+            <span id="profileKills">0</span>
+        </div>
+
+        <div class="profileRow">
+            ITEMS FOUND:
+            <span id="profileItems">0</span>
+        </div>
+
+        <div class="profileXP">
+            LEVEL
+            <span id="xpLevel">01</span>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+        </div>
+
+        <button id="resumeGameBtn">
+            RESUME
+        </button>
+
+        <button id="profileReturnHQBtn">
+            ← RETURN TO HQ
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="level2.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

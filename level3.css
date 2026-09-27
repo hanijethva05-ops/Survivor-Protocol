@@ -1,0 +1,1148 @@
+/* =========================================================
+   ZOMBIE SURVIVAL
+   LEVEL 3 // SECTOR 03
+   DOWNTOWN EXTRACTION
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #020403;
+    color: #67ff8a;
+    font-family: "Courier New", monospace;
+    user-select: none;
+}
+
+
+/* =========================================================
+   GAME SCREEN
+========================================================= */
+
+#gameScreen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #020403;
+}
+
+
+/* =========================================================
+   GAME WORLD
+========================================================= */
+
+#gameWorld {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(0, 8, 5, 0.78),
+            rgba(0, 8, 5, 0.78)
+        ),
+        repeating-linear-gradient(
+            90deg,
+            #101512 0px,
+            #101512 120px,
+            #151b18 121px,
+            #151b18 240px
+        );
+
+    border: 1px solid #173d28;
+}
+
+
+/* =========================================================
+   DOWNTOWN STREET
+========================================================= */
+
+.street {
+    position: absolute;
+
+    left: 15%;
+    top: 0;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.45),
+            transparent 15%,
+            transparent 85%,
+            rgba(0,0,0,.45)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            #171c1a 0px,
+            #171c1a 80px,
+            #202623 82px,
+            #202623 160px
+        );
+
+    border-left: 4px solid #29352f;
+    border-right: 4px solid #29352f;
+
+    box-shadow:
+        inset 0 0 100px rgba(0,0,0,.8);
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   ROAD CENTER LINE
+========================================================= */
+
+.street::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    transform: translateX(-50%);
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            #4a7c5c 0px,
+            #4a7c5c 42px,
+            transparent 42px,
+            transparent 82px
+        );
+
+    opacity: .5;
+}
+
+
+/* =========================================================
+   SIDE BUILDING SHADOWS
+========================================================= */
+
+#gameWorld::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.9) 0%,
+            transparent 18%,
+            transparent 82%,
+            rgba(0,0,0,.9) 100%
+        );
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   CHECKPOINT
+========================================================= */
+
+.checkpoint {
+    position: absolute;
+
+    left: 5%;
+    top: 35%;
+
+    width: 300px;
+
+    padding: 22px 28px;
+
+    text-align: center;
+
+    border: 2px solid #67ff8a;
+
+    background:
+        rgba(0, 12, 7, .88);
+
+    color: #67ff8a;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 0 12px rgba(103,255,138,.25),
+        inset 0 0 20px rgba(103,255,138,.08);
+
+    z-index: 10;
+}
+
+
+/* checkpoint warning */
+
+.checkpoint::before {
+    content: "⚠";
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ffd84d;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   BURNING / ABANDONED CARS
+========================================================= */
+
+.burningCar {
+    position: absolute;
+
+    font-size: 62px;
+
+    filter:
+        grayscale(1)
+        brightness(.45)
+        contrast(1.3);
+
+    opacity: .75;
+
+    z-index: 4;
+
+    text-shadow:
+        0 0 8px rgba(255,80,20,.25);
+}
+
+.car1 {
+    left: 27%;
+    top: 18%;
+}
+
+.car2 {
+    right: 22%;
+    top: 72%;
+}
+
+
+/* =========================================================
+   BARRICADES
+========================================================= */
+
+.barricade {
+    position: absolute;
+
+    width: 210px;
+    height: 36px;
+
+    border-top: 4px solid #777;
+    border-bottom: 4px solid #777;
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            transparent 0px,
+            transparent 16px,
+            rgba(100,100,100,.5) 17px,
+            rgba(100,100,100,.5) 20px
+        );
+
+    opacity: .7;
+
+    z-index: 6;
+}
+
+.wire1 {
+    left: 38%;
+    top: 30%;
+
+    transform: rotate(-12deg);
+}
+
+.wire2 {
+    right: 30%;
+    top: 55%;
+
+    transform: rotate(-12deg);
+}
+
+
+/* =========================================================
+   SUPPLY CRATES
+========================================================= */
+
+.supplyCrate {
+    position: absolute;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #263d2d,
+            #101c14
+        );
+
+    border: 2px solid #67ff8a;
+
+    color: #67ff8a;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 0 10px rgba(103,255,138,.3),
+        inset 0 0 15px rgba(103,255,138,.1);
+
+    z-index: 12;
+
+    cursor: default;
+
+    transition:
+        .2s ease;
+}
+
+
+/* crate symbol */
+
+.supplyCrate::before {
+    content: "▣";
+}
+
+
+/* crate interaction prompt */
+
+.supplyPrompt {
+    position: absolute;
+
+    left: 50%;
+    top: -32px;
+
+    transform: translateX(-50%);
+
+    white-space: nowrap;
+
+    padding: 5px 9px;
+
+    border: 1px solid #67ff8a;
+
+    background: rgba(0,0,0,.9);
+
+    color: #67ff8a;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity .2s ease;
+
+    z-index: 20;
+}
+
+
+/* JS can add this */
+
+.supplyCrate.near .supplyPrompt,
+.supplyCrate:hover .supplyPrompt {
+    opacity: 1;
+}
+
+
+/* collected crate */
+
+.supplyCrate.collected {
+    opacity: .18;
+
+    border-color: #555;
+
+    box-shadow: none;
+
+    filter: grayscale(1);
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+#player {
+    position: absolute;
+
+    width: 28px;
+    height: 28px;
+
+    left: 50%;
+    top: 80%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border: 3px solid #67ff8a;
+
+    background:
+        rgba(103,255,138,.08);
+
+    box-shadow:
+        0 0 8px #67ff8a,
+        0 0 18px rgba(103,255,138,.45);
+
+    z-index: 40;
+}
+
+
+/* player center */
+
+#player::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    transform:
+        translate(-50%, -50%);
+
+    background: #67ff8a;
+
+    box-shadow:
+        0 0 8px #67ff8a;
+}
+
+
+/* =========================================================
+   ZOMBIES
+========================================================= */
+
+.enemy {
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 29px;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 30;
+
+    filter:
+        grayscale(.35)
+        brightness(.65);
+
+    opacity: .9;
+
+    transition:
+        opacity .15s ease;
+}
+
+
+/* slow zombie */
+
+.enemy:not(.dead) {
+    animation:
+        zombieIdle 1.8s infinite ease-in-out;
+}
+
+
+@keyframes zombieIdle {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            translateY(-2px);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translateY(0);
+    }
+
+}
+
+
+/* dead zombie */
+
+.enemy.dead {
+    opacity: .18;
+
+    filter:
+        grayscale(1)
+        brightness(.35);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   CHOPPER
+========================================================= */
+
+#chopper {
+    display: none;
+
+    position: absolute;
+
+    right: 6%;
+    top: 10%;
+
+    width: 130px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    color: #67ff8a;
+
+    font-size: 65px;
+
+    z-index: 45;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(103,255,138,.55)
+        );
+}
+
+
+/* EVAC text */
+
+#chopper span {
+    display: block;
+
+    margin-top: -8px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+/* chopper ready */
+
+#chopper.ready {
+    display: block;
+
+    animation:
+        chopperPulse 1s infinite;
+}
+
+
+@keyframes chopperPulse {
+
+    0% {
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(103,255,138,.3)
+            );
+    }
+
+    50% {
+        filter:
+            drop-shadow(
+                0 0 25px
+                rgba(103,255,138,.9)
+            );
+    }
+
+    100% {
+        filter:
+            drop-shadow(
+                0 0 5px
+                rgba(103,255,138,.3)
+            );
+    }
+
+}
+
+
+/* chopper prompt */
+
+#chopperPrompt {
+    position: absolute;
+
+    left: 50%;
+    top: 90px;
+
+    transform:
+        translateX(-50%);
+
+    white-space: nowrap;
+
+    padding: 7px 12px;
+
+    border: 1px solid #67ff8a;
+
+    background:
+        rgba(0,0,0,.9);
+
+    color: #67ff8a;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CROSSHAIR
+========================================================= */
+
+#crosshair {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #67ff8a;
+
+    font-size: 30px;
+
+    font-weight: normal;
+
+    text-shadow:
+        0 0 8px #67ff8a;
+
+    z-index: 100;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   TOP HUD
+========================================================= */
+
+#topLeft,
+#topRight {
+    position: absolute;
+
+    top: 20px;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+
+    z-index: 120;
+}
+
+#topLeft {
+    left: 30px;
+}
+
+#topRight {
+    right: 30px;
+
+    text-align: right;
+}
+
+
+/* recording dot */
+
+#recDot {
+    color: #ff2020;
+
+    text-shadow:
+        0 0 8px red;
+
+    animation:
+        recBlink 1s infinite;
+}
+
+@keyframes recBlink {
+
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: .25;
+    }
+
+}
+
+
+/* =========================================================
+   OBJECTIVE HUD
+========================================================= */
+
+#objectiveHUD {
+    position: absolute;
+
+    top: 70px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    min-width: 470px;
+
+    padding: 14px 30px;
+
+    text-align: center;
+
+    border: 1px solid #67ff8a;
+
+    background:
+        rgba(0, 8, 4, .82);
+
+    color: #67ff8a;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    box-shadow:
+        0 0 12px
+        rgba(103,255,138,.15);
+
+    z-index: 120;
+}
+
+#objectiveText {
+    color: #d8ffe2;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   SUPPLY HUD
+========================================================= */
+
+#supplyHUD {
+    position: absolute;
+
+    top: 145px;
+    left: 30px;
+
+    padding: 12px 18px;
+
+    border-left: 3px solid #67ff8a;
+
+    background:
+        rgba(0,0,0,.55);
+
+    color: #67ff8a;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+
+    z-index: 120;
+}
+
+#supplies {
+    color: #ffffff;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   HEALTH HUD
+========================================================= */
+
+#healthHUD {
+    position: absolute;
+
+    left: 30px;
+    bottom: 30px;
+
+    padding: 10px 15px;
+
+    border-left: 3px solid #67ff8a;
+
+    background:
+        rgba(0,0,0,.55);
+
+    font-size: 16px;
+
+    z-index: 120;
+}
+
+#health {
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   WEAPON HUD
+========================================================= */
+
+#weaponHUD {
+    position: absolute;
+
+    right: 30px;
+    bottom: 30px;
+
+    min-width: 180px;
+
+    padding: 12px 16px;
+
+    text-align: right;
+
+    border-right: 2px solid #67ff8a;
+
+    background:
+        rgba(0,0,0,.48);
+
+    color: #67ff8a;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+
+    z-index: 120;
+}
+
+#weaponHUD span {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DAMAGE EFFECT
+========================================================= */
+
+#damageEffect {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 45%,
+            rgba(255,0,0,.38)
+        );
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 180;
+}
+
+
+.damage {
+    animation:
+        damageFlash .35s ease;
+}
+
+
+@keyframes damageFlash {
+
+    0% {
+        opacity: .9;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   COMPLETE SCREEN
+========================================================= */
+
+#finalScreen {
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(8,35,20,.96),
+            rgba(0,0,0,.98)
+        );
+
+    color: #67ff8a;
+
+    text-align: center;
+
+    z-index: 500;
+
+    letter-spacing: 4px;
+}
+
+
+#finalTitle {
+    font-size: 44px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 15px
+        rgba(103,255,138,.7);
+}
+
+
+#finalMessage {
+    margin-top: 22px;
+
+    color: #b8ffc8;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   RESTART / COMPLETE BUTTON
+========================================================= */
+
+#restartLevelBtn {
+    margin-top: 35px;
+
+    padding: 13px 30px;
+
+    border: 1px solid #67ff8a;
+
+    background:
+        transparent;
+
+    color: #67ff8a;
+
+    font-family: monospace;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    text-transform: uppercase;
+
+    box-shadow:
+        0 0 8px
+        rgba(103,255,138,.3);
+
+    transition:
+        .2s ease;
+}
+
+
+#restartLevelBtn:hover {
+    background: #67ff8a;
+
+    color: #000;
+
+    box-shadow:
+        0 0 25px
+        rgba(103,255,138,.8);
+}
+
+
+#restartLevelBtn:active {
+    transform:
+        scale(.95);
+}
+
+
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
+
+#gameScreen::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: .45;
+
+    z-index: 600;
+}
+
+
+/* =========================================================
+   CRT VIGNETTE
+========================================================= */
+
+#gameScreen::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 45%,
+            rgba(0,0,0,.55) 100%
+        );
+
+    z-index: 590;
+}
+
+
+/* =========================================================
+   MISSION READY / CHOPPER GLOW
+========================================================= */
+
+.extractionReady #objectiveHUD {
+    border-color: #fff;
+
+    color: #fff;
+
+    box-shadow:
+        0 0 20px
+        rgba(103,255,138,.5);
+}
+
+.extractionReady #chopper {
+    display: block;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    #objectiveHUD {
+        min-width: 360px;
+
+        font-size: 12px;
+    }
+
+    .checkpoint {
+        width: 230px;
+
+        font-size: 13px;
+    }
+
+    #topLeft,
+    #topRight {
+        font-size: 12px;
+    }
+
+    #weaponHUD {
+        font-size: 14px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    #objectiveHUD {
+        min-width: 280px;
+
+        padding: 10px;
+
+        top: 65px;
+    }
+
+    .checkpoint {
+        left: 3%;
+
+        width: 190px;
+
+        padding: 15px;
+
+        font-size: 11px;
+    }
+
+    #topLeft {
+        left: 15px;
+    }
+
+    #topRight {
+        right: 15px;
+    }
+
+    #supplyHUD {
+        left: 15px;
+    }
+
+    #weaponHUD {
+        right: 15px;
+    }
+
+}

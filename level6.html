@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LEVEL 6 // THE SERVER CORE</title>
+
+    <!-- Level 6 CSS -->
+    <link rel="stylesheet" href="level6.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+         GAME WORLD
+    ========================================== -->
+
+    <div id="gameWorld">
+
+        <!-- Scanline effect -->
+        <div class="scanlines"></div>
+
+
+        <!-- =====================================
+             TOP HUD
+        ====================================== -->
+
+        <div class="hud topHud">
+
+            <div class="hudLeft">
+
+                <div class="hudTitle">
+                    ORBITAL FACILITY
+                </div>
+
+                <div>
+                    LEVEL 06 // SERVER CORE
+                </div>
+
+                <div>
+                    THREAT:
+                    <span class="warning">
+                        DELTA
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="hudCenter">
+
+                <div class="missionLabel">
+                    CURRENT OBJECTIVE
+                </div>
+
+                <div
+                    id="objectiveText"
+                    class="objectiveText"
+                >
+                    DOWNLOAD 3 ENCRYPTED VIRUS LOGS
+                </div>
+
+            </div>
+
+
+            <div class="hudRight">
+
+                <div>
+                    SIGNAL:
+                    <span id="signalStatus">
+                        STABLE
+                    </span>
+                </div>
+
+                <div>
+                    <span class="recDot">
+                        ●
+                    </span>
+
+                    REC
+                </div>
+
+                <div>
+                    CAM-06 // LIVE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             SERVER ROOM
+        ====================================== -->
+
+        <div id="serverRoom">
+
+
+            <!-- =================================
+                 SERVER TOWER 1
+            ================================== -->
+
+            <div class="serverTower tower1">
+
+                <div class="serverLights">
+                    ● ● ● ●
+                </div>
+
+                <div class="serverLabel">
+                    CORE-A
+                </div>
+
+                <div class="serverLines">
+                    ||||||||||||
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SERVER TOWER 2
+            ================================== -->
+
+            <div class="serverTower tower2">
+
+                <div class="serverLights">
+                    ● ● ● ●
+                </div>
+
+                <div class="serverLabel">
+                    CORE-B
+                </div>
+
+                <div class="serverLines">
+                    ||||||||||||
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SERVER TOWER 3
+            ================================== -->
+
+            <div class="serverTower tower3">
+
+                <div class="serverLights">
+                    ● ● ● ●
+                </div>
+
+                <div class="serverLabel">
+                    CORE-C
+                </div>
+
+                <div class="serverLines">
+                    ||||||||||||
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SERVER TOWER 4
+            ================================== -->
+
+            <div class="serverTower tower4">
+
+                <div class="serverLights">
+                    ● ● ● ●
+                </div>
+
+                <div class="serverLabel">
+                    CORE-D
+                </div>
+
+                <div class="serverLines">
+                    ||||||||||||
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 COOLING PIPES
+            ================================== -->
+
+            <div class="coolingPipe pipe1"></div>
+
+            <div class="coolingPipe pipe2"></div>
+
+            <div class="coolingPipe pipe3"></div>
+
+
+            <!-- =================================
+                 SMOKE
+            ================================== -->
+
+            <div class="smoke smoke1"></div>
+
+            <div class="smoke smoke2"></div>
+
+            <div class="smoke smoke3"></div>
+
+
+            <!-- =================================
+                 TERMINAL 1
+            ================================== -->
+
+            <div
+                id="terminal1"
+                class="serverTerminal"
+                data-terminal="1"
+            >
+
+                <div class="terminalHeader">
+                    SERVER TERMINAL A
+                </div>
+
+                <div class="terminalScreen">
+
+                    <div>
+                        SERVER_A
+                    </div>
+
+                    <div>
+                        ENCRYPTED
+                    </div>
+
+                    <div>
+                        VIRUS LOG
+                    </div>
+
+                </div>
+
+                <div class="terminalStatus">
+                    READY
+                </div>
+
+                <div class="terminalPrompt">
+                    [ E ] DOWNLOAD
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 TERMINAL 2
+            ================================== -->
+
+            <div
+                id="terminal2"
+                class="serverTerminal"
+                data-terminal="2"
+            >
+
+                <div class="terminalHeader">
+                    SERVER TERMINAL B
+                </div>
+
+                <div class="terminalScreen">
+
+                    <div>
+                        SERVER_B
+                    </div>
+
+                    <div>
+                        ENCRYPTED
+                    </div>
+
+                    <div>
+                        VIRUS LOG
+                    </div>
+
+                </div>
+
+                <div class="terminalStatus">
+                    READY
+                </div>
+
+                <div class="terminalPrompt">
+                    [ E ] DOWNLOAD
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 TERMINAL 3
+            ================================== -->
+
+            <div
+                id="terminal3"
+                class="serverTerminal"
+                data-terminal="3"
+            >
+
+                <div class="terminalHeader">
+                    SERVER TERMINAL C
+                </div>
+
+                <div class="terminalScreen">
+
+                    <div>
+                        SERVER_C
+                    </div>
+
+                    <div>
+                        ENCRYPTED
+                    </div>
+
+                    <div>
+                        VIRUS LOG
+                    </div>
+
+                </div>
+
+                <div class="terminalStatus">
+                    READY
+                </div>
+
+                <div class="terminalPrompt">
+                    [ E ] DOWNLOAD
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================
+             PLAYER
+        ====================================== -->
+
+        <div
+            id="player"
+            class="player"
+        >
+            ◈
+        </div>
+
+
+        <!-- =====================================
+             CROSSHAIR
+        ====================================== -->
+
+        <div id="crosshair">
+            +
+        </div>
+
+
+        <!-- =====================================
+             DAMAGE EFFECT
+        ====================================== -->
+
+        <div
+            id="damageEffect"
+            class="damageEffect"
+        ></div>
+
+
+        <!-- =====================================
+             DOWNLOAD UI
+        ====================================== -->
+
+        <div
+            id="downloadPanel"
+            class="downloadPanel hidden"
+        >
+
+            <div class="downloadWindow">
+
+                <div
+                    id="downloadTitle"
+                    class="downloadTitle"
+                >
+                    SERVER TERMINAL
+                </div>
+
+
+                <div class="downloadText">
+                    ENCRYPTED VIRUS LOG
+                </div>
+
+
+                <div class="downloadText">
+                    DATA EXTRACTION IN PROGRESS
+                </div>
+
+
+                <div class="progressContainer">
+
+                    <div
+                        id="progressBar"
+                        class="progressBar"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    id="downloadPercent"
+                    class="downloadPercent"
+                >
+                    0%
+                </div>
+
+
+                <div class="downloadWarning">
+                    WARNING:
+                    REMAIN WITHIN TERMINAL RANGE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             INTERACTION PROMPT
+        ====================================== -->
+
+        <div
+            id="interactionPrompt"
+            class="interactionPrompt"
+        >
+            MOVE TO A SERVER TERMINAL
+        </div>
+
+
+        <!-- =====================================
+             PLAYER VITALS
+        ====================================== -->
+
+        <div class="hud vitalsHud">
+
+            <div class="vitalsTitle">
+                VITAL SIGN MONITOR
+            </div>
+
+            <div class="heartLine">
+                —\/—\/—\/—\/—
+            </div>
+
+            <div>
+                STATUS:
+                <span id="vitalStatus">
+                    STABLE
+                </span>
+            </div>
+
+            <div>
+                BPM:
+                <span id="bpm">
+                    72
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             WEAPON HUD
+        ====================================== -->
+
+        <div class="hud weaponHud">
+
+            <div class="weaponName">
+                M4 RIFLE
+            </div>
+
+            <div class="ammo">
+
+                MAG:
+
+                <span id="magAmmo">
+                    30
+                </span>
+
+                /
+
+                30
+
+            </div>
+
+
+            <div class="reserveAmmo">
+
+                RESERVE:
+
+                <span id="reserve">
+                    120
+                </span>
+
+            </div>
+
+
+            <div class="controls">
+
+                LMB FIRE
+
+                &nbsp;&nbsp;
+
+                R RELOAD
+
+                &nbsp;&nbsp;
+
+                SHIFT SPRINT
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             BATTERY
+        ====================================== -->
+
+        <div class="batteryHud">
+
+            FLASHLIGHT:
+
+            <span id="batteryPercent">
+                80%
+            </span>
+
+        </div>
+
+
+        <!-- =====================================
+             ZOMBIES KILLED
+        ====================================== -->
+
+        <div class="killCounter">
+
+            HOSTILES:
+
+            <span id="zombiesKilled">
+                0
+            </span>
+
+        </div>
+
+
+        <!-- =====================================
+             MISSION COMPLETE
+        ====================================== -->
+
+        <div
+            id="missionComplete"
+            class="overlay hidden"
+        >
+
+            <div class="missionWindow">
+
+                <div class="missionHeader">
+                    LEVEL 6 COMPLETE
+                </div>
+
+                <div class="missionLine">
+                    ALL ENCRYPTED VIRUS LOGS
+                    EXTRACTED
+                </div>
+
+                <div class="missionSuccess">
+                    SERVER CORE DATA SECURED
+                </div>
+
+                <div class="missionLine">
+                    THREAT STATUS: CONTAINED
+                </div>
+
+
+                <button
+                    id="continueBtn"
+                    class="continueButton"
+                >
+                    CONTINUE TO LEVEL 7
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             GAME OVER
+        ====================================== -->
+
+        <div
+            id="gameOver"
+            class="overlay hidden"
+        >
+
+            <div class="missionWindow">
+
+                <div class="gameOverHeader">
+                    AGENT DOWN
+                </div>
+
+                <div class="missionLine">
+                    SERVER CORE EXTRACTION FAILED
+                </div>
+
+
+                <button
+                    id="restartBtn"
+                    class="continueButton"
+                >
+                    RESTART LEVEL 6
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             LEVEL INFORMATION
+        ====================================== -->
+
+        <div class="levelInfo">
+
+            LEVEL 06
+
+            <span>
+                // THE SERVER CORE
+            </span>
+
+        </div>
+
+        <!-- =========================================
+     SURVIVOR PROFILE
+========================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="profilePanel">
+
+        <div class="profilePanelTitle">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ORBITAL FACILITY // LEVEL 06
+        </div>
+
+
+        <div class="profileRow">
+            OPERATOR
+            <span>SURVIVOR</span>
+        </div>
+
+
+        <div class="profileRow">
+            CURRENT LEVEL
+            <span>06 // THE SERVER CORE</span>
+        </div>
+
+
+        <div class="profileRow">
+            MISSION
+            <span>
+                DOWNLOAD 3 ENCRYPTED VIRUS LOGS
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            THREAT
+            <span style="color:#ffcc00;">
+                DELTA
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            STATUS
+            <span id="profileVitalStatus">
+                STABLE
+            </span>
+        </div>
+
+
+        <!-- XP -->
+
+        <div class="profileXP">
+
+            EXPERIENCE
+
+            <span id="xpLevel">
+                LEVEL 6
+            </span>
+
+            <div class="profileXPBar">
+
+                <div
+                    id="profileXPFill"
+                    style="width:60%;"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <button id="resumeGameBtn">
+            RESUME MISSION
+        </button>
+
+        <button id="profileReturnHQBtn">
+            RETURN TO HQ
+        </button>
+
+
+    </div>
+
+</div>
+
+
+    </div>
+
+
+    <!-- =========================================
+         LEVEL 6 JAVASCRIPT
+    ========================================== -->
+
+    <script src="level6.js"></script>
+    <script src="profile.js"></script>
+
+</body>
+</html>

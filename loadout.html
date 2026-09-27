@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Zombie Survival - Loadout</title>
+
+    <link
+        rel="stylesheet"
+        href="loadout.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div id="loadoutScreen">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div id="loadoutHeader">
+
+        <div>
+            SURVIVOR DATABASE // EQUIPMENT & ASSETS
+        </div>
+
+        <div id="clearance">
+            CLEARANCE: LEVEL 01
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN LOADOUT AREA
+    ========================== -->
+
+    <div id="loadoutMain">
+
+
+        <!-- =========================
+             WEAPON SLOTS
+        ========================== -->
+
+        <div id="weaponSlots">
+
+            <div
+                class="weaponSlot"
+                id="primarySlot"
+            >
+
+                <span class="slotTitle">
+                    SLOT 01 // PRIMARY
+                </span>
+
+                <span class="slotWeapon">
+                    EMPTY
+                </span>
+
+            </div>
+
+
+            <div
+                class="weaponSlot"
+                id="secondarySlot"
+            >
+
+                <span class="slotTitle">
+                    SLOT 02 // SECONDARY
+                </span>
+
+                <span class="slotWeapon">
+                    EMPTY
+                </span>
+
+            </div>
+
+
+            <div
+                class="weaponSlot"
+                id="utilitySlot"
+            >
+
+                <span class="slotTitle">
+                    SLOT 03 // MELEE / UTILITY
+                </span>
+
+                <span class="slotWeapon">
+                    EMPTY
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             BLUEPRINT
+        ========================== -->
+
+        <div id="blueprintPanel">
+
+            <div id="blueprintName">
+                BLUEPRINT // M4 RIFLE
+            </div>
+
+
+            <div id="weaponBlueprint">
+
+                <div class="blueprintWeapon">
+                    M4
+                </div>
+
+                <div class="blueprintLine line1"></div>
+                <div class="blueprintLine line2"></div>
+                <div class="blueprintLine line3"></div>
+
+            </div>
+
+
+            <!-- =========================
+                 PERFORMANCE DATA
+            ========================== -->
+
+            <div id="performance">
+
+                <div class="performanceTitle">
+                    PERFORMANCE DATA
+                </div>
+
+
+                <div class="statRow">
+
+                    <span>
+                        DMG
+                    </span>
+
+                    <div id="damageBar">
+                    </div>
+
+                </div>
+
+
+                <div class="statRow">
+
+                    <span>
+                        RPM
+                    </span>
+
+                    <div id="rpmBar">
+                    </div>
+
+                </div>
+
+
+                <div class="statRow">
+
+                    <span>
+                        RCL
+                    </span>
+
+                    <strong id="recoil">
+                        LOW
+                    </strong>
+
+                </div>
+
+
+                <div class="statRow">
+
+                    <span>
+                        CAL
+                    </span>
+
+                    <strong id="caliber">
+                        5.56MM
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             AVAILABLE ASSETS
+        ========================== -->
+
+        <div id="availableAssets">
+
+            <div class="sectionTitle">
+                AVAILABLE ASSETS
+            </div>
+
+
+            <div id="weaponList">
+
+
+                <!-- M4 -->
+
+                <div
+                    class="weaponCard"
+                    data-weapon="M4 RIFLE"
+                >
+
+                    <strong>
+                        M4 RIFLE
+                    </strong>
+
+                    <small>
+                        5.56MM // ASSAULT
+                    </small>
+
+                </div>
+
+
+                <!-- SHOTGUN -->
+
+                <div
+                    class="weaponCard"
+                    data-weapon="COMBAT SHOTGUN"
+                >
+
+                    <strong>
+                        COMBAT SHOTGUN
+                    </strong>
+
+                    <small>
+                        12 GAUGE // CLOSE RANGE
+                    </small>
+
+                </div>
+
+
+                <!-- M9 -->
+
+                <div
+                    class="weaponCard"
+                    data-weapon="M9 PISTOL"
+                >
+
+                    <strong>
+                        M9 PISTOL
+                    </strong>
+
+                    <small>
+                        9MM // SIDEARM
+                    </small>
+
+                </div>
+
+
+                <!-- REVOLVER -->
+
+                <div
+                    class="weaponCard"
+                    data-weapon="REVOLVER"
+                >
+
+                    <strong>
+                        REVOLVER
+                    </strong>
+
+                    <small>
+                        .357 // HEAVY SIDEARM
+                    </small>
+
+                </div>
+
+
+                <!-- MACHETE -->
+
+                <div
+                    class="weaponCard"
+                    data-weapon="MACHETE"
+                >
+
+                    <strong>
+                        MACHETE
+                    </strong>
+
+                    <small>
+                        MELEE // SURVIVAL
+                    </small>
+
+                </div>
+
+
+                <!-- LOCKED -->
+
+                <div
+                    class="weaponCard locked"
+                    data-weapon="ENCRYPTED ASSET"
+                >
+
+                    <strong>
+                        🔒 ENCRYPTED ASSET
+                    </strong>
+
+                    <small>
+                        LEVEL 10 REQUIRED
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 MODIFICATION
+            ========================== -->
+
+            <button
+                id="modificationBtn"
+            >
+
+                ⚙ MODIFICATION / CALIBRATION
+
+            </button>
+
+
+            <!-- =========================
+                 WARNING
+            ========================== -->
+
+            <div id="warningText">
+
+                &gt; WARNING // LOAD AT LEAST ONE PRIMARY ASSET
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <div id="loadoutFooter">
+
+        <button
+            id="backBtn"
+        >
+            ← BACK TO SURVIVOR
+        </button>
+
+
+        <div id="loadoutStatus">
+
+            PRIMARY:
+            <span id="statusPrimary">
+                EMPTY
+            </span>
+
+            &nbsp; | &nbsp;
+
+            SECONDARY:
+            <span id="statusSecondary">
+                EMPTY
+            </span>
+
+            &nbsp; | &nbsp;
+
+            UTILITY:
+            <span id="statusUtility">
+                EMPTY
+            </span>
+
+        </div>
+
+
+        <button
+            id="continueBtn"
+        >
+            CONTINUE →
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<script src="loadout.js"></script>
+
+</body>
+
+</html>

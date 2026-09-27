@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LEVEL 8 // QUARANTINE LAB</title>
+
+    <link rel="stylesheet" href="level8.css">
+    <link rel="stylesheet" href="css/profile.css">
+    
+</head>
+
+<body>
+
+<div id="gameWorld">
+
+    <!-- SCANLINES -->
+    <div class="scanlines"></div>
+
+    <!-- PLAYER -->
+    <div id="player">
+        <div class="playerCore"></div>
+    </div>
+
+    <!-- SECURITY NODES -->
+    <div id="node1" class="securityNode" data-node="1">
+        <div class="nodeCore"></div>
+        <span>NODE 01</span>
+    </div>
+
+    <div id="node2" class="securityNode" data-node="2">
+        <div class="nodeCore"></div>
+        <span>NODE 02</span>
+    </div>
+
+    <div id="node3" class="securityNode" data-node="3">
+        <div class="nodeCore"></div>
+        <span>NODE 03</span>
+    </div>
+
+    <!-- EXIT DOOR -->
+    <div id="quarantineDoor">
+        <div class="doorLight"></div>
+        <div class="doorText">QUARANTINE</div>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud">
+
+        <div class="hudTop">
+
+            <div class="levelTitle">
+                LEVEL 8
+                <span>// QUARANTINE LAB</span>
+            </div>
+
+            <div class="objectiveBox">
+                <div class="label">OBJECTIVE</div>
+                <div id="objectiveText">
+                    ACTIVATE SECURITY NODES
+                </div>
+            </div>
+
+        </div>
+
+        <div class="statusPanel">
+
+            <div class="statusItem">
+                <span>SECURITY</span>
+                <strong id="securityStatus">LOCKED</strong>
+            </div>
+
+            <div class="statusItem">
+                <span>NODES</span>
+                <strong id="nodesActivated">0 / 3</strong>
+            </div>
+
+            <div class="statusItem">
+                <span>HOSTILES</span>
+                <strong id="zombiesKilled">0</strong>
+            </div>
+
+        </div>
+
+        <div class="bottomHUD">
+
+            <div class="healthBox">
+
+                <div class="hudLabel">
+                    VITALS
+                </div>
+
+                <div id="hpText">
+                    HP 100
+                </div>
+
+                <div class="healthBar">
+                    <div id="healthFill"></div>
+                </div>
+
+            </div>
+
+            <div class="ammoBox">
+
+                <div class="hudLabel">
+                    AMMUNITION
+                </div>
+
+                <div class="ammo">
+                    <span id="magAmmo">30</span>
+                    <small>/</small>
+                    <span id="reserve">180</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- INTERACTION -->
+    <div id="interactionPrompt">
+        SEARCH THE QUARANTINE LAB
+    </div>
+
+
+    <!-- DAMAGE -->
+    <div id="damageEffect"></div>
+
+
+    <!-- MISSION COMPLETE -->
+    <div id="missionComplete" class="overlay hidden">
+
+        <div class="missionBox">
+
+            <div class="completeTitle">
+                LEVEL 8 COMPLETE
+            </div>
+
+            <div class="completeText">
+                QUARANTINE SYSTEM BREACHED
+            </div>
+
+            <div class="completeSub">
+                SECURITY NETWORK DISABLED
+            </div>
+
+            <button id="continueBtn">
+                CONTINUE TO LEVEL 9
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME OVER -->
+    <div id="gameOver" class="overlay hidden">
+
+        <div class="missionBox">
+
+            <div class="failedTitle">
+                LEVEL 8 FAILED
+            </div>
+
+            <div class="completeText">
+                AGENT ELIMINATED
+            </div>
+
+            <button id="restartBtn">
+                RESTART LEVEL
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- =========================================
+     SURVIVOR PROFILE
+========================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="survivorProfileBox">
+
+        <div class="profileHeader">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileLine"></div>
+
+        <div class="profileRow">
+            <span>NAME</span>
+            <strong id="playerName">GUEST SURVIVOR</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>EMAIL</span>
+            <strong id="playerEmail">GUEST ACCESS</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>SURVIVOR ID</span>
+            <strong id="playerID">ZS-000000</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LEVEL</span>
+            <strong id="playerLevel">08</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>LOCATION</span>
+            <strong id="profileLocation">
+                SECTOR_08 // SECURITY COMPLEX
+            </strong>
+        </div>
+
+        <div class="profileRow">
+            <span>XP</span>
+            <strong id="playerXP">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ZOMBIES KILLED</span>
+            <strong id="profileKills">0</strong>
+        </div>
+
+        <div class="profileRow">
+            <span>ITEMS FOUND</span>
+            <strong id="profileItems">0</strong>
+        </div>
+
+        <div class="xpSection">
+
+            <div class="xpHeader">
+                LEVEL <span id="xpLevel">08</span>
+            </div>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+
+        </div>
+
+        <div class="profileButtons">
+
+            <button id="resumeGameBtn">
+                RESUME GAME
+            </button>
+
+            <button id="profileReturnHQBtn">
+                RETURN TO HQ
+            </button>
+
+        </div>
+
+        <div class="profileHint">
+            PRESS ESC TO CLOSE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MINI PROFILE -->
+
+<div id="survivorMiniProfile">
+
+    <div id="miniPlayerName">
+        GUEST SURVIVOR
+    </div>
+
+    <div>
+        LVL <span id="miniPlayerLevel">08</span>
+    </div>
+
+</div>
+
+</div>
+
+<script src="level8.js"></script>
+<script src="profile.js"></script>
+
+</body>
+</html>

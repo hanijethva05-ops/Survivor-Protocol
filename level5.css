@@ -1,0 +1,1289 @@
+/* ==========================================
+   ZOMBIE SURVIVAL // LEVEL 5
+   ORBITAL COMMAND BRIDGE
+========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #020406;
+    color: #d9fff4;
+    font-family: "Courier New", monospace;
+}
+
+body {
+    user-select: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   GAME SCREEN
+========================================== */
+
+#gameScreen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at center,
+            #10221f 0%,
+            #06100f 45%,
+            #010303 100%
+        );
+}
+
+
+/* ==========================================
+   GAME WORLD
+========================================== */
+
+#gameWorld {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+#orbitalFacility {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            rgba(0, 255, 190, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 255, 190, 0.035) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            ellipse at center,
+            #16312d 0%,
+            #0a1716 48%,
+            #020504 100%
+        );
+
+    background-size:
+        45px 45px,
+        45px 45px,
+        100% 100%;
+}
+
+
+/* ==========================================
+   FLOOR
+========================================== */
+
+#orbitalFacility::before {
+    content: "";
+    position: absolute;
+    inset: 8%;
+    border: 1px solid rgba(0, 255, 190, 0.16);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49.5%,
+            rgba(0, 255, 190, 0.06) 50%,
+            transparent 50.5%
+        ),
+        linear-gradient(
+            transparent 49.5%,
+            rgba(0, 255, 190, 0.06) 50%,
+            transparent 50.5%
+        );
+
+    box-shadow:
+        inset 0 0 100px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(0, 255, 190, 0.04);
+}
+
+
+/* ==========================================
+   FACILITY GRID
+========================================== */
+
+.facilityGrid {
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 48px,
+            rgba(0, 255, 190, 0.035) 49px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 48px,
+            rgba(0, 255, 190, 0.035) 49px
+        );
+
+    opacity: 0.7;
+}
+
+
+/* ==========================================
+   GLOW AREAS
+========================================== */
+
+.facilityGlow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 190, 0.11),
+        transparent 70%
+    );
+
+    pointer-events: none;
+}
+
+.glowOne {
+    left: 8%;
+    top: 15%;
+}
+
+.glowTwo {
+    right: 8%;
+    bottom: 12%;
+}
+
+
+/* ==========================================
+   COMMAND BRIDGE
+========================================== */
+
+#commandBridge {
+    position: absolute;
+
+    left: 25%;
+    top: 15%;
+
+    width: 50%;
+    height: 30%;
+
+    border: 2px solid rgba(0, 255, 190, 0.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20, 45, 42, 0.92),
+            rgba(4, 12, 12, 0.96)
+        );
+
+    box-shadow:
+        inset 0 0 35px rgba(0, 255, 190, 0.08),
+        0 0 25px rgba(0, 255, 190, 0.05);
+}
+
+
+/* ==========================================
+   BRIDGE WINDOW
+========================================== */
+
+.bridgeWindow {
+    position: absolute;
+
+    left: 7%;
+    right: 7%;
+    top: 12%;
+    height: 52%;
+
+    border: 1px solid rgba(100, 255, 230, 0.22);
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #112827,
+            #030707 75%
+        );
+
+    box-shadow:
+        inset 0 0 50px #000;
+}
+
+
+/* Stars / space */
+.bridgeWindow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(circle, #9ffff0 1px, transparent 2px) 10% 20% / 90px 80px,
+        radial-gradient(circle, #9ffff0 1px, transparent 2px) 70% 50% / 120px 100px,
+        radial-gradient(circle, #9ffff0 1px, transparent 2px) 40% 80% / 150px 120px;
+
+    opacity: 0.5;
+}
+
+
+/* ==========================================
+   BRIDGE LABEL
+========================================== */
+
+.bridgeLabel {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 8%;
+
+    text-align: center;
+
+    color: rgba(160, 255, 235, 0.65);
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+
+/* ==========================================
+   SERVERS
+========================================== */
+
+.server {
+    position: absolute;
+
+    width: 110px;
+    height: 150px;
+
+    border: 1px solid rgba(0, 255, 190, 0.3);
+
+    background:
+        linear-gradient(
+            180deg,
+            #10201e,
+            #050909
+        );
+
+    color: #4dffe0;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    padding-top: 18px;
+    text-align: center;
+
+    box-shadow:
+        inset 0 0 20px rgba(0, 255, 190, 0.06),
+        0 0 10px rgba(0, 255, 190, 0.05);
+}
+
+.server::after {
+    content: "● ● ● ●";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 15px;
+
+    color: #21d8b7;
+    font-size: 8px;
+    letter-spacing: 3px;
+}
+
+.serverOne {
+    left: 8%;
+    top: 48%;
+}
+
+.serverTwo {
+    right: 8%;
+    top: 48%;
+}
+
+.serverThree {
+    left: 44%;
+    bottom: 5%;
+}
+
+
+/* ==========================================
+   AI TERMINAL
+========================================== */
+
+#aiTerminal {
+    position: absolute;
+
+    left: 50%;
+    top: 60%;
+
+    width: 260px;
+    height: 190px;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+}
+
+
+/* ==========================================
+   TERMINAL SCREEN
+========================================== */
+
+.terminalScreen {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    top: 0;
+
+    height: 125px;
+
+    border: 2px solid rgba(0, 255, 190, 0.55);
+
+    background:
+        radial-gradient(
+            circle at center,
+            #102c27,
+            #020807
+        );
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 190, 0.12),
+        inset 0 0 25px rgba(0, 255, 190, 0.1);
+
+    padding: 14px;
+}
+
+
+.terminalHeader {
+    color: #52ffe1;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+
+#terminalStatus {
+    color: #7fffea;
+    font-size: 10px;
+    margin-bottom: 12px;
+}
+
+
+#hackText {
+    color: #b9fff3;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   TERMINAL BASE
+========================================== */
+
+.terminalBase {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 60px;
+
+    border: 1px solid rgba(0, 255, 190, 0.25);
+
+    background:
+        linear-gradient(
+            180deg,
+            #14211f,
+            #050909
+        );
+
+    clip-path: polygon(
+        10% 0,
+        90% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+
+/* ==========================================
+   HACK PROMPT
+========================================== */
+
+#hackPrompt {
+    position: absolute;
+
+    left: 50%;
+    top: 145px;
+
+    transform: translateX(-50%);
+
+    width: 300px;
+
+    text-align: center;
+
+    color: #00ffcc;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    animation: promptPulse 1.2s infinite alternate;
+}
+
+@keyframes promptPulse {
+    from {
+        opacity: 0.45;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+#player {
+    position: absolute;
+
+    left: 50%;
+    top: 82%;
+
+    width: 24px;
+    height: 30px;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 30;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d8fff5 0 25%,
+            #3d8d7d 25% 70%,
+            #142c28 70%
+        );
+
+    border: 1px solid #baffee;
+
+    box-shadow:
+        0 0 12px rgba(0, 255, 190, 0.35);
+}
+
+
+/* ==========================================
+   ENEMIES
+========================================== */
+
+.enemy {
+    position: absolute;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    z-index: 25;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(255, 0, 0, 0.2)
+        );
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+}
+
+.enemyOne {
+    left: 18%;
+    top: 55%;
+}
+
+.enemyTwo {
+    right: 18%;
+    top: 55%;
+}
+
+.enemyThree {
+    left: 72%;
+    top: 78%;
+}
+
+
+/* ==========================================
+   CROSSHAIR
+========================================== */
+
+#crosshair {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 100;
+
+    color: #cafff3;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    text-shadow:
+        0 0 8px #00ffcc;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   HUD COMMON
+========================================== */
+
+#topLeftHUD,
+#topRightHUD,
+#bottomLeftHUD,
+#bottomRightHUD {
+    position: absolute;
+    z-index: 200;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   TOP LEFT
+========================================== */
+
+#topLeftHUD {
+    left: 25px;
+    top: 22px;
+
+    line-height: 2;
+}
+
+#battery {
+    color: #7fffea;
+}
+
+#batteryBars {
+    color: #00ffcc;
+    margin-left: 8px;
+}
+
+#batteryPercent {
+    color: #d8fff6;
+    margin-left: 5px;
+}
+
+#location {
+    color: #688e87;
+}
+
+#location span {
+    color: #a4fff0;
+}
+
+
+/* ==========================================
+   RADAR
+========================================== */
+
+#radar {
+    position: relative;
+
+    margin-top: 12px;
+
+    width: 110px;
+    height: 110px;
+
+    border: 1px solid rgba(0, 255, 190, 0.3);
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 255, 190, 0.05),
+            rgba(0, 0, 0, 0.5)
+        );
+}
+
+.radarCircle {
+    position: absolute;
+    inset: 22px;
+
+    border: 1px solid rgba(0, 255, 190, 0.2);
+    border-radius: 50%;
+}
+
+.radarSweep {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 50%;
+    height: 1px;
+
+    transform-origin: left center;
+
+    background: #00ffcc;
+
+    box-shadow: 0 0 8px #00ffcc;
+
+    animation: radarSweep 2.2s linear infinite;
+}
+
+@keyframes radarSweep {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.radarDot {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #00ffcc;
+
+    box-shadow: 0 0 7px #00ffcc;
+}
+
+.dotOne {
+    left: 67%;
+    top: 35%;
+}
+
+.dotTwo {
+    left: 34%;
+    top: 63%;
+}
+
+
+/* ==========================================
+   TOP RIGHT
+========================================== */
+
+#topRightHUD {
+    right: 25px;
+    top: 22px;
+
+    text-align: right;
+
+    line-height: 2;
+}
+
+#recording {
+    color: #a8fff2;
+}
+
+#recDot {
+    color: #ff3333;
+}
+
+.recBlink {
+    opacity: 0.15;
+}
+
+#systemClock {
+    color: #547a73;
+}
+
+#clock {
+    color: #b4fff2;
+}
+
+#signalStatus {
+    color: #6f918b;
+}
+
+#signalStatus span {
+    color: #4dffbf;
+}
+
+
+/* ==========================================
+   VITAL HUD
+========================================== */
+
+#bottomLeftHUD {
+    left: 25px;
+    bottom: 25px;
+
+    width: 280px;
+}
+
+#vitalTitle {
+    color: #6eaaa0;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+
+    margin-bottom: 8px;
+}
+
+#ecg {
+    color: #00ffb7;
+
+    font-size: 13px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 6px rgba(0, 255, 183, 0.5);
+}
+
+#heartRate {
+    margin-top: 8px;
+
+    color: #759b94;
+}
+
+#vitalStatus {
+    color: #54ffbc;
+}
+
+#bpm {
+    color: #cafff2;
+}
+
+
+/* ==========================================
+   WEAPON HUD
+========================================== */
+
+#bottomRightHUD {
+    right: 25px;
+    bottom: 25px;
+
+    text-align: right;
+}
+
+#weaponName {
+    color: #b8fff1;
+
+    font-size: 16px;
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+#ammoCounter {
+    display: flex;
+    gap: 25px;
+
+    color: #6eaaa0;
+}
+
+#ammoCounter strong {
+    color: #ffffff;
+    font-size: 22px;
+}
+
+#reserve {
+    color: #b8fff1;
+}
+
+#attachments {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+.attachment {
+    padding: 5px 8px;
+
+    border: 1px solid rgba(0, 255, 190, 0.2);
+
+    color: #73a69e;
+
+    font-size: 9px;
+}
+
+.equipped {
+    color: #8effd8;
+}
+
+
+/* ==========================================
+   LOW AMMO
+========================================== */
+
+#lowAmmoWarning {
+    position: absolute;
+
+    left: 50%;
+    bottom: 100px;
+
+    transform: translateX(-50%);
+
+    z-index: 300;
+
+    color: #ff6d6d;
+
+    font-size: 11px;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+#lowAmmoWarning.warningActive {
+    opacity: 1;
+
+    animation: ammoFlash 0.5s infinite alternate;
+}
+
+@keyframes ammoFlash {
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   OBJECTIVE
+========================================== */
+
+#objectiveHUD {
+    position: absolute;
+
+    left: 50%;
+    top: 28px;
+
+    transform: translateX(-50%);
+
+    z-index: 220;
+
+    padding: 8px 16px;
+
+    border-bottom: 1px solid rgba(0, 255, 190, 0.25);
+
+    color: #668d86;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+#objectiveText {
+    color: #d4fff6;
+}
+
+
+/* ==========================================
+   DAMAGE EFFECT
+========================================== */
+
+#damageEffect {
+    position: absolute;
+    inset: 0;
+
+    z-index: 500;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 40%,
+            rgba(255, 0, 0, 0.45)
+        );
+
+    opacity: 0;
+}
+
+#damageEffect.damageActive {
+    animation: damageFlash 0.35s;
+}
+
+@keyframes damageFlash {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================
+   CRT SCANLINES
+========================================== */
+
+#scanlines {
+    position: absolute;
+    inset: 0;
+
+    z-index: 600;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.025) 0,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: 0.4;
+}
+
+
+/* ==========================================
+   CRT VIGNETTE
+========================================== */
+
+#crtVignette {
+    position: absolute;
+    inset: 0;
+
+    z-index: 601;
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 180px rgba(0, 0, 0, 0.9);
+}
+
+
+/* ==========================================
+   LEVEL 5 COMPLETE
+========================================== */
+
+#level5Complete {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    background:
+        rgba(0, 0, 0, 0.93);
+
+    padding: 30px;
+}
+
+#level5Complete.active {
+    display: flex;
+
+    animation: terminalAppear 0.5s ease;
+}
+
+@keyframes terminalAppear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.completeTitle {
+    color: #00ffcc;
+
+    font-size: clamp(25px, 4vw, 52px);
+
+    letter-spacing: 7px;
+
+    text-shadow:
+        0 0 20px rgba(0, 255, 190, 0.6);
+
+    margin-bottom: 25px;
+}
+
+.completeText {
+    color: #a8fff0;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+}
+
+#aiBootMessage {
+    color: #ff335f;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+    animation: criticalBlink 0.7s infinite alternate;
+}
+
+@keyframes criticalBlink {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.completeSub {
+    max-width: 700px;
+
+    color: #d8fff7;
+
+    font-size: 12px;
+
+    line-height: 2;
+
+    margin-bottom: 35px;
+}
+
+
+/* ==========================================
+   CONTINUE BUTTON
+========================================== */
+
+#continueBtn {
+    padding: 13px 28px;
+
+    border: 1px solid #00ffcc;
+
+    background: transparent;
+
+    color: #00ffcc;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    transition:
+        background 0.2s,
+        color 0.2s,
+        box-shadow 0.2s;
+}
+
+#continueBtn:hover {
+    background: #00ffcc;
+    color: #00110d;
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 190, 0.4);
+}
+
+
+/* ==========================================
+   GAME OVER
+========================================== */
+
+#gameOver {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1100;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        rgba(0, 0, 0, 0.96);
+}
+
+#gameOver.active {
+    display: flex;
+}
+
+#connectionLost {
+    color: #ff3c3c;
+
+    font-size: clamp(30px, 5vw, 60px);
+
+    letter-spacing: 8px;
+
+    margin-bottom: 15px;
+}
+
+#signalTerminated {
+    color: #8a5757;
+
+    font-size: 12px;
+
+    margin-bottom: 30px;
+}
+
+#deathStats {
+    color: #91aaa5;
+
+    line-height: 2;
+
+    margin-bottom: 30px;
+}
+
+#deathStats span {
+    color: #ffffff;
+}
+
+#restartBtn,
+#returnHQBtn {
+    min-width: 230px;
+
+    padding: 12px 20px;
+
+    margin: 5px;
+
+    border: 1px solid rgba(0, 255, 190, 0.4);
+
+    background: transparent;
+
+    color: #9dfff0;
+
+    letter-spacing: 2px;
+}
+
+#restartBtn:hover,
+#returnHQBtn:hover {
+    background: rgba(0, 255, 190, 0.1);
+}
+
+
+/* ==========================================
+   LEVEL 5 GLITCH
+========================================== */
+
+body.level5Glitch #gameScreen {
+    animation: level5Glitch 0.08s infinite;
+}
+
+@keyframes level5Glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    30% {
+        transform: translate(-2px, 1px);
+    }
+
+    60% {
+        transform: translate(2px, -1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 700px) {
+
+    #topLeftHUD {
+        left: 12px;
+        top: 12px;
+    }
+
+    #topRightHUD {
+        right: 12px;
+        top: 12px;
+    }
+
+    #bottomLeftHUD {
+        left: 12px;
+        bottom: 12px;
+        width: 220px;
+    }
+
+    #bottomRightHUD {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    #objectiveHUD {
+        top: 105px;
+
+        font-size: 9px;
+
+        max-width: 90%;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #radar {
+        width: 80px;
+        height: 80px;
+    }
+
+    #aiTerminal {
+        transform: translateX(-50%) scale(0.8);
+    }
+
+    .server {
+        transform: scale(0.7);
+    }
+
+    .completeTitle {
+        letter-spacing: 3px;
+    }
+
+}

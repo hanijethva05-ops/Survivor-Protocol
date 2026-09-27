@@ -1,0 +1,634 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #020303;
+    color: #7cff9a;
+    font-family: monospace;
+}
+
+#gameScreen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #020303;
+}
+
+#gameWorld {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+#subwayWorld {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            #070909,
+            #101414,
+            #050707
+        );
+}
+
+
+/* =================================
+   TRACKS
+================================= */
+
+.track {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: #333;
+    box-shadow: 0 0 8px #111;
+}
+
+.trackA {
+    left: 42%;
+}
+
+.trackB {
+    left: 58%;
+}
+
+.track::after {
+    content: "";
+    position: absolute;
+    left: -70px;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 45px,
+            #222 46px,
+            #222 52px
+        );
+}
+
+
+/* =================================
+   BROKEN TRAIN
+================================= */
+
+.train {
+    position: absolute;
+    width: 220px;
+    height: 110px;
+    background: #252b2b;
+    border: 3px solid #566060;
+    opacity: .75;
+}
+
+.trainA {
+    left: 8%;
+    top: 20%;
+    transform: rotate(-3deg);
+}
+
+.trainB {
+    right: 8%;
+    bottom: 20%;
+    transform: rotate(4deg);
+}
+
+.trainWindow {
+    display: inline-block;
+    width: 45px;
+    height: 35px;
+    margin: 15px 5px;
+    background: #030505;
+    border: 2px solid #677;
+}
+
+.trainDoor {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #677;
+}
+
+
+/* =================================
+   WATER
+================================= */
+
+#floodWater {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            rgba(0, 60, 70, .35),
+            rgba(0, 35, 45, .55)
+        );
+
+    pointer-events: none;
+}
+
+#floodWater::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 18px,
+            rgba(100, 220, 220, .06) 19px,
+            transparent 20px
+        );
+}
+
+
+/* =================================
+   GENERATOR
+================================= */
+
+#generatorRoom {
+    position: absolute;
+    left: 12%;
+    top: 70%;
+    text-align: center;
+}
+
+.generatorBox {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #888;
+    background: #111;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
+
+.generatorLabel,
+.computerLabel,
+.gateText {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+#generatorPrompt,
+#computerPrompt,
+#escapePrompt {
+    margin-top: 10px;
+    padding: 7px;
+    border: 1px solid #6f8;
+    display: none;
+}
+
+
+/* =================================
+   CONTROL ROOM
+================================= */
+
+#controlRoom {
+    position: absolute;
+    right: 15%;
+    top: 18%;
+    text-align: center;
+}
+
+.computer {
+    width: 100px;
+    height: 70px;
+    border: 3px solid #666;
+    background: #050808;
+    display: grid;
+    place-items: center;
+}
+
+.screenText {
+    font-size: 12px;
+}
+
+
+/* =================================
+   ESCAPE GATE
+================================= */
+
+#escapeGate {
+    position: absolute;
+    right: 3%;
+    top: 43%;
+    width: 100px;
+    height: 170px;
+    border: 4px solid #555;
+    text-align: center;
+    padding-top: 55px;
+}
+
+#escapeGate.unlocked {
+    border-color: #7cff9a;
+    box-shadow: 0 0 25px #4f8;
+}
+
+
+/* =================================
+   PLAYER
+================================= */
+
+#player {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translate(-50%, -50%);
+    background: #7cff9a;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #7cff9a;
+    z-index: 20;
+}
+
+
+/* =================================
+   SPRINTER
+================================= */
+
+.sprinter {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    z-index: 15;
+    font-size: 27px;
+}
+
+
+/* =================================
+   CROSSHAIR
+================================= */
+
+#crosshair {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    z-index: 50;
+}
+
+
+/* =================================
+   DARKNESS
+================================= */
+
+#gameWorld::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .88);
+    pointer-events: none;
+    z-index: 30;
+}
+
+#gameWorld.flashlightON::after {
+    background:
+        radial-gradient(
+            circle at var(--lightX, 50%) var(--lightY, 50%),
+            transparent 0,
+            transparent 130px,
+            rgba(0, 0, 0, .88) 300px
+        );
+}
+
+
+/* =================================
+   HUD
+================================= */
+
+#topHUD {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    right: 30px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 15px;
+    z-index: 100;
+}
+
+#objectiveHUD {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border: 1px solid #485;
+    padding: 12px 25px;
+
+    z-index: 100;
+}
+
+#flashlightStatus {
+    position: absolute;
+    left: 30px;
+    bottom: 80px;
+    z-index: 100;
+}
+
+#waterStatus {
+    position: absolute;
+    left: 30px;
+    bottom: 50px;
+    z-index: 100;
+}
+
+#ammoHUD {
+    position: absolute;
+    right: 30px;
+    bottom: 45px;
+    text-align: right;
+    font-size: 18px;
+    z-index: 100;
+}
+
+#vitals {
+    position: absolute;
+    left: 30px;
+    bottom: 20px;
+    z-index: 100;
+}
+
+
+/* =================================
+   MISSION COMPLETE
+================================= */
+
+#missionComplete {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+
+    background: rgba(0, 10, 5, .94);
+
+    z-index: 500;
+
+    font-size: 20px;
+}
+
+#missionComplete.active {
+    display: flex;
+}
+
+.completeTitle {
+    font-size: 48px;
+    letter-spacing: 8px;
+}
+
+button {
+    padding: 14px 35px;
+    background: transparent;
+    border: 1px solid #7cff9a;
+    color: #7cff9a;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #7cff9a;
+    color: #020303;
+}
+
+/* ==========================================
+   LEVEL 2 RESULT SCREENS
+========================================== */
+
+#missionComplete,
+#levelFailed {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        rgba(0, 5, 4, 0.96);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity .4s ease;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+}
+
+
+#missionComplete.active,
+#levelFailed.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+}
+
+
+/* ==========================================
+   COMPLETE
+========================================== */
+
+#missionComplete {
+
+    color: #45ff88;
+
+}
+
+
+#completeTitle {
+
+    font-size: clamp(
+        32px,
+        5vw,
+        64px
+    );
+
+    letter-spacing: 5px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 10px #45ff88,
+        0 0 30px #45ff88;
+
+}
+
+
+#completeSubtitle {
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 25px;
+
+}
+
+
+#completeStats {
+
+    line-height: 2;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 30px;
+
+}
+
+
+#completeStats span {
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   FAILED
+========================================== */
+
+#levelFailed {
+
+    color: #ff3838;
+
+}
+
+
+#failedTitle {
+
+    font-size: clamp(
+        32px,
+        5vw,
+        64px
+    );
+
+    letter-spacing: 5px;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 0 10px #ff3838,
+        0 0 30px #ff3838;
+
+}
+
+
+#failedSubtitle {
+
+    font-size: 18px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 25px;
+
+}
+
+
+#failedStats {
+
+    line-height: 2;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 30px;
+
+}
+
+
+#failedStats span {
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   RESULT BUTTONS
+========================================== */
+
+#missionComplete button,
+#levelFailed button {
+
+    min-width: 230px;
+
+    padding: 14px 25px;
+
+    margin: 6px;
+
+    background:
+        rgba(0, 20, 15, .8);
+
+    border:
+        1px solid currentColor;
+
+    color: inherit;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+}
+
+
+#missionComplete button:hover,
+#levelFailed button:hover {
+
+    background:
+        currentColor;
+
+    color:
+        #00100a;
+
+    box-shadow:
+        0 0 25px currentColor;
+
+}
