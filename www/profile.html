@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Survivor Profile</title>
+
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         MINI SURVIVOR PROFILE
+    =========================================== -->
+
+    <div id="survivorMiniProfile">
+
+        <div class="miniProfileTitle">
+            SURVIVOR IDENTITY
+        </div>
+
+        <div id="miniPlayerName">
+            SURVIVOR
+        </div>
+
+        <div class="miniPlayerLevel">
+            LEVEL <span id="miniPlayerLevel">01</span>
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         FULL SURVIVOR PROFILE
+    =========================================== -->
+
+    <div id="survivorProfilePanel">
+
+        <div class="profileHeader">
+            SURVIVOR PROFILE
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                NAME
+            </span>
+
+            <span
+                class="profileValue"
+                id="playerName">
+                SURVIVOR
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                ACCOUNT
+            </span>
+
+            <span
+                class="profileValue"
+                id="playerEmail">
+                GUEST ACCESS
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                SURVIVOR ID
+            </span>
+
+            <span
+                class="profileValue"
+                id="playerID">
+                ZS-XXXX0000
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                CURRENT LEVEL
+            </span>
+
+            <span
+                class="profileValue"
+                id="playerLevel">
+                01
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                LOCATION
+            </span>
+
+            <span
+                class="profileValue"
+                id="profileLocation">
+                QUARANTINE HOSPITAL
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                ZOMBIES KILLED
+            </span>
+
+            <span
+                class="profileValue"
+                id="profileKills">
+                0
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                ITEMS FOUND
+            </span>
+
+            <span
+                class="profileValue"
+                id="profileItems">
+                0
+            </span>
+        </div>
+
+
+        <div class="profileRow">
+            <span class="profileLabel">
+                XP
+            </span>
+
+            <span
+                class="profileValue"
+                id="playerXP">
+                0
+            </span>
+        </div>
+
+
+        <!-- XP BAR -->
+
+        <div class="profileLevel">
+
+            <div class="profileLevelText">
+
+                <span>
+                    XP PROGRESS
+                </span>
+
+                <span>
+                    LEVEL
+                    <span id="xpLevel">
+                        01
+                    </span>
+                </span>
+
+            </div>
+
+
+            <div class="profileXPBar">
+
+                <div
+                    class="profileXPFill"
+                    id="profileXPFill">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CLOSE -->
+
+        <button
+            class="profileClose"
+            id="resumeGameBtn">
+
+            CLOSE PROFILE
+
+        </button>
+
+
+        <!-- HQ -->
+
+        <button
+            id="profileReturnHQBtn">
+
+            RETURN TO HQ
+
+        </button>
+
+    </div>
+
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

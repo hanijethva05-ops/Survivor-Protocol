@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Zombie Survival - Operation Logs</title>
+
+    <link
+        rel="stylesheet"
+        href="level-select.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div id="levelScreen">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header id="levelHeader">
+
+        <div>
+
+            OPERATION LOGS
+            <span>// CLASSIFIED</span>
+
+        </div>
+
+
+        <div id="operationStatus">
+
+            NETWORK:
+            <strong>ONLINE</strong>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN AREA
+    ========================== -->
+
+    <main id="levelMain">
+
+
+        <!-- =========================
+             MAP / CCTV
+        ========================== -->
+
+        <section id="operationMap">
+
+
+            <div id="mapHeader">
+
+                <span>
+                    TACTICAL OPERATIONS MAP
+                </span>
+
+                <span id="mapSignal">
+                    SIGNAL: STABLE
+                </span>
+
+            </div>
+
+
+            <div id="mapDisplay">
+
+
+                <div class="mapGrid"></div>
+
+
+                <!-- LEVEL 01 -->
+
+                <button
+                    class="mapPoint unlocked active"
+                    data-level="1"
+                >
+
+                    <span class="pointNumber">
+                        01
+                    </span>
+
+                    <span class="pointLabel">
+                        SECTOR 01
+                    </span>
+
+                </button>
+
+
+                <!-- LEVEL 02 -->
+
+                <button
+                    class="mapPoint locked"
+                    data-level="2"
+                >
+
+                    <span class="pointNumber">
+                        02
+                    </span>
+
+                    <span class="pointLabel">
+                        SECTOR 02
+                    </span>
+
+                </button>
+
+
+                <!-- LEVEL 03 -->
+
+                <button
+                    class="mapPoint locked"
+                    data-level="3"
+                >
+
+                    <span class="pointNumber">
+                        03
+                    </span>
+
+                    <span class="pointLabel">
+                        SECTOR 03
+                    </span>
+
+                </button>
+
+
+                <div id="mapCoordinates">
+
+                    COORD:
+                    <span id="coordinates">
+                        S01 // Q-HOSPITAL
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             OPERATION DETAILS
+        ========================== -->
+
+        <section id="operationPanel">
+
+
+            <div id="operationTitle">
+
+                LEVEL 01
+
+            </div>
+
+
+            <div id="operationName">
+
+                SECTOR 01 —
+                THE QUARANTINE HOSPITAL
+
+            </div>
+
+
+            <div id="threatLevel">
+
+                THREAT LEVEL:
+
+                <strong>
+                    ALPHA // LOW
+                </strong>
+
+            </div>
+
+
+            <!-- OBJECTIVE -->
+
+            <div class="infoBox">
+
+                <div class="infoTitle">
+                    MISSION OBJECTIVE
+                </div>
+
+                <p id="objective">
+
+                    Recover insulin supplies and
+                    encrypted data drives from
+                    the hospital basement.
+
+                </p>
+
+            </div>
+
+
+            <!-- CCTV -->
+
+            <div class="infoBox">
+
+                <div class="infoTitle">
+                    CCTV FEED PREVIEW
+                </div>
+
+
+                <div id="cctvPreview">
+
+                    <div class="cctvScan"></div>
+
+                    <span id="cctvText">
+
+                        CAM 01 //
+                        HOSPITAL LOBBY
+
+                    </span>
+
+                    <span class="cctvZombie">
+                        🧟
+                    </span>
+
+                    <span class="cctvRec">
+                        ● REC
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TACTICAL TIP -->
+
+            <div class="infoBox">
+
+                <div class="infoTitle">
+                    TACTICAL ADVISORY
+                </div>
+
+                <p id="tacticalTip">
+
+                    Basic weapons are sufficient.
+                    Test your attachments before
+                    entering deeper sectors.
+
+                </p>
+
+            </div>
+
+
+            <!-- LOCK WARNING -->
+
+            <div id="lockWarning">
+
+                [ ENCRYPTED —
+                COMPLETE PREVIOUS OPERATION ]
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer id="levelFooter">
+
+
+        <button id="backBtn">
+
+            ← BACK TO LOADOUT
+
+        </button>
+
+
+        <div id="selectedOperation">
+
+            OPERATION:
+
+            <strong>
+                SECTOR 01
+            </strong>
+
+        </div>
+
+
+        <button id="startMissionBtn">
+
+            AUTHORIZE OPERATION
+            <br>
+
+            <small>
+                // START FEED
+            </small>
+
+        </button>
+
+
+    </footer>
+
+
+    <!-- =========================
+         LOADING OVERLAY
+    ========================== -->
+
+    <div id="loadingOverlay">
+
+        <div id="loadingText">
+
+            INITIALIZING OPERATION...
+
+        </div>
+
+
+        <div id="loadingPercent">
+
+            0%
+
+        </div>
+
+
+        <div id="loadingBar">
+
+            <div id="loadingProgress"></div>
+
+        </div>
+
+
+        <div id="loadingStatus">
+
+            CONNECTING TO TACTICAL NETWORK...
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<script src="level-select.js"></script>
+
+</body>
+
+</html>

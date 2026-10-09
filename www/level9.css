@@ -1,0 +1,1326 @@
+/* ==========================================
+   LEVEL 9 - CORE REACTOR
+========================================== */
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #020304;
+
+    color: #dfffff;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+#gameWorld {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(0,255,255,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,80,0,.05),
+            transparent 55%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            rgba(0,255,255,.025) 1px,
+            transparent 1px
+        ),
+        #020506;
+
+    background-size:
+        auto,
+        auto,
+        60px 60px,
+        60px 60px,
+        auto;
+}
+
+
+/* ==========================================
+   REACTOR ROOM
+========================================== */
+
+.reactorRoom {
+    position: absolute;
+    inset: 0;
+}
+
+
+/* ==========================================
+   FLOOR GRID
+========================================== */
+
+.reactorRoom::before {
+    content: "";
+
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+    bottom: 4%;
+
+    height: 62%;
+
+    border:
+        1px solid rgba(0,255,255,.16);
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            rgba(0,255,255,.035) 0,
+            rgba(0,255,255,.035) 2px,
+            transparent 2px,
+            transparent 70px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0,255,255,.03) 0,
+            rgba(0,255,255,.03) 2px,
+            transparent 2px,
+            transparent 70px
+        );
+
+    box-shadow:
+        inset 0 0 100px #000;
+}
+
+
+/* ==========================================
+   REACTOR CORE
+========================================== */
+
+.reactorCore {
+    position: absolute;
+
+    left: 50%;
+    top: 48%;
+
+    width: 250px;
+    height: 250px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        2px solid rgba(0,255,255,.3);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 50px rgba(0,255,255,.15),
+        inset 0 0 50px rgba(0,255,255,.1);
+}
+
+.reactorSphere {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 80px;
+    height: 80px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0 5%,
+            #00ffff 15%,
+            #008c99 38%,
+            #031416 72%
+        );
+
+    box-shadow:
+        0 0 20px #00ffff,
+        0 0 70px rgba(0,255,255,.8);
+
+    animation:
+        reactorPulse 1.2s infinite alternate;
+}
+
+@keyframes reactorPulse {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            scale(.9);
+
+        box-shadow:
+            0 0 20px #00ffff,
+            0 0 50px rgba(0,255,255,.5);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            scale(1.08);
+
+        box-shadow:
+            0 0 35px #00ffff,
+            0 0 100px rgba(0,255,255,.9);
+    }
+}
+
+
+/* ==========================================
+   REACTOR RINGS
+========================================== */
+
+.reactorRing {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border:
+        2px solid rgba(0,255,255,.45);
+
+    border-radius: 50%;
+}
+
+.ring1 {
+    width: 130px;
+    height: 130px;
+
+    transform:
+        translate(-50%, -50%);
+
+    animation:
+        spin 5s linear infinite;
+}
+
+.ring2 {
+    width: 190px;
+    height: 190px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-style: dashed;
+
+    animation:
+        spinReverse 8s linear infinite;
+}
+
+.ring3 {
+    width: 235px;
+    height: 235px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-color:
+        rgba(255,180,0,.25);
+
+    animation:
+        spin 12s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+}
+
+@keyframes spinReverse {
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(-360deg);
+    }
+}
+
+.reactorLabel {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -35px;
+
+    text-align: center;
+
+    color: #55777a;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+
+/* ==========================================
+   PILLARS
+========================================== */
+
+.reactorPillar {
+    position: absolute;
+
+    width: 55px;
+    height: 300px;
+
+    top: 25%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #050708,
+            #152326,
+            #050708
+        );
+
+    border:
+        2px solid #19393d;
+
+    box-shadow:
+        inset 0 0 25px #000,
+        0 0 15px rgba(0,255,255,.08);
+}
+
+.pillar1 {
+    left: 8%;
+}
+
+.pillar2 {
+    right: 8%;
+}
+
+.pillar3 {
+    left: 48%;
+    top: 5%;
+    height: 140px;
+}
+
+
+/* ==========================================
+   ENERGY PIPES
+========================================== */
+
+.energyPipe {
+    position: absolute;
+
+    height: 10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #405b5e,
+            #071012,
+            #294447
+        );
+
+    border:
+        1px solid #456b70;
+
+    box-shadow:
+        0 0 15px rgba(0,255,255,.12);
+}
+
+.energyPipe::after {
+    content: "";
+
+    position: absolute;
+
+    left: 10%;
+    right: 10%;
+
+    top: 3px;
+
+    height: 2px;
+
+    background: #00ffff;
+
+    opacity: .35;
+
+    animation:
+        energyFlow .7s linear infinite;
+}
+
+.pipe1 {
+    width: 35%;
+    left: 5%;
+    top: 30%;
+}
+
+.pipe2 {
+    width: 30%;
+    right: 5%;
+    top: 30%;
+}
+
+.pipe3 {
+    width: 45%;
+    left: 27%;
+    top: 65%;
+}
+
+.pipe4 {
+    width: 25%;
+    left: 5%;
+    top: 65%;
+}
+
+@keyframes energyFlow {
+
+    from {
+        transform:
+            translateX(-40%);
+    }
+
+    to {
+        transform:
+            translateX(40%);
+    }
+}
+
+
+/* ==========================================
+   STABILIZERS
+========================================== */
+
+.stabilizer {
+    position: absolute;
+
+    width: 145px;
+    height: 125px;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071315,
+            #020405
+        );
+
+    border:
+        2px solid #15575d;
+
+    box-shadow:
+        0 0 25px rgba(0,255,255,.08),
+        inset 0 0 25px #000;
+
+    z-index: 20;
+
+    transition:
+        .2s ease;
+}
+
+.stabilizer.active {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 30px rgba(0,255,255,.45),
+        inset 0 0 20px rgba(0,255,255,.08);
+}
+
+.stabilizer.completed {
+    border-color: #00ff66;
+
+    box-shadow:
+        0 0 30px rgba(0,255,100,.35);
+}
+
+.stabilizerCore {
+    width: 30px;
+    height: 30px;
+
+    margin: 0 auto 10px;
+
+    border-radius: 50%;
+
+    background: #07191b;
+
+    border:
+        2px solid #15575d;
+
+    box-shadow:
+        inset 0 0 12px #000;
+}
+
+.stabilizer.active .stabilizerCore {
+    background: #00ffff;
+
+    box-shadow:
+        0 0 20px #00ffff;
+}
+
+.stabilizer.completed .stabilizerCore {
+    background: #00ff66;
+
+    border-color: #00ff66;
+
+    box-shadow:
+        0 0 20px #00ff66;
+}
+
+.stabilizerText {
+    text-align: center;
+
+    color: #00ffff;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+.stabilizerStatus {
+    margin-top: 10px;
+
+    text-align: center;
+
+    color: #506d70;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.stabilizer.completed .stabilizerStatus {
+    color: #00ff66;
+}
+
+
+/* ==========================================
+   HUD
+========================================== */
+
+#hud {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 75px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 25px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,8,10,.96),
+            rgba(0,8,10,.6),
+            transparent
+        );
+
+    border-bottom:
+        1px solid rgba(0,255,255,.15);
+
+    z-index: 100;
+}
+
+.hudTitle {
+    color: #00ffff;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #00ffff;
+}
+
+.hudLevel {
+    color: #ffcc00;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+}
+
+#reactorStatus {
+    color: #ff3333;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px red;
+
+    animation:
+        statusBlink .8s infinite alternate;
+}
+
+@keyframes statusBlink {
+
+    from {
+        opacity: .5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ==========================================
+   OBJECTIVE
+========================================== */
+
+#objectivePanel {
+    position: fixed;
+
+    left: 25px;
+    top: 95px;
+
+    width: 350px;
+
+    padding: 15px;
+
+    background:
+        rgba(0,8,10,.9);
+
+    border-left:
+        3px solid #00ffff;
+
+    border-top:
+        1px solid rgba(0,255,255,.25);
+
+    border-bottom:
+        1px solid rgba(0,255,255,.25);
+
+    z-index: 100;
+}
+
+.objectiveHeader {
+    color: #60797c;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+#objectiveText {
+    color: #00ffff;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.objectiveProgress {
+    margin-top: 10px;
+
+    color: #00ff66;
+
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   INSTABILITY
+========================================== */
+
+#reactorPanel {
+    position: fixed;
+
+    top: 95px;
+    right: 25px;
+
+    width: 240px;
+
+    padding: 15px;
+
+    background:
+        rgba(0,8,10,.9);
+
+    border:
+        1px solid rgba(255,60,0,.35);
+
+    z-index: 100;
+}
+
+.reactorPanelTitle {
+    color: #ff6644;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.instabilityBar {
+    width: 100%;
+    height: 10px;
+
+    background: #170908;
+
+    border:
+        1px solid #50201b;
+}
+
+#instabilityFill {
+    width: 100%;
+    height: 100%;
+
+    background: #ff3333;
+
+    box-shadow:
+        0 0 12px red;
+
+    transition:
+        width .3s linear;
+}
+
+#instabilityText {
+    margin-top: 7px;
+
+    text-align: right;
+
+    color: #ff5555;
+
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   AMMO
+========================================== */
+
+#ammoPanel {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    min-width: 170px;
+
+    padding: 15px 20px;
+
+    background:
+        rgba(0,7,9,.95);
+
+    border:
+        1px solid rgba(0,255,255,.3);
+
+    z-index: 100;
+}
+
+.ammoLabel,
+.healthLabel {
+    color: #557174;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+#magAmmo {
+    color: #ffffff;
+
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.ammoSlash {
+    color: #416165;
+
+    font-size: 20px;
+}
+
+#reserve {
+    color: #00ffff;
+
+    font-size: 16px;
+}
+
+#reloadText {
+    margin-top: 5px;
+
+    color: #557174;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   HEALTH
+========================================== */
+
+#healthPanel {
+    position: fixed;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: 210px;
+
+    padding: 15px;
+
+    background:
+        rgba(0,7,9,.95);
+
+    border:
+        1px solid rgba(0,255,100,.25);
+
+    z-index: 100;
+}
+
+#hpText {
+    margin: 7px 0;
+
+    color: #00ff66;
+
+    font-size: 20px;
+}
+
+.healthBar {
+    height: 7px;
+
+    background: #07120d;
+
+    border:
+        1px solid #174a31;
+}
+
+#healthFill {
+    width: 100%;
+    height: 100%;
+
+    background: #00ff66;
+
+    box-shadow:
+        0 0 10px #00ff66;
+}
+
+
+/* ==========================================
+   PLAYER
+========================================== */
+
+#player {
+    position: absolute;
+
+    width: 42px;
+    height: 42px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border:
+        2px solid #00ffff;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0 8%,
+            #00a8b0 14% 30%,
+            #031416 35% 100%
+        );
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 35px rgba(0,255,255,.5);
+
+    z-index: 80;
+}
+
+
+/* ==========================================
+   ENEMIES
+========================================== */
+
+.enemy {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 34px;
+
+    z-index: 70;
+
+    filter:
+        drop-shadow(
+            0 0 9px
+            rgba(255,0,50,.7)
+        );
+
+    transition:
+        opacity .15s,
+        transform .15s;
+}
+
+.enemyHit {
+    filter:
+        brightness(3)
+        drop-shadow(
+            0 0 20px red
+        );
+}
+
+
+/* ==========================================
+   INTERACTION
+========================================== */
+
+#interactionPrompt,
+#exitPrompt {
+    position: fixed;
+
+    left: 50%;
+    bottom: 13%;
+
+    transform:
+        translateX(-50%);
+
+    padding: 12px 25px;
+
+    background:
+        rgba(0,8,10,.95);
+
+    border:
+        1px solid #00ffff;
+
+    color: #00ffff;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 300;
+}
+
+#interactionPrompt.active,
+#exitPrompt.active {
+    opacity: 1;
+
+    animation:
+        promptPulse .7s infinite alternate;
+}
+
+@keyframes promptPulse {
+
+    from {
+        box-shadow:
+            0 0 10px rgba(0,255,255,.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 30px rgba(0,255,255,.5);
+    }
+}
+
+
+/* ==========================================
+   ALERT
+========================================== */
+
+#reactorAlert {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff003c;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px red;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 500;
+}
+
+#reactorAlert.active {
+    animation:
+        reactorAlert .8s ease;
+}
+
+@keyframes reactorAlert {
+
+    0% {
+        opacity: 0;
+    }
+
+    20%,
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* ==========================================
+   EXIT
+========================================== */
+
+#exitDoor {
+    position: absolute;
+
+    right: 4%;
+    top: 46%;
+
+    width: 100px;
+    height: 180px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #050708,
+            #17272a,
+            #050708
+        );
+
+    border:
+        2px solid #354c4f;
+
+    z-index: 30;
+
+    opacity: .35;
+
+    transition:
+        .3s ease;
+}
+
+#exitDoor.unlocked {
+    opacity: 1;
+
+    border-color: #00ff66;
+
+    box-shadow:
+        0 0 35px rgba(0,255,100,.45);
+}
+
+.exitLight {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+    right: 15px;
+
+    height: 8px;
+
+    background: #ff003c;
+}
+
+#exitDoor.unlocked .exitLight {
+    background: #00ff66;
+
+    box-shadow:
+        0 0 15px #00ff66;
+}
+
+.exitText {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 50%;
+
+    text-align: center;
+
+    color: #557174;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   DAMAGE
+========================================== */
+
+#damageEffect {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border:
+        0 solid rgba(255,0,0,.8);
+
+    z-index: 900;
+
+    transition:
+        .15s ease;
+}
+
+#damageEffect.active {
+    border-width: 18px;
+
+    box-shadow:
+        inset 0 0 100px rgba(255,0,0,.6);
+}
+
+
+/* ==========================================
+   COMPLETE / GAME OVER
+========================================== */
+
+#missionComplete,
+#gameOver {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        rgba(0,0,0,.9);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1000;
+}
+
+#missionComplete.active,
+#gameOver.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.completeBox,
+.gameOverBox {
+    padding: 45px;
+
+    text-align: center;
+
+    background:
+        rgba(0,12,15,.96);
+
+    border:
+        1px solid #00ff66;
+
+    box-shadow:
+        0 0 60px rgba(0,255,100,.25);
+}
+
+.gameOverBox {
+    border-color: #ff003c;
+
+    box-shadow:
+        0 0 60px rgba(255,0,60,.3);
+}
+
+.completeSmall,
+.gameOverSmall {
+    color: #557174;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+.completeBox h1 {
+    color: #00ff66;
+
+    font-size: 38px;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px #00ff66;
+}
+
+.gameOverBox h1 {
+    color: #ff003c;
+
+    font-size: 40px;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 15px red;
+}
+
+.completeBox p,
+.gameOverBox p {
+    color: #9acccc;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+button {
+    margin-top: 20px;
+
+    padding: 13px 24px;
+
+    background:
+        #031416;
+
+    color: #00ffff;
+
+    border:
+        1px solid #00ffff;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        .2s ease;
+}
+
+button:hover {
+    background: #00ffff;
+
+    color: #020405;
+
+    box-shadow:
+        0 0 25px #00ffff;
+}
+
+
+/* ==========================================
+   SCANLINES
+========================================== */
+
+#gameWorld::after {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 950;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+
+/* ==========================================
+   VIGNETTE
+========================================== */
+
+#gameWorld::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 940;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 40%,
+            rgba(0,0,0,.8) 100%
+        );
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    #objectivePanel {
+        width: 280px;
+    }
+
+    #reactorPanel {
+        width: 190px;
+    }
+
+    .reactorCore {
+        width: 190px;
+        height: 190px;
+    }
+
+    .stabilizer {
+        transform: scale(.8);
+    }
+}

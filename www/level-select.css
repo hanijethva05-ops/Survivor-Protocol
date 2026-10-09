@@ -1,0 +1,1244 @@
+/* =========================================================
+   ZOMBIE SURVIVAL
+   OPERATION LOGS / LEVEL SELECT
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #0b2115 0%,
+            #04100a 48%,
+            #010403 100%
+        );
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    letter-spacing: 2px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN SCREEN
+========================================================= */
+
+#levelScreen {
+
+    width: 94%;
+
+    max-width: 1500px;
+
+    min-height: calc(100vh - 110px);
+
+    margin: 20px auto 95px;
+
+    padding: 22px;
+
+    position: relative;
+
+    border: 2px solid #315b42;
+
+    border-radius: 22px;
+
+    background:
+        rgba(2, 12, 7, 0.95);
+
+    box-shadow:
+        0 0 35px rgba(70, 255, 120, 0.12),
+        inset 0 0 45px rgba(70, 255, 120, 0.04);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
+
+#levelScreen::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 100;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(100, 255, 140, 0.035) 0px,
+            rgba(100, 255, 140, 0.035) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#levelHeader {
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 24px;
+
+    border: 1px solid #315b42;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(20, 65, 35, 0.35),
+            rgba(2, 15, 8, 0.9)
+        );
+
+    font-size: 18px;
+
+    text-shadow:
+        0 0 8px rgba(80, 255, 120, 0.45);
+}
+
+
+#levelHeader span {
+
+    color: #4b8c60;
+
+    font-size: 12px;
+}
+
+
+#operationStatus {
+
+    color: #4b8c60;
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+#operationStatus strong {
+
+    color: #73ff9c;
+
+    animation:
+        statusBlink 2s infinite;
+}
+
+
+@keyframes statusBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+
+}
+
+
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+#levelMain {
+
+    display: grid;
+
+    grid-template-columns:
+        1.15fr
+        0.85fr;
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   OPERATION MAP
+========================================================= */
+
+#operationMap {
+
+    min-height: 600px;
+
+    border: 1px solid #315b42;
+
+    background:
+        #020b06;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MAP HEADER
+========================================================= */
+
+#mapHeader {
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid #315b42;
+
+    font-size: 13px;
+}
+
+
+#mapSignal {
+
+    color: #73ff9c;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAP DISPLAY
+========================================================= */
+
+#mapDisplay {
+
+    position: relative;
+
+    height: 545px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(50, 150, 80, 0.12),
+            transparent 65%
+        );
+}
+
+
+/* =========================================================
+   MAP GRID
+========================================================= */
+
+.mapGrid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.35;
+
+    background-image:
+        linear-gradient(
+            rgba(90, 255, 130, 0.14) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(90, 255, 130, 0.14) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+    transform:
+        perspective(500px)
+        rotateX(3deg);
+
+}
+
+
+/* =========================================================
+   MAP DECORATIVE LINES
+========================================================= */
+
+#mapDisplay::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 75%;
+
+    height: 1px;
+
+    left: 12%;
+
+    top: 48%;
+
+    background:
+        rgba(80, 255, 120, 0.25);
+
+    transform:
+        rotate(-12deg);
+}
+
+
+#mapDisplay::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+
+    height: 70%;
+
+    left: 48%;
+
+    top: 15%;
+
+    background:
+        rgba(80, 255, 120, 0.2);
+
+}
+
+
+/* =========================================================
+   MAP POINTS
+========================================================= */
+
+.mapPoint {
+
+    position: absolute;
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 50%;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(3, 25, 12, 0.9);
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* LEVEL POSITIONS */
+
+.mapPoint[data-level="1"] {
+
+    left: 16%;
+
+    top: 25%;
+}
+
+
+.mapPoint[data-level="2"] {
+
+    left: 55%;
+
+    top: 42%;
+}
+
+
+.mapPoint[data-level="3"] {
+
+    left: 72%;
+
+    top: 15%;
+}
+
+
+/* =========================================================
+   UNLOCKED POINT
+========================================================= */
+
+.mapPoint.unlocked {
+
+    border-color: #73ff9c;
+
+    box-shadow:
+        0 0 18px rgba(70, 255, 120, 0.25);
+}
+
+
+.mapPoint.unlocked:hover {
+
+    transform:
+        scale(1.08);
+
+    box-shadow:
+        0 0 30px rgba(70, 255, 120, 0.4);
+}
+
+
+/* =========================================================
+   ACTIVE POINT
+========================================================= */
+
+.mapPoint.active {
+
+    animation:
+        pointPulse 1.5s infinite;
+}
+
+
+.mapPoint.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -13px;
+
+    border: 1px solid #73ff9c;
+
+    border-radius: 50%;
+
+    animation:
+        radarPulse 1.5s infinite;
+}
+
+
+@keyframes pointPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 12px rgba(70, 255, 120, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 0 32px rgba(70, 255, 120, 0.5);
+    }
+
+}
+
+
+@keyframes radarPulse {
+
+    0% {
+        transform: scale(0.8);
+
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.35);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   LOCKED POINT
+========================================================= */
+
+.mapPoint.locked {
+
+    border-color: #713737;
+
+    color: #c44949;
+
+    cursor: not-allowed;
+
+    opacity: 0.75;
+}
+
+
+.mapPoint.locked::after {
+
+    content: "✕";
+
+    position: absolute;
+
+    top: -8px;
+
+    right: -8px;
+
+    width: 24px;
+
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid #713737;
+
+    border-radius: 50%;
+
+    background: #190707;
+
+    color: #ff5555;
+
+    font-size: 13px;
+}
+
+
+.mapPoint.locked:hover {
+
+    transform: none;
+
+    box-shadow:
+        0 0 12px rgba(255, 50, 50, 0.15);
+}
+
+
+/* =========================================================
+   POINT TEXT
+========================================================= */
+
+.pointNumber {
+
+    display: block;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+.pointLabel {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   MAP COORDINATES
+========================================================= */
+
+#mapCoordinates {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    left: 18px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(1, 9, 5, 0.9);
+
+    color: #4d8f61;
+
+    font-size: 10px;
+
+    z-index: 20;
+}
+
+
+#coordinates {
+
+    color: #73ff9c;
+}
+
+
+/* =========================================================
+   OPERATION PANEL
+========================================================= */
+
+#operationPanel {
+
+    min-height: 600px;
+
+    padding: 25px;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(3, 16, 8, 0.85);
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   OPERATION TITLE
+========================================================= */
+
+#operationTitle {
+
+    color: #73ff9c;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 12px rgba(70, 255, 120, 0.5);
+}
+
+
+#operationName {
+
+    margin-top: 10px;
+
+    color: #a1d9ae;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   THREAT
+========================================================= */
+
+#threatLevel {
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-left: 3px solid #73ff9c;
+
+    background:
+        rgba(40, 130, 60, 0.08);
+
+    color: #5c9d6c;
+
+    font-size: 11px;
+}
+
+
+#threatLevel strong {
+
+    color: #73ff9c;
+
+    margin-left: 8px;
+}
+
+
+/* =========================================================
+   INFO BOXES
+========================================================= */
+
+.infoBox {
+
+    margin-top: 18px;
+
+    padding: 15px;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(2, 12, 7, 0.75);
+}
+
+
+.infoTitle {
+
+    padding-bottom: 9px;
+
+    border-bottom: 1px solid #315b42;
+
+    color: #73ff9c;
+
+    font-size: 11px;
+}
+
+
+.infoBox p {
+
+    margin: 12px 0 0;
+
+    color: #619572;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CCTV
+========================================================= */
+
+#cctvPreview {
+
+    height: 120px;
+
+    margin-top: 12px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid #315b42;
+
+    background:
+        linear-gradient(
+            180deg,
+            #102d1b,
+            #020a05
+        );
+}
+
+
+#cctvPreview::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(100, 255, 140, 0.08) 0px,
+            rgba(100, 255, 140, 0.08) 1px,
+            transparent 1px,
+            transparent 6px
+        );
+}
+
+
+.cctvScan {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 2px;
+
+    background:
+        rgba(100, 255, 140, 0.5);
+
+    box-shadow:
+        0 0 10px rgba(100, 255, 140, 0.5);
+
+    animation:
+        scanMove 2.5s linear infinite;
+}
+
+
+@keyframes scanMove {
+
+    from {
+        top: 0;
+    }
+
+    to {
+        top: 100%;
+    }
+
+}
+
+
+#cctvText {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 10px;
+
+    z-index: 5;
+
+    font-size: 9px;
+
+    color: #73ff9c;
+}
+
+
+.cctvZombie {
+
+    position: absolute;
+
+    left: 48%;
+
+    bottom: 15px;
+
+    font-size: 45px;
+
+    filter:
+        grayscale(1)
+        brightness(0.7);
+
+    animation:
+        zombieMove 4s ease-in-out infinite;
+}
+
+
+@keyframes zombieMove {
+
+    0%,
+    100% {
+        transform: translateX(-25px);
+    }
+
+    50% {
+        transform: translateX(25px);
+    }
+
+}
+
+
+.cctvRec {
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 10px;
+
+    z-index: 5;
+
+    color: #ff5555;
+
+    font-size: 9px;
+
+    animation:
+        statusBlink 1s infinite;
+}
+
+
+/* =========================================================
+   LOCK WARNING
+========================================================= */
+
+#lockWarning {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 14px;
+
+    border: 1px solid #713737;
+
+    background:
+        rgba(80, 15, 15, 0.12);
+
+    color: #ff5555;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+#lockWarning.show {
+
+    display: block;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+#levelFooter {
+
+    position: fixed;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    z-index: 200;
+
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        12px 4%;
+
+    background:
+        rgba(1, 7, 4, 0.98);
+
+    border-top: 1px solid #315b42;
+
+    box-shadow:
+        0 -8px 30px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================================================
+   FOOTER BUTTONS
+========================================================= */
+
+#backBtn,
+#startMissionBtn {
+
+    min-height: 48px;
+
+    padding:
+        9px 18px;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(3, 17, 9, 0.95);
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+#backBtn:hover {
+
+    border-color: #73ff9c;
+
+    box-shadow:
+        0 0 15px rgba(70, 255, 120, 0.2);
+}
+
+
+/* =========================================================
+   START MISSION
+========================================================= */
+
+#startMissionBtn {
+
+    min-width: 210px;
+
+    border:
+        1px solid #a33b3b;
+
+    background:
+        rgba(90, 15, 15, 0.18);
+
+    color: #ff6262;
+
+    text-shadow:
+        0 0 8px rgba(255, 60, 60, 0.4);
+
+    animation:
+        missionPulse 2s infinite;
+}
+
+
+#startMissionBtn:hover {
+
+    border-color: #ff5555;
+
+    background:
+        rgba(120, 20, 20, 0.28);
+
+    box-shadow:
+        0 0 25px rgba(255, 50, 50, 0.25);
+
+}
+
+
+#startMissionBtn small {
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+@keyframes missionPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 5px rgba(255, 50, 50, 0.05);
+    }
+
+    50% {
+        box-shadow:
+            0 0 18px rgba(255, 50, 50, 0.18);
+    }
+
+}
+
+
+/* =========================================================
+   SELECTED OPERATION
+========================================================= */
+
+#selectedOperation {
+
+    flex: 1;
+
+    text-align: center;
+
+    color: #4f8e60;
+
+    font-size: 11px;
+}
+
+
+#selectedOperation strong {
+
+    color: #73ff9c;
+}
+
+
+/* =========================================================
+   LOADING OVERLAY
+========================================================= */
+
+#loadingOverlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    background:
+        #010403;
+
+    color: #73ff9c;
+
+    text-align: center;
+}
+
+
+#loadingOverlay.active {
+
+    display: flex;
+}
+
+
+#loadingText {
+
+    font-size: 20px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 25px;
+
+    animation:
+        statusBlink 1s infinite;
+}
+
+
+#loadingPercent {
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+#loadingBar {
+
+    width: 420px;
+
+    max-width: 75vw;
+
+    height: 10px;
+
+    border: 1px solid #315b42;
+
+    background:
+        #020b06;
+}
+
+
+#loadingProgress {
+
+    width: 0%;
+
+    height: 100%;
+
+    background:
+        #73ff9c;
+
+    box-shadow:
+        0 0 12px rgba(70, 255, 120, 0.7);
+
+    transition:
+        width 0.1s linear;
+}
+
+
+#loadingStatus {
+
+    margin-top: 15px;
+
+    color: #4f8e60;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+
+    #levelMain {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #operationMap,
+    #operationPanel {
+
+        min-height: 500px;
+
+    }
+
+
+    #mapDisplay {
+
+        height: 445px;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    #levelScreen {
+
+        width: 96%;
+
+        padding: 12px;
+
+    }
+
+
+    #levelHeader {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+
+    }
+
+
+    #operationStatus {
+
+        text-align: left;
+
+    }
+
+
+    #levelFooter {
+
+        position: static;
+
+        flex-direction: column;
+
+        padding: 12px;
+
+    }
+
+
+    #selectedOperation {
+
+        order: -1;
+
+    }
+
+
+    #backBtn,
+    #startMissionBtn {
+
+        width: 100%;
+
+    }
+
+}

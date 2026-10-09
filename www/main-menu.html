@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Zombie Survival - Security System</title>
+
+    <link rel="stylesheet" href="main-menu.css">
+    <link rel="stylesheet" href="settings.css">
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+</head>
+
+
+<body>
+
+
+    <div id="securityMonitor">
+
+
+        <!-- =========================
+             CAMERA HEADER
+        ========================== -->
+
+        <div id="cameraHeader">
+
+            <span id="cameraName">
+                CAM 01 - HOSPITAL RECEPTION
+            </span>
+
+            <span id="recording">
+                ● REC
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             CAMERA SCREEN
+        ========================== -->
+
+        <div id="cameraScreen">
+
+
+            <div id="cameraScene">
+
+
+                <!-- =========================
+                     CAM 01 - HOSPITAL
+                ========================== -->
+
+                <div class="hospitalScene">
+
+                    <div class="hospitalWall"></div>
+
+                    <div class="hospitalDoor doorLeft"></div>
+
+                    <div class="hospitalDoor doorRight"></div>
+
+                    <div class="hospitalLight lightOne"></div>
+
+                    <div class="hospitalLight lightTwo"></div>
+
+
+                    <div class="stretcher">
+
+                        <div class="stretcherMattress"></div>
+
+                        <div class="stretcherWheel wheel1"></div>
+
+                        <div class="stretcherWheel wheel2"></div>
+
+                    </div>
+
+
+                    <div class="cameraZombie zombieOne">
+                        🧟
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     CAM 02 - MAIN CORRIDOR
+                ========================== -->
+
+                <div class="corridorScene">
+
+                    <div class="corridorLight"></div>
+
+                    <div class="corridorDoor door1"></div>
+
+                    <div class="corridorDoor door2"></div>
+
+                    <div class="corridorZombie">
+                        🧟
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     CAM 03 - BASEMENT
+                ========================== -->
+
+                <div class="basementScene">
+
+                    <div class="basementLight"></div>
+
+                    <div class="basementDoor"></div>
+
+                    <div class="horde">
+                        🧟 🧟 🧟 🧟 🧟
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =========================
+                 SIGNAL LOST
+            ========================== -->
+
+            <div id="signalLost">
+                SIGNAL LOST
+            </div>
+
+
+            <!-- =========================
+                 CRT EFFECTS
+            ========================== -->
+
+            <div id="scanlines"></div>
+
+            <div id="static"></div>
+
+
+        </div>
+
+
+        <!-- =========================
+             CAMERA SELECTOR
+        ========================== -->
+
+        <div id="cameraSelector">
+
+
+            <button
+                class="cameraBtn active"
+            >
+                CAM 01
+            </button>
+
+
+            <button
+                class="cameraBtn"
+            >
+                CAM 02
+            </button>
+
+
+            <button
+                class="cameraBtn"
+            >
+                CAM 03
+            </button>
+
+
+        </div>
+
+
+        <!-- =========================
+             CONTROL PANEL
+        ========================== -->
+
+        <div id="controlPanel">
+
+
+            <div id="systemTitle">
+                SECURITY SYSTEM // CONTROL PANEL
+            </div>
+
+
+            <div id="systemStatus">
+
+                SYSTEM STATUS:
+                <span>ONLINE</span>
+
+                &nbsp; | &nbsp;
+
+                SIGNAL:
+                <span>STABLE</span>
+
+            </div>
+
+
+            <!-- =========================
+                 MENU BUTTONS
+            ========================== -->
+
+            <div id="menuButtons">
+
+
+                <button id="playBtn">
+
+                    ▶ LOG IN
+                    <br>
+
+                    <small>
+                        INITIALIZE SYSTEM
+                    </small>
+
+                </button>
+
+
+                <button id="loadoutBtn">
+
+                    ◈ SYSTEM SPEC
+                    <br>
+
+                    <small>
+                        SURVIVOR ASSETS
+                    </small>
+
+                </button>
+
+
+                <button id="settingsBtn">
+
+                    ⚙ CONFIGURATION
+                    <br>
+
+                    <small>
+                        SYSTEM CONFIG
+                    </small>
+
+                </button>
+
+
+                <button id="quitBtn">
+
+                    ■ SHUT DOWN
+                    <br>
+
+                    <small>
+                        TERMINATE FEED
+                    </small>
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =========================
+                 TERMINAL
+            ========================== -->
+
+            <div id="terminalText">
+
+                &gt; SECURITY NETWORK INITIALIZED<br>
+
+                &gt; CAMERA FEEDS CONNECTED<br>
+
+                &gt; SURVIVOR DATABASE LOCKED<br>
+
+                &gt; WAITING FOR AUTHORIZATION...
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    
+
+<!-- =====================================================
+     LOGIN TERMINAL
+===================================================== -->
+<div id="loginGateScreen" class="gameScreen hidden">
+
+    <div class="screenPanel">
+
+        <div class="screenHeader">
+            <span>AUTHORIZATION TERMINAL</span>
+            <span class="dangerText">RESTRICTED</span>
+        </div>
+
+        <div class="screenTitle">
+            SECURITY ACCESS GATEWAY
+        </div>
+
+        <p class="screenSubtitle">
+            IDENTITY VERIFICATION REQUIRED // SELECT ACCESS METHOD
+        </p>
+
+        <div class="authOptions">
+
+            <button id="googleLoginBtn" class="selectionBtn">
+                <strong>◎ LINK GOOGLE ID</strong>
+                <small>SECURE CLOUD PROFILE</small>
+            </button>
+
+            <button id="guestAccessBtn" class="selectionBtn">
+                <strong>▶ GUEST TERMINAL ACCESS</strong>
+                <small>LOCAL PROFILE // NO CLOUD SYNC</small>
+            </button>
+
+        </div>
+
+        <button id="loginBackBtn" class="backBtn">
+            ← RETURN TO SECURITY SYSTEM
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     LEVEL SELECT
+===================================================== -->
+
+<div id="levelSelectScreen" class="gameScreen hidden">
+
+    <div class="screenPanel widePanel">
+
+        <div class="screenHeader">
+            <span>MISSION DATABASE</span>
+            <span>LEVEL SELECT</span>
+        </div>
+
+        <div class="screenTitle">
+            SELECT MISSION LEVEL
+        </div>
+
+        <p class="screenSubtitle">
+            SELECT AN UNLOCKED LEVEL FOR DEPLOYMENT
+        </p>
+
+        <div id="levelGrid" class="mapGrid">
+
+            <!-- JavaScript will create levels here -->
+
+        </div>
+
+        <div class="selectionFooter">
+
+            <span id="selectedLevelText">
+                SELECT LEVEL
+            </span>
+
+            <button id="confirmLevelBtn" class="primaryBtn">
+                ▶ CONFIRM LEVEL
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAP SELECT
+===================================================== -->
+
+
+
+<!-- =====================================================
+     GUN / LOADOUT SELECT
+===================================================== -->
+<div id="loadoutScreen" class="gameScreen hidden">
+
+    <div class="screenPanel widePanel">
+
+        <div class="screenHeader">
+            <span>ARMORY DATABASE</span>
+            <span>LOADOUT CALIBRATION</span>
+        </div>
+
+        <div class="screenTitle">
+            SELECT SURVIVOR LOADOUT
+        </div>
+
+        <p class="screenSubtitle">
+            PRIMARY WEAPON SYSTEM // LEVEL 01 DEPLOYMENT
+        </p>
+
+        <div class="weaponGrid">
+
+            <button class="weaponCard selected" data-weapon="pistol">
+
+                <div class="weaponIcon">
+                    ◉
+                </div>
+
+                <strong id="primaryWeaponSpec">M9 PISTOL</strong>
+
+                <small>
+                    DAMAGE: 50
+                    <br>
+                    MAG: 30
+                </small>
+
+                <span>STANDARD ISSUE</span>
+
+            </button>
+
+
+            <button class="weaponCard" data-weapon="rifle">
+
+                <div class="weaponIcon">
+                    ═╪═
+                </div>
+
+                <strong>ASSAULT RIFLE</strong>
+
+                <small>
+                    DAMAGE: 35
+                    <br>
+                    MAG: 30
+                </small>
+
+                <span>LOCKED</span>
+
+            </button>
+
+
+            <button class="weaponCard" data-weapon="shotgun">
+
+                <div class="weaponIcon">
+                    ═══
+                </div>
+
+                <strong>TACTICAL SHOTGUN</strong>
+
+                <small>
+                    DAMAGE: 90
+                    <br>
+                    MAG: 8
+                </small>
+
+                <span>LOCKED</span>
+
+            </button>
+
+        </div>
+
+
+        <div class="loadoutSummary">
+
+            <div>
+                WEAPON:
+                <strong id="selectedWeaponText">
+                    M9 PISTOL
+                </strong>
+            </div>
+
+            <div>
+                MAP:
+                <strong id="loadoutMapText">
+                    QUARANTINE HOSPITAL
+                </strong>
+            </div>
+
+        </div>
+
+
+        <button id="deployAgentBtn" class="deployBtn">
+    ▶ DEPLOY SURVIVOR
+</button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     CONFIGURATION SCREEN
+===================================================== -->
+
+<div id="configurationScreen" class="gameScreen hidden">
+
+    <div class="screenPanel">
+
+        <div class="screenHeader">
+            <span>SYSTEM CONFIGURATION</span>
+            <span>SETTINGS</span>
+        </div>
+
+        <div class="screenTitle">
+            SURVIVOR SYSTEM CONFIG
+        </div>
+
+        <p class="screenSubtitle">
+            MODIFY SYSTEM PARAMETERS // LOCAL SETTINGS
+        </p>
+
+        <div class="configOptions">
+
+            <div class="configRow">
+                <span>CAMERA FEED</span>
+                <button id="cameraToggleBtn">
+                    ON
+                </button>
+            </div>
+
+            <div class="configRow">
+                <span>SCANLINE EFFECT</span>
+                <button id="scanlineToggleBtn">
+                    ON
+                </button>
+            </div>
+
+            <div class="configRow">
+                <span>CRT STATIC</span>
+                <button id="staticToggleBtn">
+                    ON
+                </button>
+            </div>
+
+            
+
+        </div>
+
+        <button id="configurationBackBtn" class="backBtn">
+            ← RETURN TO SECURITY SYSTEM
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     SYSTEM SPEC SCREEN
+===================================================== -->
+
+<div id="systemSpecScreen" class="gameScreen hidden">
+
+    <div class="screenPanel">
+
+        <div class="screenHeader">
+            <span>SURVIVOR SYSTEM SPEC</span>
+            <span>DATABASE</span>
+        </div>
+
+        <div class="screenTitle">
+            SURVIVOR ASSETS
+        </div>
+
+        <p class="screenSubtitle">
+            ACTIVE SYSTEM STATUS // PLAYER PROFILE
+        </p>
+
+        <div class="configOptions">
+
+            <div class="configRow">
+                <span>PRIMARY WEAPON</span>
+                <strong id="specWeapon">
+                    M9 PISTOL
+                </strong>
+            </div>
+
+            <div class="configRow">
+                <span>AVAILABLE MAP</span>
+                <strong id="specMap">
+                    QUARANTINE HOSPITAL
+                </strong>
+            </div>
+
+            <div class="configRow">
+                <span>CURRENT LEVEL</span>
+                <strong id="specLevel">
+                    LEVEL 1
+                </strong>
+            </div>
+
+            <div class="configRow">
+                <span>EXPERIENCE</span>
+                <strong id="specXP">
+                    0 XP
+                </strong>
+            </div>
+
+            <div class="configRow">
+                <span>UNLOCKED WEAPONS</span>
+                <strong id="specWeapons">
+                    1
+                </strong>
+            </div>
+
+            <div class="configRow">
+                <span>UNLOCKED MAPS</span>
+                <strong id="specMaps">
+                    1
+                </strong>
+            </div>
+
+        </div>
+
+        <button id="systemSpecBackBtn" class="backBtn">
+            ← RETURN TO SECURITY SYSTEM
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SHUT DOWN SCREEN
+===================================================== -->
+
+<div id="shutdownScreen" class="gameScreen hidden">
+
+    <div class="screenPanel">
+
+        <div class="screenHeader">
+            <span>SYSTEM TERMINATION</span>
+            <span class="dangerText">OFFLINE</span>
+        </div>
+
+        <div class="screenTitle">
+            SYSTEM SHUT DOWN
+        </div>
+
+        <p class="screenSubtitle">
+            SECURITY NETWORK TERMINATED // ALL FEEDS OFFLINE
+        </p>
+
+        <div class="terminalText">
+
+            &gt; SECURITY NETWORK: OFFLINE<br>
+            &gt; CAMERA FEEDS: DISCONNECTED<br>
+            &gt; SURVIVOR DATABASE: LOCKED<br>
+            &gt; ALL SYSTEMS: TERMINATED<br>
+            &gt; TERMINAL SAFE TO CLOSE
+
+        </div>
+
+        <button id="shutdownBackBtn" class="backBtn">
+    ← RETURN TO SECURITY SYSTEM
+</button>
+
+    </div>
+
+</div>
+
+
+
+
+    <script src="main-menu.js"></script>
+    <script src="settings.js"></script>
+
+</body>
+
+</html>

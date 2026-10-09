@@ -1,0 +1,690 @@
+/* =========================================================
+   ZOMBIE SURVIVAL - SETTINGS SCREEN
+   settings.css
+========================================================= */
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 255, 100, 0.08),
+            transparent 45%
+        ),
+        #020805;
+
+    color: #39ff88;
+
+    font-family: "Courier New", monospace;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   CONFIGURATION / SETTINGS SCREEN
+========================================================= */
+
+#configurationScreen {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: center;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0, 50, 20, 0.97),
+            rgba(0, 5, 2, 0.99) 75%
+        );
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* Hidden state */
+
+#configurationScreen.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   SETTINGS PANEL
+========================================================= */
+
+#configurationScreen .screenPanel {
+    position: relative;
+
+    width: min(700px, 94vw);
+
+    flex-shrink: 0;
+
+    margin: 0 auto 40px;
+
+    padding: 35px;
+
+    border: 1px solid #19ff72;
+
+    background:
+        rgba(0, 12, 6, 0.98);
+
+    color: #39ff88;
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 100, 0.15),
+        inset 0 0 30px rgba(0, 255, 100, 0.04);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#configurationScreen .screenHeader {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid rgba(57, 255, 136, 0.35);
+
+    font-size: 16px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+#configurationScreen .screenTitle {
+    margin-top: 30px;
+
+    text-align: center;
+
+    font-size: 27px;
+
+    letter-spacing: 6px;
+
+    color: #39ff88;
+
+    text-shadow:
+        0 0 10px rgba(57, 255, 136, 0.45);
+}
+
+
+/* =========================================================
+   SUBTITLE
+========================================================= */
+
+#configurationScreen .screenSubtitle {
+    margin: 15px 0 35px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    letter-spacing: 2px;
+
+    color: #39ff88;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   CONFIG OPTIONS
+========================================================= */
+
+.configOptions {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   CONFIG ROW
+========================================================= */
+
+.configRow {
+
+    width: 100%;
+
+    min-height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 12px 18px;
+
+    border-left: 2px solid #19ff72;
+
+    border-top: 1px solid rgba(57, 255, 136, 0.12);
+
+    border-bottom: 1px solid rgba(57, 255, 136, 0.2);
+
+    background:
+        rgba(0, 255, 100, 0.025);
+
+    color: #39ff88;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+    transition: 0.2s ease;
+}
+
+
+.configRow:hover {
+
+    background:
+        rgba(0, 255, 100, 0.06);
+
+    box-shadow:
+        0 0 15px rgba(25, 255, 114, 0.08);
+}
+
+
+/* =========================================================
+   OLD BUTTON-STYLE TOGGLE SUPPORT
+========================================================= */
+
+.configRow > button {
+
+    min-width: 90px;
+
+    height: 40px;
+
+    padding: 0 15px;
+
+    border: 1px solid #19ff72;
+
+    background: transparent;
+
+    color: #39ff88;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.configRow > button:hover {
+
+    background: #19ff72;
+
+    color: #001b0a;
+
+    box-shadow:
+        0 0 15px rgba(25, 255, 114, 0.45);
+}
+
+
+/* =========================================================
+   MODERN SWITCH SUPPORT
+========================================================= */
+
+.switch {
+
+    position: relative;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    width: 100px;
+
+    height: 42px;
+}
+
+
+/* Hide checkbox */
+
+.switch input {
+
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+}
+
+
+/* Switch body */
+
+.switch .slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    background: #e60000;
+
+    border: 2px solid #ff4444;
+
+    box-shadow:
+        0 0 10px rgba(255, 0, 0, 0.35);
+
+    transition: 0.25s ease;
+}
+
+
+/* ON background */
+
+.switch input:checked + .slider {
+
+    background: #19b900;
+
+    border-color: #19ff72;
+
+    box-shadow:
+        0 0 12px rgba(25, 255, 114, 0.45);
+}
+
+
+/* ON / OFF text */
+
+.switch .slider::before {
+
+    content: "OFF";
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 12px;
+
+    transform: translateY(-50%);
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    transition: 0.25s ease;
+}
+
+
+/* ON text */
+
+.switch input:checked + .slider::before {
+
+    content: "ON";
+
+    left: 13px;
+
+    right: auto;
+}
+
+
+/* Circle */
+
+.switch .slider::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 34px;
+    height: 34px;
+
+    top: 2px;
+    left: 2px;
+
+    border-radius: 50%;
+
+    background: #eeeeee;
+
+    border: 2px solid #999999;
+
+    box-shadow:
+        inset 0 0 5px rgba(0, 0, 0, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.6);
+
+    transition: 0.25s ease;
+}
+
+
+/* Circle ON position */
+
+.switch input:checked + .slider::after {
+
+    left: auto;
+
+    right: 2px;
+}
+
+
+/* Switch hover */
+
+.switch .slider:hover {
+
+    filter: brightness(1.15);
+}
+
+
+/* =========================================================
+   RETURN BUTTON
+========================================================= */
+
+#configurationScreen .backBtn {
+
+    display: block;
+
+    margin-top: 30px;
+
+    padding: 13px 22px;
+
+    background: transparent;
+
+    border: 1px solid #19ff72;
+
+    color: #39ff88;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+#configurationScreen .backBtn:hover {
+
+    background: #19ff72;
+
+    color: #001b0a;
+
+    box-shadow:
+        0 0 18px rgba(25, 255, 114, 0.4);
+}
+
+
+/* =========================================================
+   OPTIONAL SETTINGS SCREEN SUPPORT
+========================================================= */
+
+#settingsScreen {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    overflow-y: auto;
+
+    padding: 40px 20px;
+}
+
+
+#settingsScreen.hidden {
+
+    display: none !important;
+}
+
+
+.settingsPanel {
+
+    width: min(900px, 94vw);
+
+    flex-shrink: 0;
+
+    margin-bottom: 40px;
+
+    padding: 35px;
+
+    border: 1px solid #19ff72;
+
+    background:
+        rgba(0, 15, 8, 0.97);
+
+    box-shadow:
+        0 0 25px rgba(0, 255, 100, 0.15),
+        inset 0 0 30px rgba(0, 255, 100, 0.03);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    #configurationScreen {
+
+        padding: 20px 10px;
+    }
+
+
+    #configurationScreen .screenPanel {
+
+        width: 96vw;
+
+        padding: 24px;
+
+        margin-bottom: 30px;
+    }
+
+
+    #configurationScreen .screenHeader {
+
+        font-size: 11px;
+
+        letter-spacing: 2px;
+    }
+
+
+    #configurationScreen .screenTitle {
+
+        font-size: 20px;
+
+        letter-spacing: 3px;
+
+        line-height: 1.5;
+    }
+
+
+    #configurationScreen .screenSubtitle {
+
+        font-size: 10px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .configRow {
+
+        min-height: 60px;
+
+        padding: 12px;
+
+        font-size: 12px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .switch {
+
+        width: 85px;
+
+        height: 38px;
+    }
+
+
+    .switch .slider::after {
+
+        width: 30px;
+
+        height: 30px;
+
+        top: 2px;
+
+        left: 2px;
+    }
+
+
+    .switch input:checked + .slider::after {
+
+        right: 2px;
+    }
+
+
+    .switch .slider::before {
+
+        font-size: 12px;
+
+        right: 9px;
+    }
+
+
+    .switch input:checked + .slider::before {
+
+        left: 10px;
+    }
+
+
+    #configurationScreen .backBtn {
+
+        width: 100%;
+
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   SHORT HEIGHT SCREENS
+========================================================= */
+
+@media (max-height: 650px) {
+
+    #configurationScreen {
+
+        align-items: flex-start;
+
+        padding-top: 20px;
+    }
+
+    #configurationScreen .screenPanel {
+
+        margin-bottom: 30px;
+    }
+}
+
+/* =========================================================
+   SETTINGS EFFECT CONTROL
+========================================================= */
+
+/* Scanlines OFF hone par completely hide */
+#cameraScreen #scanlines {
+    display: block;
+    pointer-events: none;
+}
+
+/* Static OFF hone par completely hide */
+#cameraScreen #static {
+    display: block;
+    pointer-events: none;
+}
+
+/* =========================================================
+   CRT DOTS - REMOVE WHEN STATIC IS OFF
+========================================================= */
+
+/* Default dots ko hata do */
+#cameraScreen::after {
+    display: none;
+}

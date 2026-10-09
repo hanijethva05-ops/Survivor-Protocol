@@ -1,0 +1,9 @@
+@"
+.env
+node_modules/
+.idea/
+.git/
+android/*.jks
+android/**/*.jks
+android/keystore.properties
+"@ | Set-Content .gitignore

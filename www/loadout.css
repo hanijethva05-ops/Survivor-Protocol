@@ -1,0 +1,1090 @@
+/* =========================================================
+   ZOMBIE SURVIVAL
+   LOADOUT / EQUIPMENT SCREEN
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: #020806;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #0b2115 0%,
+            #04100a 45%,
+            #010504 100%
+        );
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    letter-spacing: 2px;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN SCREEN
+========================================================= */
+
+#loadoutScreen {
+
+    width: 92%;
+
+    max-width: 1500px;
+
+    min-height: calc(100vh - 40px);
+
+    margin: 20px auto 100px auto;
+
+    padding: 25px;
+
+    border: 2px solid #315b42;
+
+    border-radius: 25px;
+
+    background:
+        rgba(2, 12, 7, 0.94);
+
+    box-shadow:
+        0 0 30px rgba(70, 255, 120, 0.12),
+        inset 0 0 40px rgba(70, 255, 120, 0.04);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CRT SCANLINES
+========================================================= */
+
+#loadoutScreen::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(100, 255, 140, 0.035) 0px,
+            rgba(100, 255, 140, 0.035) 1px,
+            transparent 1px,
+            transparent 5px
+        );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+#loadoutHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    min-height: 75px;
+
+    padding: 18px 25px;
+
+    border: 1px solid #315b42;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(15, 50, 28, 0.35),
+            rgba(2, 15, 8, 0.8)
+        );
+
+    color: #73ff9c;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    text-shadow:
+        0 0 8px rgba(80, 255, 120, 0.45);
+}
+
+
+#clearance {
+
+    color: #73ff9c;
+
+    font-size: 16px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   MAIN LOADOUT
+========================================================= */
+
+#loadoutMain {
+
+    display: grid;
+
+    grid-template-columns:
+        270px
+        minmax(400px, 1fr)
+        1.2fr;
+
+    gap: 22px;
+
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   WEAPON SLOTS
+========================================================= */
+
+#weaponSlots {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.weaponSlot {
+
+    min-height: 125px;
+
+    padding: 22px 20px;
+
+    border: 1px solid #315b42;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20, 60, 35, 0.35),
+            rgba(2, 15, 8, 0.9)
+        );
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.weaponSlot::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+
+    left: 8px;
+
+    width: 12px;
+
+    height: 12px;
+
+    border-left: 1px solid #73ff9c;
+
+    border-top: 1px solid #73ff9c;
+}
+
+
+.weaponSlot::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 8px;
+
+    bottom: 8px;
+
+    width: 12px;
+
+    height: 12px;
+
+    border-right: 1px solid #73ff9c;
+
+    border-bottom: 1px solid #73ff9c;
+}
+
+
+.weaponSlot:hover {
+
+    border-color: #73ff9c;
+
+    box-shadow:
+        0 0 20px rgba(70, 255, 120, 0.18);
+
+    transform: translateX(3px);
+}
+
+
+.weaponSlot.active {
+
+    border-color: #73ff9c;
+
+    box-shadow:
+        0 0 20px rgba(70, 255, 120, 0.2),
+        inset 0 0 20px rgba(70, 255, 120, 0.05);
+}
+
+
+.slotTitle {
+
+    display: block;
+
+    color: #73ff9c;
+
+    font-size: 15px;
+
+    margin-bottom: 22px;
+}
+
+
+.slotWeapon {
+
+    display: block;
+
+    color: #548c67;
+
+    font-size: 14px;
+}
+
+
+.weaponSlot.active .slotWeapon {
+
+    color: #73ff9c;
+
+    text-shadow:
+        0 0 8px rgba(70, 255, 120, 0.6);
+}
+
+
+/* =========================================================
+   BLUEPRINT PANEL
+========================================================= */
+
+#blueprintPanel {
+
+    min-height: 420px;
+
+    border: 1px solid #315b42;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(45, 130, 70, 0.14),
+            rgba(1, 7, 4, 0.98) 70%
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BLUEPRINT TITLE
+========================================================= */
+
+#blueprintName {
+
+    height: 55px;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid #315b42;
+
+    color: #73ff9c;
+
+    font-size: 14px;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 8px rgba(70, 255, 120, 0.5);
+}
+
+
+/* =========================================================
+   BLUEPRINT AREA
+========================================================= */
+
+#weaponBlueprint {
+
+    height: 275px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+}
+
+
+/* Rotating technical circle */
+
+#weaponBlueprint::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 210px;
+
+    height: 210px;
+
+    border:
+
+        1px dashed
+
+        rgba(100, 255, 140, 0.25);
+
+    border-radius: 50%;
+
+    animation:
+        rotateBlueprint 10s linear infinite;
+}
+
+
+#weaponBlueprint::after {
+
+    content: "+";
+
+    position: absolute;
+
+    font-size: 130px;
+
+    color:
+        rgba(100, 255, 140, 0.055);
+}
+
+
+/* =========================================================
+   WEAPON GRAPHIC
+========================================================= */
+
+.blueprintWeapon {
+
+    position: relative;
+
+    z-index: 5;
+
+    color: #5cff86;
+
+    font-size: 90px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 8px #4dff79,
+        0 0 20px rgba(70, 255, 120, 0.65),
+        0 0 45px rgba(70, 255, 120, 0.25);
+
+    animation:
+        blueprintFloat 2.5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   TECHNICAL LINES
+========================================================= */
+
+.blueprintLine {
+
+    position: absolute;
+
+    height: 1px;
+
+    background:
+        rgba(90, 255, 130, 0.3);
+
+    z-index: 2;
+}
+
+
+.line1 {
+
+    width: 35%;
+
+    left: 5%;
+
+    top: 35%;
+}
+
+
+.line2 {
+
+    width: 28%;
+
+    right: 5%;
+
+    top: 55%;
+}
+
+
+.line3 {
+
+    width: 40%;
+
+    left: 30%;
+
+    bottom: 25%;
+}
+
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+#performance {
+
+    border-top: 1px solid #315b42;
+
+    padding: 20px;
+}
+
+
+.performanceTitle {
+
+    margin-bottom: 18px;
+
+    color: #73ff9c;
+
+    font-size: 15px;
+}
+
+
+.statRow {
+
+    display: grid;
+
+    grid-template-columns:
+        55px
+        1fr;
+
+    align-items: center;
+
+    min-height: 30px;
+
+    font-size: 13px;
+}
+
+
+.statRow strong {
+
+    color: #73ff9c;
+}
+
+
+/* =========================================================
+   PERFORMANCE BARS
+========================================================= */
+
+#damageBar,
+#rpmBar {
+
+    display: flex;
+
+    gap: 5px;
+
+    min-height: 12px;
+}
+
+
+#damageBar::before {
+
+    content:
+        "█ █ █ █ ░ ░ ░";
+}
+
+
+#rpmBar::before {
+
+    content:
+        "█ █ █ █ █ █ ░";
+}
+
+
+#damageBar::before,
+#rpmBar::before {
+
+    color: #65ff8d;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 6px rgba(70, 255, 120, 0.45);
+}
+
+
+/* =========================================================
+   AVAILABLE ASSETS
+========================================================= */
+
+#availableAssets {
+
+    border: 1px solid #315b42;
+
+    padding: 24px;
+
+    background:
+        rgba(3, 17, 9, 0.75);
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.sectionTitle {
+
+    padding-bottom: 17px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #315b42;
+
+    color: #73ff9c;
+
+    font-size: 17px;
+
+    text-shadow:
+        0 0 8px rgba(70, 255, 120, 0.4);
+}
+
+
+/* =========================================================
+   WEAPON LIST
+========================================================= */
+
+#weaponList {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   WEAPON CARD
+========================================================= */
+
+.weaponCard {
+
+    min-height: 80px;
+
+    padding: 18px;
+
+    border: 1px solid #315b42;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8, 35, 18, 0.8),
+            rgba(2, 12, 7, 0.9)
+        );
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.weaponCard:hover {
+
+    border-color: #73ff9c;
+
+    background:
+        rgba(50, 130, 70, 0.14);
+
+    box-shadow:
+        0 0 18px rgba(70, 255, 120, 0.15);
+
+    transform: translateY(-2px);
+}
+
+
+.weaponCard.selected {
+
+    border: 2px solid #73ff9c;
+
+    background:
+        rgba(45, 120, 65, 0.18);
+
+    box-shadow:
+        0 0 20px rgba(70, 255, 120, 0.25);
+}
+
+
+.weaponCard strong {
+
+    display: block;
+
+    color: #73ff9c;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+
+.weaponCard small {
+
+    display: block;
+
+    color: #4f9363;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   LOCKED WEAPON
+========================================================= */
+
+.weaponCard.locked {
+
+    border-color: #633535;
+
+    cursor: not-allowed;
+
+}
+
+
+.weaponCard.locked:hover {
+
+    transform: none;
+
+    box-shadow: none;
+
+    background:
+        rgba(80, 20, 20, 0.12);
+}
+
+
+.weaponCard.locked strong {
+
+    color: #ff5555;
+}
+
+
+.weaponCard.locked small {
+
+    color: #a13e3e;
+}
+
+
+/* =========================================================
+   MODIFICATION BUTTON
+========================================================= */
+
+#modificationBtn {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border: 1px solid #73ff9c;
+
+    background:
+        rgba(40, 110, 60, 0.08);
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+#modificationBtn:hover {
+
+    background:
+        rgba(70, 255, 120, 0.13);
+
+    box-shadow:
+        0 0 20px rgba(70, 255, 120, 0.2);
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+#warningText {
+
+    margin-top: 15px;
+
+    min-height: 55px;
+
+    padding: 16px;
+
+    border: 1px dashed #315b42;
+
+    color: #ff5252;
+
+    font-size: 12px;
+
+    background:
+        rgba(50, 10, 10, 0.08);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+#loadoutFooter {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 100;
+
+    min-height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 12px 30px;
+
+    background:
+        rgba(1, 8, 5, 0.98);
+
+    border-top: 1px solid #315b42;
+
+    box-shadow:
+        0 -5px 25px rgba(0, 0, 0, 0.65);
+
+}
+
+
+/* =========================================================
+   FOOTER BUTTONS
+========================================================= */
+
+#backBtn,
+#continueBtn {
+
+    min-height: 45px;
+
+    padding: 10px 18px;
+
+    border: 1px solid #315b42;
+
+    background:
+        rgba(3, 18, 9, 0.95);
+
+    color: #73ff9c;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    flex-shrink: 0;
+
+}
+
+
+#backBtn:hover,
+#continueBtn:hover {
+
+    border-color: #73ff9c;
+
+    background:
+        rgba(70, 255, 120, 0.1);
+
+    box-shadow:
+        0 0 15px rgba(70, 255, 120, 0.18);
+
+}
+
+
+#continueBtn {
+
+    border-color: #73ff9c;
+
+    min-width: 130px;
+
+}
+
+
+/* =========================================================
+   LOADOUT STATUS
+========================================================= */
+
+#loadoutStatus {
+
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: center;
+
+    color: #4e9663;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+#loadoutStatus span {
+
+    color: #73ff9c;
+
+}
+
+
+/* =========================================================
+   LOADOUT STATUS
+========================================================= */
+
+#loadoutStatus {
+
+    text-align: center;
+
+    color: #4e9663;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+
+#loadoutStatus span {
+
+    color: #73ff9c;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes rotateBlueprint {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+@keyframes blueprintFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+
+    background: #010504;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background: #315b42;
+
+    border: 1px solid #73ff9c;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: #477957;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    #loadoutMain {
+
+        grid-template-columns:
+            230px
+            1fr;
+
+    }
+
+    #availableAssets {
+
+        grid-column:
+            1 / -1;
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    #loadoutScreen {
+
+        width: 96%;
+
+        padding: 12px;
+
+        margin-top: 10px;
+
+    }
+
+
+    #loadoutHeader {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        font-size: 14px;
+
+    }
+
+
+    #clearance {
+
+        text-align: left;
+
+    }
+
+
+    #loadoutMain {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #weaponList {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #loadoutFooter {
+
+        position: static;
+
+        grid-template-columns: 1fr;
+
+        margin-top: 20px;
+
+    }
+
+
+    #loadoutStatus {
+
+        white-space: normal;
+
+        line-height: 2;
+
+    }
+
+}

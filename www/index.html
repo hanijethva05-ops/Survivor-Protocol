@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Zombie Survival // Sector 01</title>
+
+    
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+
+<body>
+
+
+<div id="gameScreen">
+
+    
+    
+
+    <!-- =====================================
+         GAME WORLD
+    ====================================== -->
+
+    <div id="gameWorld">
+
+        <div id="hospitalWorld">
+
+            <div class="worldLight lightA"></div>
+            <div class="worldLight lightB"></div>
+
+            <div class="worldDoor"></div>
+
+            <div class="worldWindow"></div>
+
+            <div class="worldFloor"></div>
+
+
+            <!-- ZOMBIES -->
+
+            <div class="enemy enemyOne">
+                🧟
+            </div>
+
+            <div class="enemy enemyTwo">
+                🧟
+            </div>
+
+            <div class="enemy enemyThree">
+                🧟
+            </div>
+
+            <!-- ==========================================
+     LEVEL 1 OBJECTIVE
+========================================== -->
+
+<div id="medicalCrate">
+
+    <div class="crateGlow"></div>
+
+    <div class="crateLabel">
+        MEDICAL CRATE
+    </div>
+
+    <div class="crateSub">
+        INSULIN // CLASSIFIED
+    </div>
+
+    <div id="pickupPrompt">
+        [E] COLLECT INSULIN
+    </div>
+
+</div>
+
+
+    <!-- ==========================================
+        ESCAPE DOOR
+    ========================================== -->
+
+    <div id="escapeDoor">
+
+        <div class="doorLabel">  
+            REAR EXIT
+        </div>
+
+        <div id="escapePrompt">
+            ESCAPE ROUTE
+        </div>
+
+    </div>
+
+
+    <!-- Surprise zombies spawn here -->
+
+    <div id="surpriseZombies"></div>
+
+            <!-- PLAYER -->
+
+            <div id="player">
+            </div>
+
+        </div>
+
+
+        <!-- CROSSHAIR -->
+
+        <div id="crosshair">
+            +
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         TOP LEFT
+         SYSTEM STATUS + RADAR
+    ====================================== -->
+
+    <div id="topLeftHUD">
+
+
+        <div id="battery">
+
+            BATT
+
+            <span id="batteryBars">
+                [████░]
+            </span>
+
+            <span id="batteryPercent">
+                80%
+            </span>
+
+        </div>
+
+
+        <div id="location">
+
+            LOC:
+            <span>
+                SECTOR_01
+            </span>
+
+        </div>
+
+
+        <!-- RADAR -->
+
+        <div id="radar">
+
+            <div class="radarCircle"></div>
+
+            <div class="radarSweep"></div>
+
+            <div
+                class="radarDot dotOne"
+            ></div>
+
+            <div
+                class="radarDot dotTwo"
+            ></div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         TOP RIGHT
+         LIVE TELEMETRY
+    ====================================== -->
+
+    <div id="topRightHUD">
+
+
+        <div id="recording">
+
+            <span id="recDot">
+                ●
+            </span>
+
+            REC&nbsp;&nbsp;
+            CAM-01&nbsp;&nbsp;
+            LIVE
+
+        </div>
+
+
+        <div id="systemClock">
+
+            ISO-8601
+            <span id="clock">
+                2026-09-18 16:07:32
+            </span>
+
+        </div>
+
+
+        <div id="signalStatus">
+
+            SIGNAL:
+            <span>
+                STABLE
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         BOTTOM LEFT
+         VITAL MONITOR
+    ====================================== -->
+
+    <div id="bottomLeftHUD">
+
+
+        <div id="vitalTitle">
+
+            VITAL SIGN MONITOR
+
+        </div>
+
+
+        <div id="ecg">
+
+            <div id="ecgLine">
+                ──╲╱╲──╲╱╲──╲╱╲──
+            </div>
+
+        </div>
+
+
+        <div id="heartRate">
+
+            VITAL_SIGNS:
+            <span id="vitalStatus">
+                STABLE
+            </span>
+
+            //
+
+            <span id="bpm">
+                72
+            </span>
+
+            BPM
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         BOTTOM RIGHT
+         WEAPON / AMMO
+    ====================================== -->
+
+    <div id="bottomRightHUD">
+
+
+        <div id="weaponName">
+
+            M4 RIFLE
+
+        </div>
+
+
+        <div id="ammoCounter">
+
+            <div>
+
+                MAG:
+
+                <strong id="magAmmo">
+                    30
+                </strong>
+
+            </div>
+
+
+            <div id="reserveAmmo">
+
+                RSV:
+                <span id="reserve">
+                    090
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ATTACHMENTS -->
+
+        <div id="attachments">
+
+
+            <div class="attachment equipped">
+
+                ⚡
+                SCOPE
+
+            </div>
+
+
+            <div class="attachment equipped">
+
+                🎒
+                MAG_EXT
+
+            </div>
+
+
+            <div class="attachment equipped">
+
+                🔇
+                SUPR
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         LOW AMMO WARNING
+    ====================================== -->
+
+    <div id="lowAmmoWarning">
+
+        ⚠️ LOW ASSETS -
+        RELOAD IMMEDIATELY
+
+    </div>
+
+
+
+    <!-- =====================================
+         OBJECTIVE
+    ====================================== -->
+
+    <div id="objectiveHUD">
+
+    OBJECTIVE:
+
+    <span id="objectiveText">
+        RECOVER MEDICAL INSULIN
+    </span>
+
+</div>
+
+
+
+    <!-- =====================================
+         DAMAGE EFFECT
+    ====================================== -->
+
+    <div id="damageEffect"></div>
+
+
+    <!-- =====================================
+         CRT EFFECT
+    ====================================== -->
+
+    <div id="scanlines"></div>
+
+    <div id="crtVignette"></div>
+
+
+    <!-- =====================================
+     LEVEL COMPLETE
+===================================== -->
+
+<div id="missionComplete">
+
+    <div id="missionCompleteTitle">
+        LEVEL 1 // SECTOR 01 COMPLETE
+    </div>
+
+    <small id="missionCompleteSubtitle">
+        QUARANTINE HOSPITAL // EXTRACTION SUCCESSFUL
+    </small>
+
+    <div id="missionCompleteStats">
+        ZOMBIES KILLED:
+        <span id="completeKills">0</span>
+
+        <br>
+
+        ITEMS RECOVERED:
+        <span id="completeItems">0</span>
+
+        <br>
+
+        XP AWARDED:
+        <span id="completeXP">100</span>
+    </div>
+
+    <button id="continueMissionBtn">
+        LEVEL 2 →
+    </button>
+
+</div>
+
+<!-- =====================================
+     SURVIVOR PROFILE
+===================================== -->
+
+<div id="survivorProfilePanel">
+
+    <div class="profilePanel">
+
+        <div class="profilePanelTitle">
+            SURVIVOR PROFILE
+        </div>
+
+        <div class="profileStatus">
+            ACTIVE SURVIVOR // PLAYER DATABASE
+        </div>
+
+        <div class="profileRow">
+            NAME:
+            <span id="playerName">SURVIVOR</span>
+        </div>
+
+        <div class="profileRow">
+            EMAIL:
+            <span id="playerEmail">UNKNOWN</span>
+        </div>
+
+        <div class="profileRow">
+            SURVIVOR ID:
+            <span id="playerID">ZS-000000</span>
+        </div>
+
+        <div class="profileRow">
+            LEVEL:
+            <span id="playerLevel">01</span>
+        </div>
+
+        <div class="profileRow">
+            LOCATION:
+            <span id="profileLocation">QUARANTINE HOSPITAL</span>
+        </div>
+
+        <div class="profileRow">
+            XP:
+            <span id="playerXP">0</span>
+        </div>
+
+        <div class="profileRow">
+            ZOMBIES KILLED:
+            <span id="profileKills">0</span>
+        </div>
+
+        <div class="profileRow">
+            ITEMS FOUND:
+            <span id="profileItems">0</span>
+        </div>
+
+        <div class="profileXP">
+            LEVEL
+            <span id="xpLevel">01</span>
+
+            <div class="profileXPBar">
+                <div id="profileXPFill"></div>
+            </div>
+        </div>
+
+        <button id="resumeGameBtn">
+            RESUME
+        </button>
+
+        <button id="profileReturnHQBtn">
+            ← RETURN TO HQ
+        </button>
+
+    </div>
+
+</div>
+
+    <!-- =====================================
+     LEVEL FAILED
+===================================== -->
+
+<div id="gameOver">
+
+    <div id="connectionLost">
+        LEVEL 1 // SECTOR 01 FAILED
+    </div>
+
+    <div id="signalTerminated">
+        // SURVIVOR SIGNAL LOST
+    </div>
+
+    <div id="deathStats">
+
+        TIME ALIVE:
+        <span id="timeAlive">
+            00:00
+        </span>
+
+        <br>
+
+        ZOMBIES KILLED:
+        <span id="zombiesKilled">
+            0
+        </span>
+
+        <br>
+
+        ITEMS FOUND:
+        <span id="itemsFound">
+            0
+        </span>
+
+    </div>
+
+    <button id="restartBtn">
+        ↻ RESTART LEVEL 1
+    </button>
+
+    <button id="returnHQBtn">
+        ← RETURN TO HQ
+    </button>
+
+</div>
+
+    
+
+
+</div>
+
+
+<script src="game.js"></script>
+<script src="profile.js"></script>
+
+
+
+</body>
+
+</html>

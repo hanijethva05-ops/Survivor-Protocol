@@ -1,0 +1,1661 @@
+/* =========================================================
+   LEVEL 6 // THE SERVER CORE
+   CORRECTED CSS
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background: #010405;
+    color: #cfffff;
+
+    font-family:
+        "Courier New",
+        Courier,
+        monospace;
+}
+
+body {
+    cursor: crosshair;
+}
+
+
+/* =========================================================
+   GAME WORLD
+   ========================================================= */
+
+#gameWorld {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(0, 100, 100, 0.15),
+            transparent 52%
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0,255,255,0.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            0deg,
+            rgba(0,255,255,0.035) 1px,
+            transparent 1px
+        ),
+
+        #020607;
+
+    background-size:
+        auto,
+        50px 50px,
+        50px 50px,
+        auto;
+}
+
+
+/* =========================================================
+   SCANLINES
+   ========================================================= */
+
+.scanlines {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 950;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,0.025) 0px,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: 0.45;
+}
+
+
+/* =========================================================
+   TOP HUD
+   ========================================================= */
+
+.topHud {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    min-height: 78px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 12px 28px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,8,10,0.96),
+            rgba(0,8,10,0.72),
+            transparent
+        );
+
+    border-bottom:
+        1px solid rgba(0,255,255,0.18);
+
+    z-index: 200;
+}
+
+.hud {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.hudLeft {
+    min-width: 250px;
+
+    line-height: 1.6;
+
+    color: #6f9295;
+}
+
+.hudLeft > div:nth-child(2) {
+    color: #00ffff;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        0 0 10px rgba(0,255,255,0.7);
+}
+
+.hudLeft > div:nth-child(3) {
+    color: #5b777a;
+}
+
+.hudCenter {
+    width: 430px;
+
+    text-align: center;
+
+    padding-top: 2px;
+}
+
+.missionLabel {
+    color: #537276;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 7px;
+}
+
+.objectiveText {
+    color: #00ffff;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 8px rgba(0,255,255,0.5);
+}
+
+.hudRight {
+    min-width: 220px;
+
+    text-align: right;
+
+    line-height: 1.7;
+
+    color: #638184;
+}
+
+#signalStatus {
+    color: #00ff66;
+
+    text-shadow:
+        0 0 8px rgba(0,255,100,0.5);
+}
+
+.warning {
+    color: #ffcc00;
+
+    text-shadow:
+        0 0 8px rgba(255,204,0,0.5);
+}
+
+.recDot {
+    color: #ff003c;
+
+    animation:
+        recBlink 1s infinite;
+}
+
+@keyframes recBlink {
+
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   SERVER ROOM
+   ========================================================= */
+
+#serverRoom {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   SERVER TOWERS
+   ========================================================= */
+
+.serverTower {
+    position: absolute;
+
+    width: 105px;
+    height: 270px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #030708,
+            #111b1d,
+            #050809
+        );
+
+    border:
+        1px solid #183c40;
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 0 18px rgba(0,255,255,0.07),
+        inset 0 0 30px rgba(0,0,0,0.95);
+
+    z-index: 15;
+}
+
+.serverTower::before {
+    content: "";
+
+    position: absolute;
+
+    left: 15px;
+    right: 15px;
+
+    top: 45px;
+
+    height: 3px;
+
+    background: #00aeb5;
+
+    box-shadow:
+        0 35px #00aeb5,
+        0 70px #00aeb5,
+        0 105px #00aeb5,
+        0 140px #00aeb5,
+        0 175px #00aeb5;
+
+    opacity: 0.35;
+
+    animation:
+        serverPulse 1.4s infinite alternate;
+}
+
+.serverTower::after {
+    content: "SERVER";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 9px;
+
+    text-align: center;
+
+    color: #31575b;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+@keyframes serverPulse {
+
+    from {
+        opacity: 0.15;
+    }
+
+    to {
+        opacity: 0.65;
+    }
+}
+
+
+/* Tower positions */
+
+.tower1 {
+    left: 12%;
+    top: 25%;
+}
+
+.tower2 {
+    left: 28%;
+    top: 30%;
+}
+
+.tower3 {
+    right: 22%;
+    top: 25%;
+}
+
+.tower4 {
+    right: 9%;
+    top: 35%;
+}
+
+
+/* Server lights */
+
+.serverLights {
+    position: absolute;
+
+    top: 12px;
+    left: 13px;
+
+    color: #00ffff;
+
+    font-size: 8px;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 7px #00ffff;
+
+    animation:
+        lightFlicker 1.2s infinite alternate;
+}
+
+@keyframes lightFlicker {
+
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.serverLabel {
+    position: absolute;
+
+    top: 28px;
+    left: 13px;
+
+    color: #55777a;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+.serverLines {
+    position: absolute;
+
+    top: 65px;
+    left: 14px;
+
+    color: #00aeb5;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   COOLING PIPES
+   ========================================================= */
+
+.coolingPipe {
+    position: absolute;
+
+    background:
+        linear-gradient(
+            180deg,
+            #344e50,
+            #071113,
+            #2a4042
+        );
+
+    border:
+        1px solid #3d6669;
+
+    box-shadow:
+        0 0 10px rgba(0,255,255,0.1);
+
+    opacity: 0.75;
+}
+
+.pipe1 {
+    left: 5%;
+    top: 13%;
+
+    width: 90%;
+    height: 11px;
+}
+
+.pipe2 {
+    left: 37%;
+    top: 10%;
+
+    width: 11px;
+    height: 45%;
+}
+
+.pipe3 {
+    left: 50%;
+    top: 40%;
+
+    width: 45%;
+    height: 11px;
+}
+
+
+/* =========================================================
+   SMOKE
+   ========================================================= */
+
+.smoke {
+    position: absolute;
+
+    width: 90px;
+    height: 130px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(180,255,255,0.13),
+            transparent 68%
+        );
+
+    filter: blur(12px);
+
+    pointer-events: none;
+
+    animation:
+        smokeRise 3.5s infinite ease-in-out;
+}
+
+.smoke1 {
+    left: 17%;
+    top: 14%;
+}
+
+.smoke2 {
+    left: 46%;
+    top: 13%;
+    animation-delay: 1s;
+}
+
+.smoke3 {
+    right: 17%;
+    top: 15%;
+    animation-delay: 2s;
+}
+
+@keyframes smokeRise {
+
+    0% {
+        transform:
+            translateY(20px)
+            scale(0.7);
+
+        opacity: 0.03;
+    }
+
+    50% {
+        transform:
+            translateY(-15px)
+            scale(1.15);
+
+        opacity: 0.2;
+    }
+
+    100% {
+        transform:
+            translateY(-55px)
+            scale(1.5);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   TERMINALS
+   ========================================================= */
+
+.serverTerminal {
+    position: absolute;
+
+    width: 155px;
+    height: 150px;
+
+    padding: 12px;
+
+    pointer-events: auto;
+
+    cursor: crosshair;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(5,22,24,0.98),
+            rgba(1,5,6,0.98)
+        );
+
+    border:
+        2px solid #007e85;
+
+    box-shadow:
+        0 0 18px rgba(0,255,255,0.08),
+        inset 0 0 25px rgba(0,255,255,0.04);
+
+    z-index: 100;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        transform 0.2s;
+}
+
+.serverTerminal:hover {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 30px rgba(0,255,255,0.3);
+
+    transform:
+        translateY(-2px);
+}
+
+.terminalHeader {
+    color: #6c8d90;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 7px;
+}
+
+.terminalScreen {
+    height: 62px;
+
+    padding: 7px;
+
+    background:
+        #001012;
+
+    border:
+        1px solid #075d62;
+
+    color: #00ffff;
+
+    font-size: 9px;
+
+    line-height: 1.35;
+
+    overflow: hidden;
+
+    text-shadow:
+        0 0 6px rgba(0,255,255,0.45);
+}
+
+.terminalStatus {
+    margin-top: 7px;
+
+    color: #7f9b9e;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+}
+
+.terminalPrompt {
+    margin-top: 7px;
+
+    color: #00ffff;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    letter-spacing: 1px;
+}
+
+
+/* Terminal positions */
+
+#terminal1 {
+    left: 18%;
+    top: 31%;
+}
+
+#terminal2 {
+    left: 51%;
+    top: 22%;
+}
+
+#terminal3 {
+    right: 14%;
+    top: 31%;
+}
+
+
+/* Active terminal */
+
+.serverTerminal.active {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 35px rgba(0,255,255,0.45),
+        inset 0 0 25px rgba(0,255,255,0.12);
+
+    animation:
+        terminalPulse 0.8s infinite alternate;
+}
+
+@keyframes terminalPulse {
+
+    from {
+        box-shadow:
+            0 0 18px rgba(0,255,255,0.2);
+    }
+
+    to {
+        box-shadow:
+            0 0 40px rgba(0,255,255,0.55);
+    }
+}
+
+
+/* Completed terminal */
+
+.serverTerminal.completed {
+    border-color: #00ff66;
+
+    opacity: 0.6;
+
+    box-shadow:
+        0 0 22px rgba(0,255,100,0.18);
+}
+
+.serverTerminal.completed .terminalStatus {
+    color: #00ff66;
+}
+
+.serverTerminal.completed .terminalPrompt {
+    color: #00ff66;
+}
+
+.serverTerminal.completed::after {
+    content:
+        "DOWNLOAD COMPLETE";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: -22px;
+
+    text-align: center;
+
+    color: #00ff66;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   PLAYER
+   ========================================================= */
+
+#player {
+    position: absolute;
+
+    width: 44px;
+    height: 44px;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 300;
+
+    border:
+        2px solid #00ffff;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #e8ffff 0 10%,
+            #00aeb5 12% 28%,
+            #031517 32% 100%
+        );
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 35px rgba(0,255,255,0.35);
+}
+
+#player::after {
+    content: "";
+
+    position: absolute;
+
+    width: 65px;
+    height: 2px;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translateY(-50%);
+
+    background: #00ffff;
+
+    opacity: 0.45;
+}
+
+
+/* =========================================================
+   CROSSHAIR
+   ========================================================= */
+
+#crosshair {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #00ffff;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px #00ffff;
+
+    z-index: 700;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INTERACTION PROMPT
+   ========================================================= */
+
+.interactionPrompt {
+    position: fixed;
+
+    left: 50%;
+    bottom: 12%;
+
+    transform:
+        translateX(-50%);
+
+    padding: 11px 24px;
+
+    color: #00ffff;
+
+    background:
+        rgba(0,10,12,0.92);
+
+    border:
+        1px solid #00ffff;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.2);
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    z-index: 600;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s;
+}
+
+.interactionPrompt.active {
+    opacity: 1;
+
+    animation:
+        promptPulse 0.9s infinite alternate;
+}
+
+@keyframes promptPulse {
+
+    from {
+        box-shadow:
+            0 0 10px rgba(0,255,255,0.15);
+    }
+
+    to {
+        box-shadow:
+            0 0 30px rgba(0,255,255,0.5);
+    }
+}
+
+
+/* =========================================================
+   ZOMBIES
+   ========================================================= */
+
+.enemy {
+    position: absolute;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff284c;
+
+    font-size: 34px;
+
+    z-index: 400;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(255,0,50,0.65)
+        );
+
+    transition:
+        opacity 0.15s,
+        filter 0.1s;
+}
+
+.sprinter {
+    animation:
+        zombiePulse 0.35s infinite alternate;
+}
+
+@keyframes zombiePulse {
+
+    from {
+        filter:
+            drop-shadow(
+                0 0 4px
+                rgba(255,0,50,0.5)
+            );
+    }
+
+    to {
+        filter:
+            drop-shadow(
+                0 0 17px
+                rgba(255,0,50,0.95)
+            );
+    }
+}
+
+.enemyHit {
+    filter:
+        brightness(3)
+        drop-shadow(
+            0 0 20px red
+        );
+}
+
+
+/* =========================================================
+   ZOMBIE ALERT
+   ========================================================= */
+
+.zombieAlert {
+    position: fixed;
+
+    left: 50%;
+    top: 48%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color: #ff003c;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px red;
+
+    z-index: 1000;
+
+    pointer-events: none;
+
+    opacity: 0;
+}
+
+.zombieAlert.active {
+    animation:
+        alertFlash 0.9s ease;
+}
+
+@keyframes alertFlash {
+
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   DAMAGE EFFECT
+   ========================================================= */
+
+#damageEffect {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 900;
+
+    pointer-events: none;
+
+    border:
+        0 solid rgba(255,0,0,0.85);
+
+    transition:
+        border-width 0.12s,
+        box-shadow 0.12s;
+}
+
+#damageEffect.damageActive {
+    border-width: 18px;
+
+    box-shadow:
+        inset 0 0 100px rgba(255,0,0,0.6);
+}
+
+
+/* =========================================================
+   DOWNLOAD PANEL
+   ========================================================= */
+
+.downloadPanel {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,0.35);
+
+    z-index: 800;
+
+    pointer-events: none;
+}
+
+.downloadPanel.hidden {
+    display: none !important;
+}
+
+.downloadWindow {
+    width: 430px;
+
+    padding: 25px;
+
+    background:
+        rgba(0,9,11,0.97);
+
+    border:
+        1px solid #00ffff;
+
+    box-shadow:
+        0 0 45px rgba(0,255,255,0.25);
+
+    text-align: center;
+}
+
+.downloadTitle {
+    color: #00ffff;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+}
+
+.downloadText {
+    color: #688b8e;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-top: 6px;
+}
+
+.progressContainer {
+    width: 100%;
+    height: 10px;
+
+    margin-top: 20px;
+
+    background: #071719;
+
+    border:
+        1px solid #17484c;
+
+    overflow: hidden;
+}
+
+.progressBar {
+    width: 0%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00aeb5,
+            #00ffff
+        );
+
+    box-shadow:
+        0 0 15px #00ffff;
+
+    transition:
+        width 0.08s linear;
+}
+
+.downloadPercent {
+    margin-top: 10px;
+
+    color: #00ffff;
+
+    font-size: 15px;
+}
+
+.downloadWarning {
+    margin-top: 18px;
+
+    color: #ffcc00;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   VITALS HUD
+   ========================================================= */
+
+.vitalsHud {
+    position: fixed;
+
+    left: 25px;
+    bottom: 25px;
+
+    width: 300px;
+
+    padding: 12px;
+
+    color: #58787b;
+
+    background:
+        rgba(0,7,9,0.7);
+
+    border-left:
+        2px solid #00ffff;
+
+    z-index: 500;
+
+    line-height: 1.7;
+}
+
+.vitalsTitle {
+    color: #58787b;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+.heartLine {
+    color: #00ffff;
+
+    font-size: 14px;
+
+    text-shadow:
+        0 0 8px #00ffff;
+}
+
+#vitalStatus {
+    color: #00ff66;
+}
+
+#bpm {
+    color: #00ffff;
+}
+
+
+/* =========================================================
+   WEAPON HUD
+   ========================================================= */
+
+.weaponHud {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 280px;
+
+    padding: 14px;
+
+    background:
+        rgba(0,7,9,0.88);
+
+    border:
+        1px solid rgba(0,255,255,0.25);
+
+    z-index: 500;
+}
+
+.weaponName {
+    color: #00ffff;
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
+
+    text-align: right;
+}
+
+.ammo {
+    margin-top: 8px;
+
+    color: #647f82;
+
+    text-align: right;
+}
+
+#magAmmo {
+    color: #ffffff;
+
+    font-size: 30px;
+
+    font-weight: bold;
+}
+
+.reserveAmmo {
+    color: #647f82;
+
+    text-align: right;
+
+    margin-top: 2px;
+}
+
+#reserve {
+    color: #00ffff;
+}
+
+.controls {
+    margin-top: 12px;
+
+    color: #587477;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   BATTERY
+   ========================================================= */
+
+.batteryHud {
+    position: fixed;
+
+    left: 25px;
+    top: 100px;
+
+    color: #527477;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    z-index: 500;
+}
+
+#batteryPercent {
+    color: #00ffff;
+}
+
+
+/* =========================================================
+   KILL COUNTER
+   ========================================================= */
+
+.killCounter {
+    position: fixed;
+
+    left: 25px;
+    top: 125px;
+
+    color: #527477;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    z-index: 500;
+}
+
+#zombiesKilled {
+    color: #ff4058;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   LEVEL INFO
+   ========================================================= */
+
+.levelInfo {
+    position: fixed;
+
+    left: 25px;
+    bottom: 8px;
+
+    color: #365558;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    z-index: 500;
+}
+
+.levelInfo span {
+    color: #587a7d;
+}
+
+
+/* =========================================================
+   MISSION COMPLETE
+   ========================================================= */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,0.9);
+
+    z-index: 1500;
+}
+
+.overlay.hidden {
+    display: none !important;
+}
+
+.missionWindow {
+    width: 480px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    background:
+        rgba(0,15,10,0.97);
+
+    border:
+        1px solid #00ff66;
+
+    box-shadow:
+        0 0 55px rgba(0,255,100,0.3);
+}
+
+.missionHeader {
+    color: #00ff66;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 0 15px #00ff66;
+
+    margin-bottom: 22px;
+}
+
+.missionLine {
+    color: #789b9a;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    line-height: 1.7;
+
+    margin-top: 8px;
+}
+
+.missionSuccess {
+    color: #8affaa;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    margin: 18px 0;
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+   ========================================================= */
+
+.continueButton {
+    margin-top: 25px;
+
+    padding: 13px 24px;
+
+    color: #00ff66;
+
+    background:
+        rgba(0,30,15,0.85);
+
+    border:
+        1px solid #00ff66;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+}
+
+.continueButton:hover {
+    color: #001006;
+
+    background: #00ff66;
+
+    box-shadow:
+        0 0 25px rgba(0,255,100,0.5);
+}
+
+
+/* =========================================================
+   GAME OVER
+   ========================================================= */
+
+#gameOver .missionWindow {
+    background:
+        rgba(20,0,5,0.97);
+
+    border-color: #ff003c;
+
+    box-shadow:
+        0 0 55px rgba(255,0,60,0.3);
+}
+
+.gameOverHeader {
+    color: #ff003c;
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    letter-spacing: 6px;
+
+    text-shadow:
+        0 0 15px red;
+}
+
+#gameOver .continueButton {
+    color: #ff003c;
+
+    border-color: #ff003c;
+
+    background:
+        rgba(30,0,8,0.9);
+}
+
+#gameOver .continueButton:hover {
+    color: #100006;
+
+    background: #ff003c;
+
+    box-shadow:
+        0 0 25px rgba(255,0,60,0.5);
+}
+
+
+/* =========================================================
+   LOW AMMO WARNING
+   ========================================================= */
+
+#lowAmmoWarning {
+    position: fixed;
+
+    left: 50%;
+    bottom: 25%;
+
+    transform:
+        translateX(-50%);
+
+    color: #ff003c;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    z-index: 1200;
+
+    opacity: 0;
+}
+
+#lowAmmoWarning.warningActive {
+    opacity: 1;
+
+    animation:
+        warningBlink 0.45s infinite alternate;
+}
+
+@keyframes warningBlink {
+
+    from {
+        opacity: 0.25;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   GLITCH
+   ========================================================= */
+
+.aiLevelGlitch {
+    animation:
+        screenGlitch 0.25s infinite;
+}
+
+@keyframes screenGlitch {
+
+    0% {
+        filter: none;
+    }
+
+    25% {
+        filter:
+            hue-rotate(35deg)
+            contrast(1.25);
+    }
+
+    50% {
+        filter:
+            saturate(1.8);
+    }
+
+    75% {
+        filter:
+            hue-rotate(-35deg)
+            contrast(1.3);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+
+/* =========================================================
+   VIGNETTE
+   ========================================================= */
+
+#gameWorld::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 940;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 40%,
+            rgba(0,0,0,0.78) 100%
+        );
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .hudCenter {
+        width: 330px;
+    }
+
+    .serverTerminal {
+        transform: scale(0.9);
+    }
+
+    .weaponHud {
+        width: 240px;
+    }
+
+    .vitalsHud {
+        width: 250px;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    .serverTower {
+        height: 220px;
+    }
+
+    .serverTerminal {
+        height: 135px;
+    }
+
+    .topHud {
+        min-height: 65px;
+    }
+
+    .vitalsHud,
+    .weaponHud {
+        bottom: 12px;
+    }
+}
