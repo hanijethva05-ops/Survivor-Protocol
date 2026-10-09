@@ -35,17 +35,6 @@ Explore the game's menus and levels, use weapons, and try to survive the zombie 
 
 *Features and controls may vary by game mode and current implementation.*
 
-## 📸 Screenshots
-
-Screenshots will appear here as you add them to the `screenshots/` folder.
-
-| Main Menu | Gameplay |
-|---|---|
-| Add `screenshots/main-menu.png` | Add `screenshots/gameplay.png` |
-
-| Level Selection | Loadout |
-|---|---|
-| Add `screenshots/level-select.png` | Add `screenshots/loadout.png` |
 
 ## 🛠️ Built With
 
